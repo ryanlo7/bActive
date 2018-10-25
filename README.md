@@ -13,4 +13,4 @@ Discussion 1C - Brett Chalabian
 - Ryan Lo: 704579791
 
 ## GitHub Repository
-https://github.com/ryanlo7/B-Active
+https://github.com/ryanlo7/bActive
