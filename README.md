@@ -1,7 +1,7 @@
 # B Active
 
 ## Team:
-Name: ActiveBruins
+Name: ActiveBruins  
 Discussion 1C - Brett Chalabian
 
 ## Team Members:
