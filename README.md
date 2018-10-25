@@ -1,10 +1,9 @@
-## B-Active
-==========
+# B-Active
 
-# Team Name:
+## Team Name:
 ActiveBruins
 
-# Team Members:
+## Team Members:
 - Eric Kong: 304601223
 - Eddie Huang: 204607720
 - Krishna Babu: 604460009
@@ -14,5 +13,5 @@ ActiveBruins
 
 Discussion 1C - Brett Chalabian
 
-# GitHub Repository
+## GitHub Repository
 https://github.com/ryanlo7/B-Active
