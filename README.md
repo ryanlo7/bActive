@@ -1,7 +1,8 @@
-# B-Active
+# B Active
 
-## Team Name:
-ActiveBruins
+## Team:
+Name: ActiveBruins  
+Discussion 1C - Brett Chalabian
 
 ## Team Members:
 - Eric Kong: 304601223
@@ -11,7 +12,5 @@ ActiveBruins
 - Ramya Satish: 104601436
 - Ryan Lo: 704579791
 
-Discussion 1C - Brett Chalabian
-
 ## GitHub Repository
-https://github.com/ryanlo7/B-Active
+https://github.com/ryanlo7/bActive
