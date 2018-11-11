@@ -4,10 +4,30 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// Get the /routes/*.js files here:
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var loginRouter = require('./routes/login');
+var registerRouter = require('./routes/register');
+var profileRouter = require('./routes/profile');
+var searchRouter = require('./routes/search');
+var eventsRouter = require('./routes/events');
 
 var app = express();
+
+
+// connection to MongoDB (must run db.sh first!):
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+const url = 'mongodb://localhost:27017/';
+const dbName = 'bActiveServer'; // database name is 'bActiveServer'
+MongoClient.connect(url, 
+	function(err, client) {
+		assert.equal(null, err);
+		console.log("Connected successfully to server");
+		app.locals.db = client.db(dbName);
+	}
+);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,8 +39,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// connect the /routes/*.js files to the url here:
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
+app.use('/profile', profileRouter);
+app.use('/search', searchRouter);
+app.use('/events', eventsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,5 +1,17 @@
 # B Active
 
+
+## HOW TO START PROJECT:
+1. follow guide on cs144 site to set up docker here (do parts A and B only):
+   http://oak.cs.ucla.edu/classes/cs144/project1/index.html
+2. follow steps from "Overview" to "Development Environment":
+   http://oak.cs.ucla.edu/classes/cs144/project3/index.html
+3. run `mongo < db.sh`
+4. play around & test frontend/backend functionality by running `npm start`
+5. edit the .ejs files in "/views" to edit front end. To edit backend, edit the corresponding .js file in "/routes"
+
+
+
 ## Team:
 Name: ActiveBruins  
 Discussion 1C - Brett Chalabian
