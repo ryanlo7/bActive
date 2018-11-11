@@ -7,7 +7,7 @@
 2. follow steps from "Overview" to "Development Environment":
    http://oak.cs.ucla.edu/classes/cs144/project3/index.html
 3. run `mongo < db.sh`
-4. play around & test frontend/backend functionality by running `npm start`
+4. play around & test frontend/backend functionality by running `npm start` and then opening the url in `http://localhost:3000/<insert page you want to open here without any extension names>`. For instance, if I want to view the "search" page, I would type in: `http://localhost:3000/search`
 5. edit the .ejs files in "/views" to edit front end. To edit backend, edit the corresponding .js file in "/routes"
 
 
