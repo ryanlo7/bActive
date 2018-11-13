@@ -15,7 +15,8 @@ DB name: bActiveServer
 
 Collection: Users
 Document Example:
-`{
+```
+{
 	"userId": 0, # start from 0 and increment by 1
 	"email": "user1@ucla.edu",
 	"password": "hashed password",
@@ -49,15 +50,18 @@ Document Example:
 		}, 
 		...
 	]
-}`
+}
+```
 
 Collection: Activities
 Document Example:
-`{
+```
+{
 	"name": "lifting",
 	"locations": ["bfit", "wooden"],
 	"size": 2 # Size representation may change when we deal with groups
-}`
+}
+```
 
 
 ## Team:
