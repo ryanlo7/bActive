@@ -10,6 +10,54 @@
 4. play around & test frontend/backend functionality by running `npm start` and then opening the url in `http://localhost:3000/<insert page you want to open here without any extension names>`. For instance, if I want to view the "match" page, I would type in: `http://localhost:3000/match`
 5. edit the .ejs files in "/views" to edit front end. To edit backend, edit the corresponding .js file in "/routes"
 
+## DATABASE FORMAT:
+DB name: bActiveServer
+
+Collection: Users
+Document Example:
+`{
+	"userId": 0, # start from 0 and increment by 1
+	"email": "user1@ucla.edu",
+	"password": "hashed password",
+	"activities": [
+		{"name": "basketball", "interest": 5, "skill": 5}, # interest and skill rankings out of 5, 5 being the highest
+		{"name": "lifting", "interest": 4, "skill": 3},
+		...
+	],
+	"availability": { # availability for every half hour starting at 00:00 to 23:30, 'true' means available, 48 total
+		"monday": [false, false, false, ...], 
+		"tuesday": [false, false, false, ...],
+		"wednesday": [false, false, false, ...],
+		"thursday": [false, false, false, ...],
+		"friday": [false, false, false, ...],
+		"saturday": [false, false, false, ...],
+		"sunday": [false, false, false, ...]
+	},
+	"events": [
+		{
+			"userId": [2], # who you matched with; array is for the case of group events
+			"activity": "lifting", # suggested activity
+			"day": "monday",
+			"time": "4PM-6:30PM", # the largest interval that matches
+			# Defining statuses:
+			# "matched" = event has been suggested to both users, neither has accepted
+			# "confirmed" = both users have accepted
+			# "pending" = user 1 has accepted, user 2 has not accepted yet
+			# "invited" = user 1 has not accepted, user 2 has accepted
+			"status": "matched",
+			"location": "bfit" # default to first location in Activities collection, changeable after confirmed
+		}, 
+		...
+	]
+}`
+
+Collection: Activities
+Document Example:
+`{
+	"name": "lifting",
+	"locations": ["bfit", "wooden"],
+	"size": 2 # Size representation may change when we deal with groups
+}`
 
 
 ## Team:
