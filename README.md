@@ -18,7 +18,6 @@ Document Example:
 ```
 {
 	"userId": 0, # start from 0 and increment by 1
-	"username": "joebruin",
 	"email": "user1@ucla.edu",
 	"password": "hashed password",
 	"activities": [
