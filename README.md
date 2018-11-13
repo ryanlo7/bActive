@@ -13,7 +13,7 @@
 ## DATABASE FORMAT:
 DB name: bActiveServer
 
-Collection: Users
+Collection: Users  
 Document Example:
 ```
 {
@@ -53,7 +53,7 @@ Document Example:
 }
 ```
 
-Collection: Activities
+Collection: Activities  
 Document Example:
 ```
 {
