@@ -61,7 +61,7 @@ app.post('/login', function(req, res) {
 	}
 	usr = req.body.username;
 	pw = req.body.password;
-	var query = {username: usr};
+	var query = {email: usr};
 	app.locals.db.collection('Users').findOne(query, function(err, result) {
 		if(result === null) {
 			res.status(401);
