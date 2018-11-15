@@ -20,6 +20,7 @@ router.post('/', function(req, res, next) {
 	}
 	if (password !== pass_confirm) {
 		res.status(401).render('register', { err: 'Error: the passwords do not match'});
+		return;
 	}
 
 	database.insertUser(database.routerProperties(req, res, next), email, password);
