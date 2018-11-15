@@ -1,9 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+/* GET new user registration. */
 router.get('/', function(req, res, next) {
-  res.send('This is the register page. Users register for first time here');
+  	res.render('register', {});
+});
+
+/* POST new user registration */
+router.post('/', function(req, res, next) {
+	var email = req.body.email;
+	var password = req.body.password;
+	res.send(`This is the email and password: ${email}, ${password}`);
 });
 
 module.exports = router;
