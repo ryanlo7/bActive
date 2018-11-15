@@ -22,8 +22,9 @@ function matchUsers(user) {
 	* in user.
 	* @param {Object} potential_match An object containing the user profile information for the the
 	* match candidate for the logged in user.
-	* @return {number} A score representing how good the match is between the logged in user
-	* and the potential match. This match is based on availability, interest level, and skill level.
+	* @return {Object} The object contains a key for a match score, and the name of the match activity. 
+	* A score representing how good the match is between the logged in user and the potential match. 
+	* This match is based on availability, interest level, and skill level.
 */
 function matchUser(curr_user, potential_match) {
 
@@ -49,6 +50,8 @@ function getAvailabilityMatchScore(curr_user_availability, potential_match_avail
 	var num_overlapping_periods = getAvailabilityMatch(curr_user_availability, potential_match_availability);
 
 	// Thirty minutes is two short for an activity, so a match requires at least an hour of matched times.
+	// Furthermore, activity matches are not expected to have an activity for over three hours, 
+	// so a maximum cutoff is set for highest possible match.
 	if (num_overlapping_periods <= 1) {
 		num_overlapping_periods = 0;
 	} else if (num_overlapping_periods > MAX_AVAILABILITY_SCORE) {
@@ -87,6 +90,91 @@ function getAvailabilityMatch(curr_user_availability, potential_match_availabili
 	}
 
 	return max_sequence;
+}
+
+/**
+	* Returns an object containing the best activity match between two users and the
+	* interest and skill level scores for that activity.
+	* @param {Array<Object>} curr_user_activities A list of activities for the current user with
+	* interest and skill level scores.
+	* @param {Array<Object>} potential_match_activities A list of activities for the potential
+	* match user with interest and skill level scores.
+	* @return {Object} The matched activity yielding the highest score for the current user.
+	* The object contains a field for the activity name, a field for the interest match score, and
+	* a field for the skill match score.
+*/
+function getBestActivityMatch(curr_user_activities, potential_match_activities) {
+	return getBestActivityMatchFromList(generateActivityMatches(curr_user_activities, potential_match_activities));
+}
+
+/**
+	* Generates a list of activity matches with an interest match and a skill match for each activity.
+	* @param {Array<Object>} curr_user_activities A list of activities for the current user with
+	* interest and skill level scores.
+	* @param {Array<Object>} potential_match_activities A list of activities for the potential
+	* match user with interest and skill level scores.
+	* @return {Array<Object>} List of objects with the potential match activities. Each object has
+	* the name of the potential match activity, a skill score, and an interest score.
+*/
+function generateActivityMatches(curr_user_activities, potential_match_activities) {
+	var activity_matches = []
+
+	// Create a list with all activities with match score temporarily as 0.
+	for (var i = 0; i < curr_user_activities.length; i++) {
+		var activity_match = {};
+		activity_match["name"] = curr_user_activities[i]["name"];
+		activity_match["skill_score"] = 0;
+		activity_match["interest_score"] = 0;
+		activity_matches.push(activity_match);
+	}
+
+	// Fill array of matched activities.
+	for (var i = 0; i < curr_user_activities.length; i++) {
+		for (var j = 0; j < potential_match_activities.length; j++) {
+			if (curr_user_activities[i]["name"] !== potential_match_activities[i]["name"]) {
+				continue;
+			}
+			activity_matches[i]["skill_score"] = computeSkillMatch(curr_user_activities[i]["skill"], potential_match_activities[i]["skill"]);
+			activity_matches[i]["interest_score"] = computeInterestMatch(curr_user_activities[i]["interest"], potential_match_activities[i]["interest"]);
+		}
+	}
+	return activity_matches;
+}
+
+/**
+	* Returns an object containing the best activity match between two users and the
+	* interest and skill level scores for that activity, given a list of activities and scores.
+	* The best match is defined as having the highest skill score and interest score combined, 
+	* disregarding activities with an interest match of 0.
+	* @param {Array<Object>} activity_matches Current activity matches with name, skill score, and interest
+	* score for each activity.
+	* @return {Object} The matched activity yielding the highest score for the current user.
+	* The object contains a field for the activity name, a field for the interest match score, and
+	* a field for the skill match score.
+*/
+function getBestActivityMatchFromList(activity_matches) {
+	var best_activity_match = {};
+	// Default initialization so that keys are present in the object. When using the score in other functions,
+	// handle exceptional case of having 0 interest match score (meaning no match).
+	best_activity_match["name"] = "lifting";
+	best_activity_match["skill_score"] = 0;
+	best_activity_match["interest_score"] = 0;
+	var max_score = 0;
+
+	for (var i = 0; i < activity_matches.length; i++) {
+		if (activity_matches[i]["interest_score"] == 0) {
+			continue;
+		} else {
+			var curr_score = activity_matches[i]["interest_score"] + activity_matches[i]["skill_score"];
+			if (curr_score > max_score) {
+				max_score = curr_score;
+				best_activity_match["name"] = activity_matches[i]["name"];
+				best_activity_match["skill_score"] = activity_matches[i]["skill_score"];
+				best_activity_match["interest_score"] = activity_matches[i]["interest_score"];
+			}
+		}
+	}
+	return best_activity_match;
 }
 
 /**
@@ -131,10 +219,10 @@ function computeNormalizedScore(curr_score, curr_max) {
 // TODO: delete testing code below.
 var arr1 = [[true, true], [true, true]];
 var arr2 = [[true, true], [true, true]];
-var activityList1 = [{ "name" : "basketball", "interest" : 5, "skill" : 5 }, 
-					{ "name" : "lifting", "interest" : 4, "skill" : 3 } ];
+var activityList1 = [{ "name" : "basketball", "interest" : 1, "skill" : 5 }, 
+					{ "name" : "lifting", "interest" : 2, "skill" : 4 } ];
 var activityList2 = [{ "name" : "basketball", "interest" : 5, "skill" : 5 }, 
-					{ "name" : "lifting", "interest" : 4, "skill" : 3 } ];
+					{ "name" : "lifting", "interest" : 5, "skill" : 1} ];
 console.log('matches: ' + getAvailabilityMatchScore(arr1, arr2));
-// console.log('best activity match: ' + getActivityMatch(activityList1, activityList2))
+console.log('best activity match: ' + JSON.stringify(getBestActivityMatch(activityList1, activityList2)));
 console.log(computeSkillMatch(5, 1));
