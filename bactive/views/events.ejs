@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Upcoming Events </title>
+        <link rel="stylesheet" href="=style.css">
+    </head>
+    <body>
+    <h1>Upcoming Events</h1>
+    <table style="text-align: center; border: 1px solid #000000; font-size: 30px;">
+    <thead style="background: #0B6FA4; font-weight: bold;">
+    <tr>
+    <th>Activity</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Meetup Location</th>
+    </tr>
+    </thead>
+    <% for (let i = 0; i < events.length; i++) { %>
+        <tbody>
+        <tr>
+        <td><%- events[i].activity %></td><td><%- events[i].day %></td><td><%- events[i].time %></td><td><%- events[i].location %></td></tr>
+        <tr style="background: #D0E4F5;">
+        <td>-</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr>
+        <td>-</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr style="background: #D0E4F5;">
+        <td>-</td><td>-</td><td>-</td><td>-</td></tr>
+        <tr>
+        <td>-</td><td>-</td><td>-</td><td>-</td></tr>
+        </tbody>
+    <% } %>
+    </tr>
+    </table>
+    </body>
+</html>
+
