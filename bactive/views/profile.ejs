@@ -25,12 +25,17 @@
     <table>
         <thead>
             <tr>
-                <th>Monday</th> <th>Tuesday</th> <th>Wednesday</th> <th>Thursday</th> 
+                <th></th><th>Monday</th> <th>Tuesday</th> <th>Wednesday</th> <th>Thursday</th> 
                 <th>Friday</th> <th>Saturday</th> <th>Sunday</th>
             </tr>
         </thead>
+        <% let hour = 0; let minutes = "00"; %>
         <% for (let i = 0; i < availability[0].length; i++) { %>
             <tr>
+                <th>
+                    <%- hour %>:<%- minutes%>
+                    <% hour = (i % 2 == 1) ? hour + 1 : hour; minutes = (minutes == "00") ? "30" : "00"; %>
+                </th>
                 <% for (let j = 0; j < availability.length; j++) { %>
                     <% if (availability[j][i]) { %>
                         <td height="30" bgcolor="#00FF00" ></td>
