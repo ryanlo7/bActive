@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Profile</title>
+        <title>Edit Profile</title>
     </head>
     <body>
-    <h1>Profile <a href='/edit/<%= userId %>'> (edit) </a> </h1>
-    <h3>Email: <%- email %> </h3>
+    <h1>Edit Profile</h1>
+
+    <form action='/profile/<%= userId %>' method='PUT'>
+            <label for='email'>Email</label>
+            <input type='text' name='email' value='<%= email %>'></input>
+
+            <br>
+            <label for='password'>New Password</label>
+            <input type='password' name='password'></input>
+
+            <br>
+            <label for='passwordconfirm'>Confirm Password</label>
+            <input type='password' name='passwordconfirm'></input>
+
+            <br>
+            <button type="submit">Save</button> 
+    </form>
+
     <h2>Activities</h2>
     <table>
         <thead>
@@ -21,22 +37,18 @@
             </tr>
         <% } %>
     </table>
+
     <h2>Availability</h2>
     <table>
         <thead>
             <tr>
-                <th></th><th>Monday</th> <th>Tuesday</th> <th>Wednesday</th> <th>Thursday</th> 
+                <th>Monday</th> <th>Tuesday</th> <th>Wednesday</th> <th>Thursday</th> 
                 <th>Friday</th> <th>Saturday</th> <th>Sunday</th>
             </tr>
         </thead>
-        <% let hour = 0; let minutes = "00"; %>
-        <% for (let i = 0; i < availability[0].length; i++) { %>
+        <% for (let i = 0; i < 48; i++) { %>
             <tr>
-                <th>
-                    <%- hour %>:<%- minutes%>
-                    <% hour = (i % 2 == 1) ? hour + 1 : hour; minutes = (minutes == "00") ? "30" : "00"; %>
-                </th>
-                <% for (let j = 0; j < availability.length; j++) { %>
+                <% for (let j = 0; j < 7; j++) { %>
                     <% if (availability[j][i]) { %>
                         <td height="30" bgcolor="#00FF00" ></td>
                     <% } else { %>
@@ -46,5 +58,6 @@
             </tr>
         <% } %>
     </table>
+
     </body>
 </html>

@@ -13,6 +13,7 @@ var registerRouter = require('./routes/register');
 var profileRouter = require('./routes/profile');
 var matchRouter = require('./routes/match');
 var eventsRouter = require('./routes/events');
+var editRouter = require('./routes/edit');
 
 var app = express();
 
@@ -45,27 +46,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 // app.use('/login', loginRouter);
 app.use('/register', registerRouter);
-app.use('/profile', profileRouter);
+// app.use('/profile', profileRouter);
 app.use('/match', matchRouter);
 app.use('/events', eventsRouter);
+app.use('/edit', editRouter);
 
 app.get('/login', function(req, res) {
-	res.render('login', {});
+	res.render('login', {err: null});
 });
 
 app.post('/login', function(req, res) {
 	var usr, pw;
-	if (req.body.username === undefined || req.body.password === undefined) {
+	if (req.body.email === undefined || req.body.password === undefined) {
 		res.status(400).send('Bad request');
 		return;
 	}
-	usr = req.body.username;
+	usr = req.body.email;
 	pw = req.body.password;
 	var query = {email: usr};
 	app.locals.db.collection('Users').findOne(query, function(err, result) {
 		if(result === null) {
-			res.status(401);
-			res.render('login', {})
+			res.status(401).render('login', {err: 'Invalid email/password combination'});
 			return;
 		}
 		bcrypt.compare(pw, result.password, function(err, rs) {
@@ -79,13 +80,33 @@ app.post('/login', function(req, res) {
 				});
 			}
 			else {
-				res.status(401);
-				res.render('login', {})
+				res.status(401).render('login', {err: 'Invalid email/password combination'});
 			}
 		});
 	});
 });
 
+app.get('/profile', function(req, res) {
+	var cert = "C-UFRaksvPKhx1txJYFcut3QGxsafPmwCY6SCly3G6c";
+	if(req.cookies.jwt === undefined) {
+		res.status(401);
+		res.render('login', {});
+		return;
+	}
+	jwt.verify(req.cookies.jwt, cert, {algorithms: ["HS256"]}, function(err, decoded) {
+		if(decoded === undefined) {
+		res.status(401);
+		res.render('login', {});
+			return;
+		}
+		if(decoded.exp < Math.floor(Date.now() / 1000) ) {
+			res.status(401);
+			res.render('login', {});
+			return;
+		}
+		res.render('profile', {});
+	});
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

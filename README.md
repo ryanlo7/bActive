@@ -25,15 +25,17 @@ Document Example:
 		{"name": "lifting", "interest": 4, "skill": 3},
 		...
 	],
-	"availability": { # availability for every half hour starting at 00:00 to 23:30, 'true' means available, 48 total
-		"monday": [false, false, false, ...], 
-		"tuesday": [false, false, false, ...],
-		"wednesday": [false, false, false, ...],
-		"thursday": [false, false, false, ...],
-		"friday": [false, false, false, ...],
-		"saturday": [false, false, false, ...],
-		"sunday": [false, false, false, ...]
-	},
+	"availability": [
+		# indexes 0 - 6 starts at monday = 0, tuesday = 1, ...
+		# availability for every half hour starting at 00:00 to 23:30, 'true' means available, 48 total
+		[false, false, false, ...], # monday
+		[false, false, false, ...], # tuesday
+		[false, false, false, ...], # wednesday
+		[false, false, false, ...], # thursday
+		[false, false, false, ...], # friday
+		[false, false, false, ...], # saturday
+		[false, false, false, ...]  # sunday
+	],
 	"events": [
 		{
 			"userId": [2], # who you matched with; array is for the case of group events
