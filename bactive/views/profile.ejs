@@ -29,9 +29,9 @@
                 <th>Friday</th> <th>Saturday</th> <th>Sunday</th>
             </tr>
         </thead>
-        <% for (let i = 0; i < 48; i++) { %>
+        <% for (let i = 0; i < availability.length; i++) { %>
             <tr>
-                <% for (let j = 0; j < 7; j++) { %>
+                <% for (let j = 0; j < availability[0].length; j++) { %>
                     <% if (availability[j][i]) { %>
                         <td bgcolor="#00FF00" ></td>
                     <% } else { %>

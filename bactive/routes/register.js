@@ -6,7 +6,7 @@ var router = express.Router();
 
 /* GET new user registration. */
 router.get('/', function(req, res, next) {
-  	res.render('register', {});
+  	res.render('register', {err: null});
 });
 
 /* POST new user registration */
@@ -15,11 +15,12 @@ router.post('/', function(req, res, next) {
 	let password = req.body.password;
 	let pass_confirm = req.body.password_confirmation;
 	if (email === "" || password === "" || pass_confirm === "") {
-		res.status(400).send('Error: the email and passwords fields must not be blank');
+		res.status(401).render('register', { err: 'Error: the email and passwords fields must not be blank'});
 		return;
 	}
 	if (password !== pass_confirm) {
-		res.status(400).send('Error: the passwords do not match');
+		res.status(401).render('register', { err: 'Error: the passwords do not match'});
+		return;
 	}
 
 	database.insertUser(database.routerProperties(req, res, next), email, password);

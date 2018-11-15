@@ -6,20 +6,29 @@
 </head>
 <body>
 	<div><h1>Welcome! Please register as a new user!</h1></div>
-	<form action="/register" method="POST">
-		<div>
-			<label for="email">Email</label>
-			<input type="text" name="email" id="email">
-		</div>
-		<div>
-			<label for="password">Password</label>
-			<input type="password" name="password" id="password">
-		</div>
-		<div>
-			<label for="password_confirmation">Confirm Password</label>
-			<input type="password" name="password_confirmation" id="password_confirmation">
-		</div>
-		<button type="submit">Register</button>
-	</form>
+	<div>
+		<% if (err !== null && err != undefined) { %>
+			<div>
+				<p style="color:red">
+	                <%= err %>
+	            </p>
+			</div>
+		<% } %>
+		<form action="/register" method="POST">
+			<div>
+				<label for="email">Email</label>
+				<input type="text" name="email" id="email">
+			</div>
+			<div>
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password">
+			</div>
+			<div>
+				<label for="password_confirmation">Confirm Password</label>
+				<input type="password" name="password_confirmation" id="password_confirmation">
+			</div>
+			<button type="submit">Register</button>
+		</form>
+	</div>
 </body>
 </html>

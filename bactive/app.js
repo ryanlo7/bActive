@@ -52,22 +52,21 @@ app.use('/events', eventsRouter);
 app.use('/edit', editRouter);
 
 app.get('/login', function(req, res) {
-	res.render('login', {});
+	res.render('login', {err: null});
 });
 
 app.post('/login', function(req, res) {
 	var usr, pw;
-	if (req.body.username === undefined || req.body.password === undefined) {
+	if (req.body.email === undefined || req.body.password === undefined) {
 		res.status(400).send('Bad request');
 		return;
 	}
-	usr = req.body.username;
+	usr = req.body.email;
 	pw = req.body.password;
 	var query = {email: usr};
 	app.locals.db.collection('Users').findOne(query, function(err, result) {
 		if(result === null) {
-			res.status(401);
-			res.render('login', {})
+			res.status(401).render('login', {err: 'Invalid email/password combination'});
 			return;
 		}
 		bcrypt.compare(pw, result.password, function(err, rs) {
@@ -81,8 +80,7 @@ app.post('/login', function(req, res) {
 				});
 			}
 			else {
-				res.status(401);
-				res.render('login', {});
+				res.status(401).render('login', {err: 'Invalid email/password combination'});
 			}
 		});
 	});
