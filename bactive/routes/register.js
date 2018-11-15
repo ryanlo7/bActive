@@ -46,12 +46,16 @@ router.post('/', function(req, res, next) {
 			}
 
 			db.collection("Values").find({"name": collectionName}).toArray(function(err, resId) {
-				let maxUserId = resId[0];
+				if (err) {
+					next(err);
+					return;
+				}
+				let maxUserId = resId[0].maxUserId;
 				let newUser = {
 					userId: maxUserId,
 					email: email,
 					password: password,
-					availability: defaultAvailability,
+					availability: [],
 					events: []
 				};
 				collection.insertOne(newUser, function (err, insertResult) {
@@ -59,16 +63,20 @@ router.post('/', function(req, res, next) {
 						next(err);
 						return;
 					}
-					res.status(201).send('Successfully created new user.');
-					return;
+					let newValue = {$set: {"maxUserId": maxUserId + 1}}; // this is buggy
+					db.collection("Values").updateOne({"name": "Users"}, newValue, function(err, updateResult) {
+						if (err) {
+							next(err);
+							return;
+						}
+						res.status(201).send('Successfully inserted new user into db.');
+						return;
+					});
 				});
 			});
 			return;
 		}
 	);
-
-
-	// res.send(`This is the email and password: ${email}, ${password}`);
 });
 
 module.exports = router;
