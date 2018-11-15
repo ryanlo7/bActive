@@ -7,6 +7,34 @@ var routerProperties = function(req, res, next) {
 	};
 }
 
+var updateUser = function(properties, email, updateSet) {
+	let req = properties.req;
+	let res = properties.res;
+	let next = properties.next;
+
+	let db = req.app.locals.db;
+	const userCollection = db.collection("Users");
+
+	userCollection.findOne({"email": email}, function(err, resultUser) {
+		if (err) {
+			next(err);
+			return;
+		}
+		if (result.length === 0) {
+			res.status(404).send(`Unable to find user with email`);
+			return;
+		}
+		userCollection.updateOne({"email": email}, updateSet, function(err, updateResult) {
+			if (err) {
+				next(err);
+				return;
+			}
+			res.status(201).send(`Successfully updated user data`);
+			return;
+		});
+	});
+}
+
 var insertUser = function(properties, email, password) {
 	let req = properties.req;
 	let res = properties.res;
@@ -80,5 +108,6 @@ var insertUser = function(properties, email, password) {
 
 module.exports = {
 	insertUser: insertUser,
+	updateUser: updateUser,
 	routerProperties: routerProperties
 };
