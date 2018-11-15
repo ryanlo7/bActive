@@ -22,5 +22,24 @@
         <% } %>
     </table>
     <h2>Availability</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Monday</th> <th>Tuesday</th> <th>Wednesday</th> <th>Thursday</th> 
+                <th>Friday</th> <th>Saturday</th> <th>Sunday</th>
+            </tr>
+        </thead>
+        <% for (let i = 0; i < 48; i++) { %>
+            <tr>
+                <% for (let j = 0; j < 7; j++) { %>
+                    <% if (availability[j][i]) { %>
+                        <td bgcolor="#00FF00" ></td>
+                    <% } else { %>
+                        <td bgcolor="#FF0000" ></td>
+                    <% } %>
+                <% } %>
+            </tr>
+        <% } %>
+    </table>
     </body>
 </html>
