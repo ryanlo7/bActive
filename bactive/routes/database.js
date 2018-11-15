@@ -33,11 +33,21 @@ var insertUser = function(properties, email, password) {
 					return;
 				}
 				let maxUserId = resId[0].maxUserId;
+
+				let defaultAvailability = [];
+				for (let i = 0; i < 7; i++) {
+					let week = [];
+					for (let j = 0; j < 48; j++) {
+						week.push(false);
+					}
+					defaultAvailability.push(week);
+				}
+
 				let newUser = {
 					userId: maxUserId,
 					email: email,
 					password: password,
-					availability: [],
+					availability: defaultAvailability,
 					activities: [],
 					events: []
 				};

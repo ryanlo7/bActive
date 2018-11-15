@@ -24,4 +24,18 @@ router.get('/:userid', function(req, res, next) {
 			});
 });
 
+/* PUT update user information. */
+router.put('/:userid', function(req, res, next) {
+	var db = req.app.locals.db;
+	var userId = parseInt(req.params.userid);
+	var email = req.params.email;
+	var password = req.params.password;
+	var passwordconfirm = req.params.passwordconfirm;
+
+	var updateObj = {$set: {'email': email}};
+
+	db.collection('Users').updateOne({'userId': userId}, updateObj, {});
+	res.redirect('/profile/' + userId);
+});
+
 module.exports = router;
