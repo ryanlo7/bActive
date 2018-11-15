@@ -81,8 +81,7 @@ app.post('/login', function(req, res) {
 				});
 			}
 			else {
-				res.status(401);
-				res.render('login', {});
+				res.status(401).render('login', {});
 			}
 		});
 	});
