@@ -7,6 +7,8 @@ db.Activities.drop()
 db.createCollection("Users")
 db.createCollection("Activities")
 
+# dummy insert to keep track of the max userId to use when making new users
+db.Users.insert({"maxUserId": 2})
 
 # Each user has the following fields:
 # 	userId: an integer to represent the user's unique user id.
@@ -16,7 +18,6 @@ db.createCollection("Activities")
 # 	events: a list of all user's events they signed up for. 
 #	availability: weekly availability every half hour
 # user1's and user2's password is the string "password" but encrypted. 
-
 
 db.Users.insert({ 	
 					"userId": 0,
