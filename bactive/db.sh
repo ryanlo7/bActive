@@ -6,9 +6,10 @@ db.Activities.drop()
 # like creating a MySQL table in database. So this is a collection of users in bActiveServer.
 db.createCollection("Users")
 db.createCollection("Activities")
+db.createCollection("Values")
 
-# dummy insert to keep track of the max userId to use when making new users
-db.Users.insert({"maxUserId": 2})
+# insert to keep track of the max userId to use when making new users
+db.Values.insert({"name": "Users", "maxUserId": 2})
 
 # Each user has the following fields:
 # 	userId: an integer to represent the user's unique user id.
