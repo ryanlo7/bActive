@@ -22,15 +22,19 @@ function matchUsers(user) {
 	* in user.
 	* @param {Object} potential_match An object containing the user profile information for the the
 	* match candidate for the logged in user.
-	* @return {Object} The object contains a key for a match score, and the name of the match activity. 
+	* @return {Array} An array of a matched activity and the match score.
 	* A score representing how good the match is between the logged in user and the potential match. 
 	* This match is based on availability, interest level, and skill level.
 */
 function matchUser(curr_user, potential_match) {
+	var availability_match_score = getAvailabilityMatchScore(curr_user["availability"], potential_match["availability"]);
+	var activity_match = getBestActivityMatch(curr_user["activities"], potential_match["activities"]);
+	var total_score = 0;
 
-	// Call each of the functions by passing in the correct fields from the user data objects
-	// to the scoring functions. If either availability of interest scores are 0, then this
-	// function should return 0.
+	if (activity_match["interest_score"] != 0 && availability_match_score != 0) {
+		total_score = activity_match["interest_score"] + activity_match["skill_score"] + availability_match_score;
+	}
+	return [activity_match["name"], total_score];
 }
 
 
@@ -217,12 +221,17 @@ function computeNormalizedScore(curr_score, curr_max) {
 }
 
 // TODO: delete testing code below.
+var user1 = {}
+var user2 = {};
+
 var arr1 = [[true, true], [true, true]];
 var arr2 = [[true, true], [true, true]];
+user1["availability"] = arr1;
+user2["availability"] = arr2;
 var activityList1 = [{ "name" : "basketball", "interest" : 1, "skill" : 5 }, 
 					{ "name" : "lifting", "interest" : 2, "skill" : 4 } ];
 var activityList2 = [{ "name" : "basketball", "interest" : 5, "skill" : 5 }, 
 					{ "name" : "lifting", "interest" : 5, "skill" : 1} ];
-console.log('matches: ' + getAvailabilityMatchScore(arr1, arr2));
-console.log('best activity match: ' + JSON.stringify(getBestActivityMatch(activityList1, activityList2)));
-console.log(computeSkillMatch(5, 1));
+user1["activities"] = activityList1;
+user2["activities"] = activityList2;
+console.log('Matching users: ' + JSON.stringify(matchUser(user1, user2)));
