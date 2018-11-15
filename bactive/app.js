@@ -13,6 +13,7 @@ var registerRouter = require('./routes/register');
 var profileRouter = require('./routes/profile');
 var matchRouter = require('./routes/match');
 var eventsRouter = require('./routes/events');
+var editRouter = require('./routes/edit');
 
 var app = express();
 
@@ -48,6 +49,7 @@ app.use('/register', registerRouter);
 app.use('/profile', profileRouter);
 app.use('/match', matchRouter);
 app.use('/events', eventsRouter);
+app.use('/edit', editRouter);
 
 app.get('/login', function(req, res) {
 	res.render('login', {});
