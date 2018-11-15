@@ -1,3 +1,5 @@
+const MAX_AVAILABILITY_SCORE = 6;	
+
 /**
 	* Key function to generate matches for a single user, given the user id.
 	* @param {number} user An integer that represents a user id.
@@ -23,6 +25,32 @@ function matchUsers(user) {
 function matchUser(curr_user, potential_match) {
 
 }
+
+
+/**
+	* Returns a score for the availability match between two users. 
+	* This is done by computing the largest overlapping block of time between the two users.
+	* This score is capped at a maximum defined by a constant MAX_AVAILABILITY_SCORE. 
+	* @param {Array<Array<<boolean>>} curr_user_availability A list of true/false availabilities
+	* for the current user for each thirty-minute time slot.
+	* @param {Array<Array<<boolean>>} potential_match_availability A list of true/false availabilities
+	* for the potentialMatch for each thirty-minute time slot.
+	* @return {number} A score representing how good the time availability match is, where 0 represents
+	* a failed match and MAX_AVAILABILITY_SCORE is the highest possible match score for this category.
+*/
+
+function getAvailabilityMatchScore(curr_user_availability, potential_match_availability) {
+	var num_overlapping_periods = getAvailabilityMatch(curr_user_availability, potential_match_availability);
+
+	// Thirty minutes is two short for an activity, so a match requires at least an hour of matched times.
+	if (num_overlapping_periods <= 1) {
+		return 0;
+	} else if (num_overlapping_periods > MAX_AVAILABILITY_SCORE) {
+		return MAX_AVAILABILITY_SCORE;
+	}
+	return num_overlapping_periods;
+}
+
 
 /**
 	* Returns maximum number of consecutive overlapping half-hours for two users. This could
@@ -58,4 +86,4 @@ function getAvailabilityMatch(curr_user_availability, potential_match_availabili
 // TODO: delete testing code below.
 var arr1 = [[true, true], [true, true]];
 var arr2 = [[true, true], [true, true]];
-console.log('matches: ' + getAvailabilityMatch(arr1, arr2));
+console.log('matches: ' + getAvailabilityMatchScore(arr1, arr2));
