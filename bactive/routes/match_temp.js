@@ -2,6 +2,8 @@ const MAX_AVAILABILITY_SCORE = 6;
 const MAX_INTEREST_SCORE = 7.5;
 const MAX_SKILL_SCORE = 5;
 const NORMALIZED_BASE = 10.0;
+const DAYS = 7;
+const TIME_SLOTS = 48;
 
 /**
 	* Key function to generate matches for a single user, given the user id.
@@ -121,7 +123,7 @@ function getBestActivityMatch(curr_user_activities, potential_match_activities) 
 	* the name of the potential match activity, a skill score, and an interest score.
 */
 function generateActivityMatches(curr_user_activities, potential_match_activities) {
-	var activity_matches = []
+	var activity_matches = [];
 
 	// Create a list with all activities with match score temporarily as 0.
 	for (var i = 0; i < curr_user_activities.length; i++) {
@@ -220,6 +222,77 @@ function computeNormalizedScore(curr_score, curr_max) {
 	return curr_score/curr_max*NORMALIZED_BASE;
 }
 
+/**
+	* Test cases for whether we correctly find the maximum number of increasing intervals.
+	* We test three different types of inputs. 
+	* The first case is if there is no overlap in time availabilities for two users.
+	* The second case is if there are multiple overlaps. We must be sure to pick the largest
+	* time overlap. 
+	* The third case is if the time overlap spans across different days. We must
+	* find the largest subsequence across multiple days.
+*/
+function testGetAvailabilityMatch() {
+	var curr_user_availability = [];
+	var match_availability = [];
+
+	const FIRST_OVERLAP = 3;
+	const SECOND_OVERLAP = 5;
+
+	// Test case for no overlap between users.
+	for (var i = 0; i < DAYS; i++) {
+		var row = [];
+		for (var j = 0; j < TIME_SLOTS; j++) {
+			row.push(false);
+		}
+		curr_user_availability.push(row);
+		match_availability.push(row);
+	}
+	assert(getAvailabilityMatch(curr_user_availability, match_availability)===0, 
+		"Availability match incorrect: expected 0 but got " + 
+		getAvailabilityMatch(curr_user_availability, match_availability)  +".");
+	
+	// Test case for some overlap between users (selecting largest overlap of possibilities).
+	for (var j = 0; j < FIRST_OVERLAP; j++) {
+		curr_user_availability[0][j] = true;
+		match_availability[0][j] = true;
+	}
+	for (var j = 0; j < SECOND_OVERLAP; j++) {
+		curr_user_availability[1][j] = true;
+		match_availability[1][j] = true;
+	}
+	assert(getAvailabilityMatch(curr_user_availability, match_availability)===SECOND_OVERLAP, 
+		"Availability match incorrect: expected " + SECOND_OVERLAP + " but got " + 
+		getAvailabilityMatch(curr_user_availability, match_availability) + ".");
+	
+	// Test case for computing overlap across different days (i.e. if the maximum time length
+	// starts on one day and goes until another day).
+	for (var i = 0; i < DAYS; i++) {
+		for (var j = 0; j < TIME_SLOTS; j++) {
+			curr_user_availability[i][j] = true;
+			match_availability[i][j] = true;
+		}
+	}
+	assert(getAvailabilityMatch(curr_user_availability, match_availability)===DAYS*TIME_SLOTS, 
+		"Availability match incorrect: expected " + DAYS*TIME_SLOTS + " but got " + 
+		getAvailabilityMatch(curr_user_availability, match_availability) + ".");
+}
+
+
+/**
+	* Assert function for test cases.
+	* @param {boolean} condition Whether the condition was met
+	* @param {string} message Error message if assertion fails
+	*
+*/
+function assert(condition, message) {
+	if (!condition) {
+		if (message) {
+			throw new Error("ASSERTION FAILED: " + message);
+		}
+		throw new Error("Test case failed!");
+	}
+
+}
 // TODO: delete testing code below.
 var user1 = {}
 var user2 = {};
@@ -235,3 +308,4 @@ var activityList2 = [{ "name" : "basketball", "interest" : 5, "skill" : 5 },
 user1["activities"] = activityList1;
 user2["activities"] = activityList2;
 console.log('Matching users: ' + JSON.stringify(matchUser(user1, user2)));
+testGetAvailabilityMatch();
