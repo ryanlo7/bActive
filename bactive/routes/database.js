@@ -8,7 +8,7 @@
 */
 var routerProperties = function(req, res, next) {
 	return {
-		req: req, 
+		req: req,
 		res: res,
 		next: next
 	};
@@ -16,6 +16,7 @@ var routerProperties = function(req, res, next) {
 
 /**
 	* Function to search for all users meeting a criteria.
+	* The server returns a 404 error if no users matching criteria are found.
 	* @param {Object} properties JSON object containing the express router properties.
 	* @param {Object} criteria JSON object to determine the search criteria for the user(s) we wish to find.
 	* @param {callback} processUsers A callback function to be invoked on the resulting set of users found.
@@ -44,10 +45,12 @@ var searchUsers = function(properties, criteria, processUsers) {
 
 /**
 	* Function to return update a user's data in Users collection in MongoDB.
+	* The server returns a 404 error if unable to find a matching user in the database.
+	* Returns a 201 if it succesfully updates user data.
 	* @param {Object} properties JSON object containing the express router properties.
 	* @param {string} email The email of the user whose fields we wish to update.
 	* @param {Object} updateSet JSON object containing the data we wish to update.
-	* @return {Void} 
+	* @return {Void}
 */
 var updateUser = function(properties, email, updateSet) {
 	let req = properties.req;
@@ -79,10 +82,14 @@ var updateUser = function(properties, email, updateSet) {
 
 /**
 	* Function to insert a new user into the Users collection in MongoDB.
+	* The server returns a 404 error if the email in the request body is already in use.
+	* Otherwise it creates a new user with the given userID and hashed password,
+	* default availabilities, and no activities or events, and adds it to the MongoDB database,
+	* returning a 201 status code.
 	* @param {Object} properties JSON object containing the express router properties.
 	* @param {string} email The email of the new user.
 	* @param {string} password The password of the new user that is encrypted with bcrypt.
-	* @return {Void} 
+	* @return {Void}
 */
 var insertUser = function(properties, email, password) {
 	let req = properties.req;
@@ -92,7 +99,7 @@ var insertUser = function(properties, email, password) {
 	let db = req.app.locals.db;
 	const userCollection = db.collection("Users");
 	const valuesCollection = db.collection("Values");
-	
+
 	userCollection.find({"email": email}).toArray(
 		function(err, result) {
 			if (err) {
