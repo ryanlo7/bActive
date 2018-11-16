@@ -137,11 +137,11 @@ function generateActivityMatches(curr_user_activities, potential_match_activitie
 	// Fill array of matched activities.
 	for (var i = 0; i < curr_user_activities.length; i++) {
 		for (var j = 0; j < potential_match_activities.length; j++) {
-			if (curr_user_activities[i]["name"] !== potential_match_activities[i]["name"]) {
+			if (curr_user_activities[i]["name"] !== potential_match_activities[j]["name"]) {
 				continue;
 			}
-			activity_matches[i]["skill_score"] = computeSkillMatch(curr_user_activities[i]["skill"], potential_match_activities[i]["skill"]);
-			activity_matches[i]["interest_score"] = computeInterestMatch(curr_user_activities[i]["interest"], potential_match_activities[i]["interest"]);
+			activity_matches[i]["skill_score"] = computeSkillMatch(curr_user_activities[i]["skill"], potential_match_activities[j]["skill"]);
+			activity_matches[i]["interest_score"] = computeInterestMatch(curr_user_activities[i]["interest"], potential_match_activities[j]["interest"]);
 		}
 	}
 	return activity_matches;
@@ -219,7 +219,7 @@ function computeSkillMatch(curr_user_skill, potential_match_skill) {
 	* @return {number} A normalized score representing the match score between two users for one category.
 */
 function computeNormalizedScore(curr_score, curr_max) {
-	return curr_score/curr_max*NORMALIZED_BASE;
+	return curr_score*1.0/curr_max*NORMALIZED_BASE;
 }
 
 /**
@@ -279,6 +279,33 @@ function testGetAvailabilityMatch() {
 
 
 /**
+	* Test for activity matching. Ensures that the "best" activity
+	* match is selected as expected.
+*/
+function testGetBestActivityMatch() {
+	var curr_user_activities = [{ "name" : "basketball", "interest" : 1, "skill" : 5 }, 
+	{ "name" : "lifting", "interest" : 2, "skill" : 4 },
+	{ "name" : "swimming", "interest" : 5, "skill" : 3 }];
+	
+	var potential_match_activities = [{ "name" : "basketball", "interest" : 5, "skill" : 5 }, 
+	{ "name" : "lifting", "interest" : 5, "skill" : 1} ];
+
+	assert(getBestActivityMatch(curr_user_activities, potential_match_activities)["name"]==="lifting", 
+		"Activity match incorrect: expected lifting" + " but got " + 
+		getBestActivityMatch(curr_user_activities, potential_match_activities)["name"] + ".");
+
+	assert(getBestActivityMatch(curr_user_activities, potential_match_activities)["skill_score"] > 0, 
+		"Skill score must be positive.");
+	assert(getBestActivityMatch(curr_user_activities, potential_match_activities)["skill_score"] < NORMALIZED_BASE, 
+		"Skill score cannot exceed maximum possible normalized score.");
+
+	assert(getBestActivityMatch(curr_user_activities, potential_match_activities)["interest_score"] > 0, 
+		"Interest score must be positive.");
+	assert(getBestActivityMatch(curr_user_activities, potential_match_activities)["interest_score"] < NORMALIZED_BASE, 
+		"Interest score cannot exceed maximum possible normalized score.");
+}
+
+/**
 	* Assert function for test cases.
 	* @param {boolean} condition Whether the condition was met
 	* @param {string} message Error message if assertion fails
@@ -293,19 +320,7 @@ function assert(condition, message) {
 	}
 
 }
-// TODO: delete testing code below.
-var user1 = {}
-var user2 = {};
 
-var arr1 = [[true, true], [true, true]];
-var arr2 = [[true, true], [true, true]];
-user1["availability"] = arr1;
-user2["availability"] = arr2;
-var activityList1 = [{ "name" : "basketball", "interest" : 1, "skill" : 5 }, 
-					{ "name" : "lifting", "interest" : 2, "skill" : 4 } ];
-var activityList2 = [{ "name" : "basketball", "interest" : 5, "skill" : 5 }, 
-					{ "name" : "lifting", "interest" : 5, "skill" : 1} ];
-user1["activities"] = activityList1;
-user2["activities"] = activityList2;
-console.log('Matching users: ' + JSON.stringify(matchUser(user1, user2)));
+
 testGetAvailabilityMatch();
+testGetBestActivityMatch();
