@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 /* GET user information. */
-router.get('/:userid', function(req, res, next) {
+router.get('/:userid',
+	function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 
