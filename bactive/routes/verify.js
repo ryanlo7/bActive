@@ -4,7 +4,6 @@ module.exports = {
 	checkLogin: function (cookie, email) {
 		var cert = "C-UFRaksvPKhx1txJYFcut3QGxsafPmwCY6SCly3G6c";
 		if(cookie == null) {
-			console.log('no cookie');
 			return false; // return 401
 		}
 
