@@ -11,7 +11,7 @@ router.post('/', function(req, res, next) {
 
 });
 
-const MAX_AVAILABILITY_SCORE = 6;	
+const MAX_AVAILABILITY_SCORE = 6;
 const MAX_INTEREST_SCORE = 7.5;
 const MAX_SKILL_SCORE = 5;
 const NORMALIZED_BASE = 10.0;
@@ -22,7 +22,7 @@ const NORMALIZED_BASE = 10.0;
 	* @param {Object} res The express routing HTTP client response object.
 	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
 	* @param {number} userId An integer that represents a user id.
-	* @return {!Array<number>} A sorted array of matching users, from highest score match
+	* @return {!Array} A sorted array of matching users, from highest score match
 	* to lowest score match.
 */
 function matchUsers(req, res, next, userId) {
@@ -41,7 +41,7 @@ function matchUsers(req, res, next, userId) {
 		});
 	};
 	database.searchUsers(database.routerProperties(req, res, next), {"userId": userId}, performMatch);
-	
+
 }
 
 /**
@@ -51,7 +51,7 @@ function matchUsers(req, res, next, userId) {
 	* @param {Object} potential_match An object containing the user profile information for the the
 	* match candidate for the logged in user.
 	* @return {Array} An array of a matched activity and the match score.
-	* A score representing how good the match is between the logged in user and the potential match. 
+	* A score representing how good the match is between the logged in user and the potential match.
 	* This match is based on availability, interest level, and skill level.
 */
 function matchUser(curr_user, potential_match) {
@@ -67,12 +67,12 @@ function matchUser(curr_user, potential_match) {
 
 
 /**
-	* Returns a score for the availability match between two users. 
+	* Returns a score for the availability match between two users.
 	* This is done by computing the largest overlapping block of time between the two users.
-	* This score is capped at a maximum defined by a constant MAX_AVAILABILITY_SCORE. 
-	* @param {Array<Array<<boolean>>} curr_user_availability A list of true/false availabilities
+	* This score is capped at a maximum defined by a constant MAX_AVAILABILITY_SCORE.
+	* @param {Array} curr_user_availability A list of true/false availabilities
 	* for the current user for each thirty-minute time slot on each day of the week.
-	* @param {Array<Array<<boolean>>} potential_match_availability A list of true/false availabilities
+	* @param {Array} potential_match_availability A list of true/false availabilities
 	* for the potentialMatch for each thirty-minute time slot on each day of the week.
 	* @return {number} A score representing how good the time availability match is, where 0 represents
 	* a failed match and MAX_AVAILABILITY_SCORE is the highest possible match score for this category.
@@ -82,7 +82,7 @@ function getAvailabilityMatchScore(curr_user_availability, potential_match_avail
 	var num_overlapping_periods = getAvailabilityMatch(curr_user_availability, potential_match_availability);
 
 	// Thirty minutes is two short for an activity, so a match requires at least an hour of matched times.
-	// Furthermore, activity matches are not expected to have an activity for over three hours, 
+	// Furthermore, activity matches are not expected to have an activity for over three hours,
 	// so a maximum cutoff is set for highest possible match.
 	if (num_overlapping_periods <= 1) {
 		num_overlapping_periods = 0;
@@ -97,9 +97,9 @@ function getAvailabilityMatchScore(curr_user_availability, potential_match_avail
 	* Returns maximum number of consecutive overlapping half-hours for two users. This could
 	* span over multiple days of the week, as long as it is a consecutive chunk of hours (i.e.
 	* 11:00 PM on Monday until 1 AM on Tuesday).
-	* @param {Array<Array<<boolean>>} curr_user_availability A list of true/false availabilities
+	* @param {Array} curr_user_availability A list of true/false availabilities
 	* for the current user for each thirty-minute time slot on each day of the week.
-	* @param {Array<Array<<boolean>>} potential_match_availability A list of true/false availabilities
+	* @param {Array} potential_match_availability A list of true/false availabilities
 	* for the potentialMatch for each thirty-minute time slot on each day of the week.
 	* @return {number} The maximum number of overlapping consecutive half-hours between the two users.
 */
@@ -127,9 +127,9 @@ function getAvailabilityMatch(curr_user_availability, potential_match_availabili
 /**
 	* Returns an object containing the best activity match between two users and the
 	* interest and skill level scores for that activity.
-	* @param {Array<Object>} curr_user_activities A list of activities for the current user with
+	* @param {Array} curr_user_activities A list of activities for the current user with
 	* interest and skill level scores.
-	* @param {Array<Object>} potential_match_activities A list of activities for the potential
+	* @param {Array} potential_match_activities A list of activities for the potential
 	* match user with interest and skill level scores.
 	* @return {Object} The matched activity yielding the highest score for the current user.
 	* The object contains a field for the activity name, a field for the interest match score, and
@@ -141,11 +141,11 @@ function getBestActivityMatch(curr_user_activities, potential_match_activities) 
 
 /**
 	* Generates a list of activity matches with an interest match and a skill match for each activity.
-	* @param {Array<Object>} curr_user_activities A list of activities for the current user with
+	* @param {Array} curr_user_activities A list of activities for the current user with
 	* interest and skill level scores.
-	* @param {Array<Object>} potential_match_activities A list of activities for the potential
+	* @param {Array} potential_match_activities A list of activities for the potential
 	* match user with interest and skill level scores.
-	* @return {Array<Object>} List of objects with the potential match activities. Each object has
+	* @return {Array} List of objects with the potential match activities. Each object has
 	* the name of the potential match activity, a skill score, and an interest score.
 */
 function generateActivityMatches(curr_user_activities, potential_match_activities) {
@@ -176,9 +176,9 @@ function generateActivityMatches(curr_user_activities, potential_match_activitie
 /**
 	* Returns an object containing the best activity match between two users and the
 	* interest and skill level scores for that activity, given a list of activities and scores.
-	* The best match is defined as having the highest skill score and interest score combined, 
+	* The best match is defined as having the highest skill score and interest score combined,
 	* disregarding activities with an interest match of 0.
-	* @param {Array<Object>} activity_matches Current activity matches with name, skill score, and interest
+	* @param {Array} activity_matches Current activity matches with name, skill score, and interest
 	* score for each activity.
 	* @return {Object} The matched activity yielding the highest score for the current user.
 	* The object contains a field for the activity name, a field for the interest match score, and
@@ -256,9 +256,9 @@ function computeNormalizedScore(curr_score, curr_max) {
 // var arr2 = [[true, true], [true, true]];
 // user1["availability"] = arr1;
 // user2["availability"] = arr2;
-// var activityList1 = [{ "name" : "basketball", "interest" : 1, "skill" : 5 }, 
+// var activityList1 = [{ "name" : "basketball", "interest" : 1, "skill" : 5 },
 // 					{ "name" : "lifting", "interest" : 2, "skill" : 4 } ];
-// var activityList2 = [{ "name" : "basketball", "interest" : 5, "skill" : 5 }, 
+// var activityList2 = [{ "name" : "basketball", "interest" : 5, "skill" : 5 },
 // 					{ "name" : "lifting", "interest" : 5, "skill" : 1} ];
 // user1["activities"] = activityList1;
 // user2["activities"] = activityList2;
