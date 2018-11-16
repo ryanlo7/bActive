@@ -6,8 +6,8 @@
     <body>
     <h1>Edit Profile</h1>
 
-    <form action='/profile/<%= userId %>' method='PUT'>
-            <label for='email'>Email</label>
+    <form action='/edit/<%= userId %>' method='POST'>
+            <label for='email'>New Email</label>
             <input type='text' name='email' value='<%= email %>'></input>
 
             <br>
@@ -23,7 +23,7 @@
     </form>
 
     <h2>Activities</h2>
-    <table>
+    <table id="activity-table">
         <thead>
             <tr>
                 <th>Activity</th> <th>Skill Level</th> <th>Interest Level</th>
@@ -32,11 +32,48 @@
         <% for (let i = 0; i < activities.length; i++) { %>
             <tr>
                 <td><%- activities[i].name %></td>
-                <td><%- activities[i].skill %></td>
-                <td><%- activities[i].interest %></td>
+                <td>
+                    <select id="activity-skill" onchange="changeActivitySkill()">
+                        <% for (let j = 1; j <= 5; j++) { %>
+                            <option <%= (activities[i].skill == j) ? "selected" : "" %> value="<%= j %>">
+                                <%= j %>
+                        <% } %>
+                    </select>
+                </td>
+                <td>
+                    <select id="activity-interest" onchange="changeActivityInterest()">
+                        <% for (let j = 1; j <= 5; j++) { %>
+                            <option <%= (activities[i].interest == j) ? "selected" : "" %> value="<%= j %>">
+                                <%= j %>
+                        <% } %>
+                    </select>
+                </td>
             </tr>
         <% } %>
     </table>
+
+    <script>
+        function changeActivityInterest() {
+
+        }
+
+        function changeActivitySkill() {
+
+        }
+    </script>
+
+    <button onclick="addActivitiesRow()">Add Row</button>
+
+    <script>
+    function addActivitiesRow() {
+        var table = document.getElementById("activity-table");
+        var row = table.insertRow(table.rows.length);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = "";
+        cell2.innerHTML = "";
+    }
+    </script>
 
     <h2>Availability</h2>
     <table>
@@ -50,9 +87,9 @@
             <tr>
                 <% for (let j = 0; j < 7; j++) { %>
                     <% if (availability[j][i]) { %>
-                        <td height="30" bgcolor="#00FF00" ></td>
+                        <td data-day="<%= j %>" data-min="<%= i %>" height="30" bgcolor="#00FF00" ></td>
                     <% } else { %>
-                        <td height="30" bgcolor="#FF0000" ></td>
+                        <td data-day="<%= j %>" data-min="<%= i %>" height="30" bgcolor="#FF0000" ></td>
                     <% } %>
                 <% } %>
             </tr>
