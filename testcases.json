@@ -133,6 +133,17 @@
 				"description": "Simple POST test, similar to the previous one, but this time with a correct username and password entered into the database. Note that even though the password is sent in the request body as plaintext, passwords in the server are hashed, and the hash of the password is checked against the hash in the server. The server should redirect to the profile page, with a code of 301 (redirect). This test would fail otherwise, with a 2XX status code, a 3XX status code that does not redirect to the profile page, a 4XX status code, (401 would suggest a problem with password checking) or a 5XX status code (indicating a server-side error)."
 			},
 			"response": []
+		},
+		{
+			"name": "GET Profile page",
+			"request": {
+				"url": "http://localhost:3000/profile/0",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Send the GET request with JWT cookie. "
+			},
+			"response": []
 		}
 	]
 }
