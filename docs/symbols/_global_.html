@@ -546,7 +546,7 @@ have the same maximum and minimum values.
 					<a name="generateActivityMatches"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{Array<Object>}</span>
+					<span class="light">{Array}</span>
 					<b>generateActivityMatches</b>(curr_user_activities, potential_match_activities)
 					
 					</div>
@@ -566,14 +566,14 @@ have the same maximum and minimum values.
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{Array<Object>}</span> <b>curr_user_activities</b>
+									<span class="light fixedFont">{Array}</span> <b>curr_user_activities</b>
 									
 								</dt>
 								<dd>A list of activities for the current user with
 interest and skill level scores.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{Array<Object>}</span> <b>potential_match_activities</b>
+									<span class="light fixedFont">{Array}</span> <b>potential_match_activities</b>
 									
 								</dt>
 								<dd>A list of activities for the potential
@@ -588,7 +588,7 @@ match user with interest and skill level scores.</dd>
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{Array<Object>}</span> List of objects with the potential match activities. Each object has
+								<dd><span class="light fixedFont">{Array}</span> List of objects with the potential match activities. Each object has
 the name of the potential match activity, a skill score, and an interest score.</dd>
 							
 							</dl>
@@ -623,14 +623,14 @@ span over multiple days of the week, as long as it is a consecutive chunk of hou
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{Array<Array<<boolean>>}</span> <b>curr_user_availability</b>
+									<span class="light fixedFont">{Array}</span> <b>curr_user_availability</b>
 									
 								</dt>
 								<dd>A list of true/false availabilities
 for the current user for each thirty-minute time slot on each day of the week.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{Array<Array<<boolean>>}</span> <b>potential_match_availability</b>
+									<span class="light fixedFont">{Array}</span> <b>potential_match_availability</b>
 									
 								</dt>
 								<dd>A list of true/false availabilities
@@ -662,7 +662,7 @@ for the potentialMatch for each thirty-minute time slot on each day of the week.
 					
 					</div>
 					<div class="description">
-						Returns a score for the availability match between two users. 
+						Returns a score for the availability match between two users.
 This is done by computing the largest overlapping block of time between the two users.
 This score is capped at a maximum defined by a constant MAX_AVAILABILITY_SCORE.
 						
@@ -679,14 +679,14 @@ This score is capped at a maximum defined by a constant MAX_AVAILABILITY_SCORE.
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{Array<Array<<boolean>>}</span> <b>curr_user_availability</b>
+									<span class="light fixedFont">{Array}</span> <b>curr_user_availability</b>
 									
 								</dt>
 								<dd>A list of true/false availabilities
 for the current user for each thirty-minute time slot on each day of the week.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{Array<Array<<boolean>>}</span> <b>potential_match_availability</b>
+									<span class="light fixedFont">{Array}</span> <b>potential_match_availability</b>
 									
 								</dt>
 								<dd>A list of true/false availabilities
@@ -735,14 +735,14 @@ interest and skill level scores for that activity.
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{Array<Object>}</span> <b>curr_user_activities</b>
+									<span class="light fixedFont">{Array}</span> <b>curr_user_activities</b>
 									
 								</dt>
 								<dd>A list of activities for the current user with
 interest and skill level scores.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{Array<Object>}</span> <b>potential_match_activities</b>
+									<span class="light fixedFont">{Array}</span> <b>potential_match_activities</b>
 									
 								</dt>
 								<dd>A list of activities for the potential
@@ -778,7 +778,7 @@ a field for the skill match score.</dd>
 					<div class="description">
 						Returns an object containing the best activity match between two users and the
 interest and skill level scores for that activity, given a list of activities and scores.
-The best match is defined as having the highest skill score and interest score combined, 
+The best match is defined as having the highest skill score and interest score combined,
 disregarding activities with an interest match of 0.
 						
 							<br />
@@ -794,7 +794,7 @@ disregarding activities with an interest match of 0.
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{Array<Object>}</span> <b>activity_matches</b>
+									<span class="light fixedFont">{Array}</span> <b>activity_matches</b>
 									
 								</dt>
 								<dd>Current activity matches with name, skill score, and interest
@@ -928,7 +928,7 @@ match candidate for the logged in user.</dd>
 							<dt class="heading">Returns:</dt>
 							
 								<dd><span class="light fixedFont">{Array}</span> An array of a matched activity and the match score.
-A score representing how good the match is between the logged in user and the potential match. 
+A score representing how good the match is between the logged in user and the potential match.
 This match is based on availability, interest level, and skill level.</dd>
 							
 							</dl>
@@ -941,7 +941,7 @@ This match is based on availability, interest level, and skill level.</dd>
 					<a name="matchUsers"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{!Array<number>}</span>
+					<span class="light">{!Array}</span>
 					<b>matchUsers</b>(req, res, next, userId)
 					
 					</div>
@@ -993,7 +993,7 @@ This match is based on availability, interest level, and skill level.</dd>
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{!Array<number>}</span> A sorted array of matching users, from highest score match
+								<dd><span class="light fixedFont">{!Array}</span> A sorted array of matching users, from highest score match
 to lowest score match.</dd>
 							
 							</dl>
@@ -1192,7 +1192,7 @@ Returns a 201 if it succesfully updates user data.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Nov 16 2018 02:53:25 GMT-0000 (GMT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Nov 16 2018 04:22:44 GMT-0000 (GMT)
 		</div>
 	</body>
 </html>
