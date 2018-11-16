@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "2062c70c-4f71-4336-a8fa-80cf769a8c34",
+		"name": "bActive",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "user1@ucla.edu",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "incorrect",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Simple login unit test to ensure that login page works. If successful, (without a valid cookie) the server will return a status code of 200 and an HTML-formatted login page, and if unsuccessful, the server will return a 4XX or 5XX error code."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "user1@ucla.edu",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "incorrect",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Simple check to determine whether a POST resulting from a login attempt that contains a username with an incorrect password is handled correctly. If handled correctly, the server will return 401 (Unauthorized) and redirect back to the login page. If handled incorrectly, the server will return an status code of 2XX, 4XX, (besides 401) or 5XX."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "user1@ucla.edu",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Simple POST test, similar to the previous one, but this time with a correct username and password entered into the database. Note that even though the password is sent in the request body as plaintext, passwords in the server are hashed, and the hash of the password is checked against the hash in the server. The server should redirect to the profile page, with a code of 301 (redirect). This test would fail otherwise, with a 2XX status code, a 3XX status code that does not redirect to the profile page, a 4XX status code, (401 would suggest a problem with password checking) or a 5XX status code (indicating a server-side error)."
+			},
+			"response": []
+		},
+		{
+			"name": "GET Profile page",
+			"request": {
+				"url": "http://localhost:3000/profile/0",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Send the GET request with JWT cookie. "
+			},
+			"response": []
+		}
+	]
+}
+{
+	"info": {
+		"_postman_id": "33d069b5-2ae0-4a71-aead-78f6a3a95bdf",
+		"name": "bActive",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "events",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				},
+				"description": "Simple events GET test, where userId is invalid. "
+			},
+			"response": [
+				{
+					"name": "events",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/events/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"events",
+								"2"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "21"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"15-5f/ox8wZv5eQh5gAXqCYMR1pDH4\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 16 Nov 2018 05:43:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "404: userId not found"
+				}
+			]
+		}
+	]
+}
