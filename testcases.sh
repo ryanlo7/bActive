@@ -17,3 +17,14 @@ curl -X POST \
   -H 'Postman-Token: d92d8286-0b95-4248-be8b-f6a89f7b3d86' \
   -H 'cache-control: no-cache' \
   -d 'username=user1%40ucla.edu&password=password'
+
+curl -X GET \
+  http://localhost:3000/events/2 \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Postman-Token: 7419d0a3-d7d1-4dbf-a357-bc72a9bef8d1' \
+  -H 'cache-control: no-cache'
+
+curl -X GET \
+  http://localhost:3000/events/1 \
+  -H 'Postman-Token: aaef2018-d7b0-4258-bf24-e4bc6ef60bb6' \
+  -H 'cache-control: no-cache'
