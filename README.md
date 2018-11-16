@@ -74,7 +74,7 @@ Document Example:
 
 ## TESTING:
 We have implemented 5 test cases in testcases.json as well as server-side test cases in match.js.
-Their respective descriptions are in the code as well as our report for part B. We have described them below as well:
+Their respective descriptions are in the code in the ‘tests’ folder, as well as our report for part B. We have described them below as well:
 
 Test Case 1: Login Page HTTP GET
 
@@ -100,6 +100,15 @@ Test Case 6: HTTP GET Event Page with valid userId, without cookie
 
 This was a basic use-case test designed to test whether the events page displays the events page for an valid userId without a cookie. To test this, the GET request must contain a valid userId (in the database at that point in time). We expect a 401 status redirect to the login page since the user does not have a cookie and is thus not logged in. Rendering other status codes or pages indicate a server-side error needing further investigation.
 
+Test Case 7: Unit Test for Time Availability Match
+
+This was a unit test case in JavaScript to test whether the time availability match between two users was computed correctly. To test this, we fill two time availability matrices with values for availability of two users. Then, we compare the time availabilities of the two users and call the function to compute the maximum overlap in availability between the two users. Assert statements are used to check that the computed overlap is correct for each of three cases that will be described below; the true value of maximum overlap is known since the availability arrays were created with a known number of overlap. 
+
+Three different availability matrix combinations are tested with the assert statements in this function to ensure that the maximum overlap is as expected: one combination ensures that the function returns 0 when there is no match, one combination ensures that if there are two matching time periods, the largest availability is returned, and the third combination ensures that contiguous time periods are detected across multiple days (i.e. if two users are available from late night on one day to the morning on the other day, we must detect this).
+
+Test Case 8: Unit Test for Activity Match
+
+This was a unit test case in JavaScript to determine whether the correct activity was selected given two users’ activity preferences. The true best activity is known prior to the test case since the activity arrays are manually filled with synthetic activity data. The function uses assert statements to check that the expected activity is selected from the lists when determining the best match. Furthermore, the function also uses assert statements to verify that the interest and skill level scores are within bounds of the expected scores (between 0, and the constant used for the maximum score post normalization). 
 
 ## Team:
 Name: ActiveBruins  
