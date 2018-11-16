@@ -33,7 +33,7 @@ function matchUsers(req, res, next, userId) {
 	let performMatch = function(curr_user) {
 		currUser = curr_user[0];
 		database.searchUsers(database.routerProperties(req, res, next), {"userId": userId}, function(users) {
-			for (int i = 0; i < users.length; i ++) {
+			for (let i = 0; i < users.length; i ++) {
 				let potentialMatchUser = users[i];
 				let result = matchUser(currUser, potentialMatchUser);
 				// do something with result
