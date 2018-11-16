@@ -16,9 +16,6 @@ router.get('/:userid', function(req, res, next) {
 
 					res.render('events', {
 					 	userId: userId,
-						email: user.email,
-						activities: user.activities,
-						availability: user.availability,
 						events: user.events
 					});
 				}
