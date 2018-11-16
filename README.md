@@ -1,5 +1,12 @@
 # B Active
 
+## ABOUT THIS PROJECT
+
+### Where the code is.
+
+- Source code is in the bactive directory. Front-end code is in bactive/views, back-end code is in bactive/routes.
+- Test cases are included in testcases.json.
+- Included libraries are node packages, and should be under bactive/node_modules.
 
 ## HOW TO START PROJECT:
 1. follow guide on cs144 site to set up docker here (do parts A and B only):
@@ -7,7 +14,7 @@
 2. follow steps from "Overview" to "Development Environment":
    http://oak.cs.ucla.edu/classes/cs144/project3/index.html
 3. run `mongo < db.sh`
-4. play around & test frontend/backend functionality by running `npm start` and then opening the url in `http://localhost:3000/<insert page you want to open here without any extension names>`. For instance, if I want to view the "match" page, I would type in: `http://localhost:3000/match`
+4. play around & test frontend/backend functionality by running `npm start` and then opening the url in `http://localhost:3000/<insert page you want to open here without any extension names>`. For instance, if I want to view the "match" page, I would type in: `http://localhost:3cd 000/match`
 5. edit the .ejs files in "/views" to edit front end. To edit backend, edit the corresponding .js file in "/routes"
 
 ## DATABASE FORMAT:
@@ -49,7 +56,7 @@ Document Example:
 			# "invited" = user 1 has not accepted, user 2 has accepted
 			"status": "matched",
 			"location": "bfit" # default to first location in Activities collection, changeable after confirmed
-		}, 
+		},
 		...
 	]
 }
