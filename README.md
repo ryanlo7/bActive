@@ -72,6 +72,34 @@ Document Example:
 }
 ```
 
+## TESTING:
+We have implemented 5 test cases in testcases.json as well as server-side test cases in match.js.
+Their respective descriptions are in the code as well as our report for part B. We have described them below as well:
+
+Test Case 1: Login Page HTTP GET
+
+This was a very basic use-case test that we used simply to verify that our server was running as intended. Upon receiving an HTTP GET request to the login page, we checked whether the server returned the appropriate status code of 200 along with an HTML page containing an email and password field. Any other status code, or an HTML page not containing the aforementioned fields, would indicate some sort of server-side error that would need to be addressed.
+
+Test Case 2: Login Page HTTP POST (incorrect password)
+
+This was another basic use-case test that we used to verify that the server successfully prevented login attempts with an incorrect password to ensure security. Upon receiving an HTTP POST request containing a valid username and incorrect password in its body, the server should make a call to MongoDB, compare the cryptographic hash of the incorrect password with the cryptographic hash of the password stored on the server, and recognize that an incorrect password was entered, thus redirecting the user back to the login page with a status code of 401 (unauthorized). Any other status code would imply some sort of error; notably, a status code of 200 (OK) would indicate a massive security vulnerability in the password verification system that would require urgent attention, especially if the server were to also return a valid cookie that the user could then use to authenticate themselves to login-protected pages.
+
+Test Case 3: Login Page HTTP POST (correct password)
+
+This was a unit test-case designed to test whether the server could recognize a correct password, redirect to the profile page, and issue a cookie that would authorize the user to access login-protected content. As mentioned previously, password checking is implemented by computing a cryptographic hash of the password provided by the user, and comparing with the cryptographic hash stored on the server. As a redirect is involved, the server should send a status code of 301; any other status code would imply some sort of error; in particular, a status code of 401 (unauthorized) would imply that the server was not properly accepting the credentials of the user.
+
+Test Case 4: HTTP GET Profile Page with Login Verification
+
+This was a unit test-case designed to test whether the profile page displays the profile for a user given a verified cookie indicating that the user has logged in within the last two hours. In order to execute this, the POST request described in Test Case 3 must first be run to obtain the JWT authorization cookie, and appended to the GET request header for the profile page. The status of the response should be 200, and the body of the response should be an HTML page that includes the user email, list of activities, and colored table of availability. 
+
+Test Case 5: HTTP GET Event Page with invalid userId
+
+This was a basic use-case test designed to test whether the events page displays the events page for an invalid userId. To test this, the GET request must contain an invalid userId (not in the database at that point in time). We expect a status code of 404, indicating userId not found. Rendering other status codes or pages indicate a server-side error needing further investigation.
+
+Test Case 6: HTTP GET Event Page with valid userId, without cookie
+
+This was a basic use-case test designed to test whether the events page displays the events page for an valid userId without a cookie. To test this, the GET request must contain a valid userId (in the database at that point in time). We expect a 401 status redirect to the login page since the user does not have a cookie and is thus not logged in. Rendering other status codes or pages indicate a server-side error needing further investigation.
+
 
 ## Team:
 Name: ActiveBruins  
