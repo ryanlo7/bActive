@@ -1,6 +1,7 @@
 var database = require('./database');
 var express = require('express');
 var router = express.Router();
+const bcrypt = require('bcryptjs');
 
 // const collectionName = 'Users';
 
@@ -22,8 +23,10 @@ router.post('/', function(req, res, next) {
 		res.status(401).render('register', { err: 'Error: the passwords do not match'});
 		return;
 	}
-
-	database.insertUser(database.routerProperties(req, res, next), email, password);
+	bcrypt.hash(password, 10, function(err, hash) {
+		database.insertUser(database.routerProperties(req, res, next), email, hash);
+	});
+	
 
 	// let db = req.app.locals.db;
 	// const collection = db.collection(collectionName);
