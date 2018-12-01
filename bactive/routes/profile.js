@@ -46,7 +46,7 @@ router.get('/:userid',
 
 function calculateRating(userRatingContainer) {
 	if (userRatingContainer.numRatings === 0) {
-		return null;
+		return 0;
 	}
 	return userRatingContainer.scoreSum / userRatingContainer.numRatings;
 }
