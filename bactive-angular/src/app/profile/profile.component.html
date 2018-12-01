@@ -1,0 +1,25 @@
+<h1>Profile (edit TODO ROUTER LINK) </h1>
+<h3>Email: {{user.email}} </h3>
+<h2>Activities</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Activity</th> <th>Skill Level</th> <th>Interest Level</th>
+        </tr>
+    </thead>
+        <tr *ngFor="let activity of user.activities">
+            <td>{{ activity.name }}</td>
+            <td>{{ activity.skill }}</td>
+            <td>{{ activity.interest }}</td>
+        </tr>
+</table>
+<h2>Availability</h2>
+<table>
+    <thead>
+        <tr>
+            <th></th><th>Monday</th> <th>Tuesday</th> <th>Wednesday</th> <th>Thursday</th>
+            <th>Friday</th> <th>Saturday</th> <th>Sunday</th>
+        </tr>
+    </thead>
+    
+</table>
