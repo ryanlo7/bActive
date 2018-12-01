@@ -26,18 +26,19 @@ router.get('/:userid',
 			} else {
 				let user = results[0]; // should only be one match
 
-				let canEdit = false;
+				let isUser = false;
 				if (verify.checkLogin(req.cookies.jwt, user.email)) {
-					canEdit = true;
+					isUser = true;
 				}
 
 				res.render('profile', {
 				 	userId: userId,
 					email: user.email,
 					rating: calculateRating(user.rating),
+					numRatings: user.rating.numRatings,
 					activities: user.activities,
 					availability: user.availability,
-					canEdit: canEdit
+					isUser: isUser
 				});
 			}
 		});

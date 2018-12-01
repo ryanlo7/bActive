@@ -6,14 +6,20 @@
         <title>Profile</title>
     </head>
     <body>
-    <span>
-        <h1>Profile </h1>
-        <% if (canEdit) { %>
+
+    <h1>Profile 
+        <% if (isUser) { %>
             <a href='/edit/<%= userId %>'> (edit) </a>
         <% } %>
-    </span>
+    </h1>
+
     <h3>Email: <%- email %> </h3>
-    <h4>Rating: <%- rating %></h4>
+    <div>
+        <h4>Rating: 
+            <%- rating %>
+        </h4>
+        <h6>(<%- numRatings %>)</h6>
+    </div>
     <h2>Activities</h2>
     <table>
         <thead>
