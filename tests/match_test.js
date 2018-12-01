@@ -16,6 +16,7 @@ function testGetAvailabilityMatch() {
 	const FIRST_OVERLAP = 3;
 	const SECOND_OVERLAP = 5;
 
+
 	// Test case for no overlap between users.
 	for (var i = 0; i < matchModule.DAYS; i++) {
 		var row = [];
@@ -51,7 +52,7 @@ function testGetAvailabilityMatch() {
 		}
 	}
 	assert(matchModule.getAvailabilityMatch(curr_user_availability, match_availability)===matchModule.DAYS*matchModule.TIME_SLOTS, 
-		"Availability match incorrect: expected " + DAYS*TIME_SLOTS + " but got " + 
+		"Availability match incorrect: expected " + matchModule.DAYS*matchModule.TIME_SLOTS + " but got " + 
 		matchModule.getAvailabilityMatch(curr_user_availability, match_availability) + ".");
 }
 
@@ -74,12 +75,12 @@ function testGetBestActivityMatch() {
 
 	assert(matchModule.getBestActivityMatch(curr_user_activities, potential_match_activities)["skill_score"] > 0, 
 		"Skill score must be positive.");
-	assert(matchModule.getBestActivityMatch(curr_user_activities, potential_match_activities)["skill_score"] < NORMALIZED_BASE, 
+	assert(matchModule.getBestActivityMatch(curr_user_activities, potential_match_activities)["skill_score"] < matchModule.NORMALIZED_BASE, 
 		"Skill score cannot exceed maximum possible normalized score.");
 
 	assert(matchModule.getBestActivityMatch(curr_user_activities, potential_match_activities)["interest_score"] > 0, 
 		"Interest score must be positive.");
-	assert(matchModule.getBestActivityMatch(curr_user_activities, potential_match_activities)["interest_score"] < NORMALIZED_BASE, 
+	assert(matchModule.getBestActivityMatch(curr_user_activities, potential_match_activities)["interest_score"] < matchModule.NORMALIZED_BASE, 
 		"Interest score cannot exceed maximum possible normalized score.");
 }
 
