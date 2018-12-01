@@ -13,9 +13,17 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <div>
-        <h1><%= title %></h1>
-        <p>The Activity App for Active Bruins</p>
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h1 class="display-4"><%= title %></h1>
+            <h2 class="lead">The Activity App for Active Bruins</h2>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row top-buffer">
+            <p style="text-align: center"><a href="/login" class="btn btn-default btn-xlg sharp">Login</a></p>
+            <p style="text-align: center"><a href="/register" class="btn btn-default btn-xlg sharp">Register</a></p>
+        </div>
     </div>
   </body>
 </html>
