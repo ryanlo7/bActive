@@ -15,7 +15,7 @@ router.get('/:userid', function(req, res, next) {
 			.find({'userId': userId})
 			.toArray(function(err, results) {
 				if (results.length == 0) {
-					res.status(404).send("404: userId not found");
+					res.status(404).send("404: hi userId not found");
 				} else {
 					user = results[0]; // should only be one match
 
@@ -24,13 +24,8 @@ router.get('/:userid', function(req, res, next) {
 						return;
 					}
 
-					let matches = matchUsers(req, res, next, userId);
-
-					res.render('match', {
-					 	userId: userId,
-						events: user.events,
-						matches: matches
-					});
+					var matchedResults = [];
+					matchUsers(req, res, next, userId, matchedResults);
 				}
 			});
 
@@ -51,6 +46,7 @@ const NORMALIZED_BASE = 10.0;
 const DAYS = 7;
 const TIME_SLOTS = 48;
 
+
 /**
 	* Key function to generate matches for a single user, given the user id.
 	* @param {Object} req The express routing HTTP client request object.
@@ -60,23 +56,28 @@ const TIME_SLOTS = 48;
 	* @return {!Array} A sorted array of matching users, from highest score match
 	* to lowest score match.
 */
-function matchUsers(req, res, next, userId) {
+function matchUsers(req, res, next, userId, matches) {
 	// Add in code to get data from database.
 	// Pass in objects of data for two users into match user function to get score match.
 	// Keep mapping of each user to score match (i.e. dictionary). Make sure that
 	// match is not attmepted for user with himself/herself.
-	let performMatch = function(curr_user) {
+	// var results = [];
+	let performMatch = function(curr_user, matchResults) {
 		currUser = curr_user[0];
-		database.searchUsers(database.routerProperties(req, res, next), {"userId": userId}, function(users) {
+		database.searchUsers(database.routerProperties(req, res, next), {}, matchResults, function(users, matchResultsArray) {
 			for (let i = 0; i < users.length; i ++) {
 				let potentialMatchUser = users[i];
-				let result = matchUser(currUser, potentialMatchUser);
-				// do something with result
+				matchResultsArray.push(matchUser(currUser, potentialMatchUser));
+				console.log(matchResultsArray.length)
+				// do something with result - or not, just keep appending to results and return
 			}
+			res.render('match', {
+					 	userId: userId,
+						matches: matchResultsArray,
+					});
 		});
 	};
-	database.searchUsers(database.routerProperties(req, res, next), {"userId": userId}, performMatch);
-
+	database.searchUsers(database.routerProperties(req, res, next), {"userId": userId}, matches, performMatch);
 }
 
 /**
@@ -283,162 +284,20 @@ function computeNormalizedScore(curr_score, curr_max) {
 	return curr_score*1.0/curr_max*NORMALIZED_BASE;
 }
 
-/**
-	* Test cases for whether we correctly find the maximum number of increasing intervals.
-	* We test three different types of inputs. 
-	* The first case is if there is no overlap in time availabilities for two users.
-	* The second case is if there are multiple overlaps. We must be sure to pick the largest
-	* time overlap. 
-	* The third case is if the time overlap spans across different days. We must
-	* find the largest subsequence across multiple days.
-*/
-function testGetAvailabilityMatch() {
-	var curr_user_availability = [];
-	var match_availability = [];
-
-	const FIRST_OVERLAP = 3;
-	const SECOND_OVERLAP = 5;
-
-	// Test case for no overlap between users.
-	for (var i = 0; i < DAYS; i++) {
-		var row = [];
-		for (var j = 0; j < TIME_SLOTS; j++) {
-			row.push(false);
-		}
-		curr_user_availability.push(row);
-		match_availability.push(row);
-	}
-	assert(getAvailabilityMatch(curr_user_availability, match_availability)===0, 
-		"Availability match incorrect: expected 0 but got " + 
-		getAvailabilityMatch(curr_user_availability, match_availability)  +".");
-	
-	// Test case for some overlap between users (selecting largest overlap of possibilities).
-	for (var j = 0; j < FIRST_OVERLAP; j++) {
-		curr_user_availability[0][j] = true;
-		match_availability[0][j] = true;
-	}
-	for (var j = 0; j < SECOND_OVERLAP; j++) {
-		curr_user_availability[1][j] = true;
-		match_availability[1][j] = true;
-	}
-	assert(getAvailabilityMatch(curr_user_availability, match_availability)===SECOND_OVERLAP, 
-		"Availability match incorrect: expected " + SECOND_OVERLAP + " but got " + 
-		getAvailabilityMatch(curr_user_availability, match_availability) + ".");
-	
-	// Test case for computing overlap across different days (i.e. if the maximum time length
-	// starts on one day and goes until another day).
-	for (var i = 0; i < DAYS; i++) {
-		for (var j = 0; j < TIME_SLOTS; j++) {
-			curr_user_availability[i][j] = true;
-			match_availability[i][j] = true;
-		}
-	}
-	assert(getAvailabilityMatch(curr_user_availability, match_availability)===DAYS*TIME_SLOTS, 
-		"Availability match incorrect: expected " + DAYS*TIME_SLOTS + " but got " + 
-		getAvailabilityMatch(curr_user_availability, match_availability) + ".");
-}
-
-/**
-	* Test cases for whether we correctly find the maximum number of increasing intervals.
-	* We test three different types of inputs. 
-	* The first case is if there is no overlap in time availabilities for two users.
-	* The second case is if there are multiple overlaps. We must be sure to pick the largest
-	* time overlap. 
-	* The third case is if the time overlap spans across different days. We must
-	* find the largest subsequence across multiple days.
-*/
-function testGetAvailabilityMatch() {
-	var curr_user_availability = [];
-	var match_availability = [];
-
-	const FIRST_OVERLAP = 3;
-	const SECOND_OVERLAP = 5;
-
-	// Test case for no overlap between users.
-	for (var i = 0; i < DAYS; i++) {
-		var row = [];
-		for (var j = 0; j < TIME_SLOTS; j++) {
-			row.push(false);
-		}
-		curr_user_availability.push(row);
-		match_availability.push(row);
-	}
-	assert(getAvailabilityMatch(curr_user_availability, match_availability)===0, 
-		"Availability match incorrect: expected 0 but got " + 
-		getAvailabilityMatch(curr_user_availability, match_availability)  +".");
-	
-	// Test case for some overlap between users (selecting largest overlap of possibilities).
-	for (var j = 0; j < FIRST_OVERLAP; j++) {
-		curr_user_availability[0][j] = true;
-		match_availability[0][j] = true;
-	}
-	for (var j = 0; j < SECOND_OVERLAP; j++) {
-		curr_user_availability[1][j] = true;
-		match_availability[1][j] = true;
-	}
-	assert(getAvailabilityMatch(curr_user_availability, match_availability)===SECOND_OVERLAP, 
-		"Availability match incorrect: expected " + SECOND_OVERLAP + " but got " + 
-		getAvailabilityMatch(curr_user_availability, match_availability) + ".");
-	
-	// Test case for computing overlap across different days (i.e. if the maximum time length
-	// starts on one day and goes until another day).
-	for (var i = 0; i < DAYS; i++) {
-		for (var j = 0; j < TIME_SLOTS; j++) {
-			curr_user_availability[i][j] = true;
-			match_availability[i][j] = true;
-		}
-	}
-	assert(getAvailabilityMatch(curr_user_availability, match_availability)===DAYS*TIME_SLOTS, 
-		"Availability match incorrect: expected " + DAYS*TIME_SLOTS + " but got " + 
-		getAvailabilityMatch(curr_user_availability, match_availability) + ".");
-}
-
-
-/**
-	* Test for activity matching. Ensures that the "best" activity
-	* match is selected as expected.
-*/
-function testGetBestActivityMatch() {
-	var curr_user_activities = [{ "name" : "basketball", "interest" : 1, "skill" : 5 }, 
-	{ "name" : "lifting", "interest" : 2, "skill" : 4 },
-	{ "name" : "swimming", "interest" : 5, "skill" : 3 }];
-	
-	var potential_match_activities = [{ "name" : "basketball", "interest" : 5, "skill" : 5 }, 
-	{ "name" : "lifting", "interest" : 5, "skill" : 1} ];
-
-	assert(getBestActivityMatch(curr_user_activities, potential_match_activities)["name"]==="lifting", 
-		"Activity match incorrect: expected lifting" + " but got " + 
-		getBestActivityMatch(curr_user_activities, potential_match_activities)["name"] + ".");
-
-	assert(getBestActivityMatch(curr_user_activities, potential_match_activities)["skill_score"] > 0, 
-		"Skill score must be positive.");
-	assert(getBestActivityMatch(curr_user_activities, potential_match_activities)["skill_score"] < NORMALIZED_BASE, 
-		"Skill score cannot exceed maximum possible normalized score.");
-
-	assert(getBestActivityMatch(curr_user_activities, potential_match_activities)["interest_score"] > 0, 
-		"Interest score must be positive.");
-	assert(getBestActivityMatch(curr_user_activities, potential_match_activities)["interest_score"] < NORMALIZED_BASE, 
-		"Interest score cannot exceed maximum possible normalized score.");
-}
-
-/**
-	* Assert function for test cases.
-	* @param {boolean} condition Whether the condition was met
-	* @param {string} message Error message if assertion fails
-	*
-*/
-function assert(condition, message) {
-	if (!condition) {
-		if (message) {
-			throw new Error("ASSERTION FAILED: " + message);
-		}
-		throw new Error("Test case failed!");
-	}
-
-}
-
-
-testGetAvailabilityMatch();
-testGetBestActivityMatch();
-
 module.exports = router;
+
+//UNCOMMENT BELOW FOR MATCHING FUNCTION TESTING PURPOSES (and comment out above 'module.exports = router')
+// module.exports = {
+// 	MAX_AVAILABILITY_SCORE:MAX_AVAILABILITY_SCORE,
+// 	MAX_INTEREST_SCORE:MAX_INTEREST_SCORE,
+// 	MAX_SKILL_SCORE:MAX_SKILL_SCORE,
+//  	NORMALIZED_BASE:NORMALIZED_BASE,
+// 	DAYS:DAYS,
+// 	TIME_SLOTS:TIME_SLOTS,
+// 	matchUsers:matchUsers,
+// 	matchUser:matchUser,
+// 	getAvailabilityMatchScore:getAvailabilityMatchScore,
+// 	getAvailabilityMatch:getAvailabilityMatch,
+// 	getBestActivityMatch:getBestActivityMatch,
+// 	router
+// };

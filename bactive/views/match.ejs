@@ -5,7 +5,7 @@
 	<title>Match</title>
 </head>
 <body>
-	<h1>Upcoming Events</h1>
+	<h1>Matches</h1>
     <table style="text-align: center; border: 1px solid #000000; font-size: 30px;">
     <thead style="background: #0B6FA4; font-weight: bold;">
     <tr>
@@ -13,13 +13,13 @@
     <th>Date</th>
     <th>Time</th>
     <th>Meetup Location</th>
-    </tr>
     </thead>
-    <% if(!matches) for (let i = 0; i < matches.length; i++) { %>
+    <% for (let i = 0; i < matches.length; i++) { %>
         <tbody>
         <tr>
-        <td><%- matches[i] %></td></tr>
-        
+        <td><%- matches.length %></td></tr>
+        <tr style="background: #D0E4F5;">
+        <td>-</td><td>-</td><td>-</td><td>-</td></tr>
         </tbody>
     <% } %>
     </tr>

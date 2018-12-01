@@ -8,15 +8,6 @@
 - Test cases are included in testcases.json.
 - Included libraries are node packages, and should be under bactive/node_modules.
 
-## HOW TO START PROJECT:
-1. follow guide on cs144 site to set up docker here (do parts A and B only):
-   http://oak.cs.ucla.edu/classes/cs144/project1/index.html
-2. follow steps from "Overview" to "Development Environment":
-   http://oak.cs.ucla.edu/classes/cs144/project3/index.html
-3. run `mongo < db.sh`
-4. play around & test frontend/backend functionality by running `npm start` and then opening the url in `http://localhost:3000/<insert page you want to open here without any extension names>`. For instance, if I want to view the "match" page, I would type in: `http://localhost:3cd 000/match`
-5. edit the .ejs files in "/views" to edit front end. To edit backend, edit the corresponding .js file in "/routes"
-
 ## DATABASE FORMAT:
 DB name: bActiveServer
 
@@ -71,6 +62,16 @@ Document Example:
 	"size": 2 # Size representation may change when we deal with groups
 }
 ```
+
+## API
+- `GET /api/:userid` returns JSON object containing all user info
+- `PUT /api/availability/:userid` requires availability=[JSON array] in body, updates huge availability array with new value
+- `PUT /api/password/:userid` requires password=[plaintext password] in body, set to plaintext because hashing in angular is probably too difficult to figure out for it to be worth it, backend will hash it
+- `POST /api/activity/:userid` requires activity=[JSON object containing new activity] in body
+- `PUT /api/activity/:userid` requires activity=[JSON object] in body, finds activity with corresponding name in array of activities
+- `POST /api/newevent/:userid` requires event=[JSON object containing new event] in body
+- `DELETE /api/deleteevent/:userid` requires event=[JSON object of event to delete] in body
+- `DELETE /api/deleteactivity/:userid` requires event=[JSON object of activity to delete] in body
 
 ## TESTING:
 We have implemented 5 test cases in testcases.json as well as server-side test cases in match.js.
