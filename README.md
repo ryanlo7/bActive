@@ -63,6 +63,15 @@ Document Example:
 }
 ```
 
+## API
+- `GET /api/:userid` returns JSON object containing all user info
+- `PUT /api/availability/:userid` requires availability=[JSON array] in body, updates huge availability array with new value
+- `PUT /api/password/:userid` requires password=[plaintext password] in body, set to plaintext because hashing in angular is probably too difficult to figure out for it to be worth it, backend will hash it
+- `POST /api/newactivity/:userid` requires activity=[JSON object containing new activity] in body
+- `PUT /api/modifyactivity/:userid` requires activity=[JSON object] in body, finds activity with corresponding name in array of activities
+- `POST /api/newevent/:userid` requires event=[JSON object containing new event] in body
+- `DELETE /api/deleteevent/:userid` requires event=[JSON object of event to delete] in body
+
 ## TESTING:
 We have implemented 5 test cases in testcases.json as well as server-side test cases in match.js.
 Their respective descriptions are in the code in the ‘tests’ folder, as well as our report for part B. We have described them below as well:
