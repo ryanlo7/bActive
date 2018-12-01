@@ -2,9 +2,13 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url("running ppl.jpg");
-  background-size: 100vw 100vh;  
+  background-size: 100vw 100vh;
 }
 
 a {
   color: #00B7FF;
+}
+
+.login-box {
+    float: right;
 }
