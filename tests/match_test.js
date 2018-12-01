@@ -16,7 +16,6 @@ function testGetAvailabilityMatch() {
 	const FIRST_OVERLAP = 3;
 	const SECOND_OVERLAP = 5;
 
-
 	// Test case for no overlap between users.
 	for (var i = 0; i < matchModule.DAYS; i++) {
 		var row = [];
@@ -85,6 +84,71 @@ function testGetBestActivityMatch() {
 }
 
 /**
+	* Mock data for current user in match user test.
+*/
+function createTestCurrentUser() {
+	var user = {};
+	var activities = [{ "name" : "basketball", "interest" : 4, "skill" : 5 }, 
+	{ "name" : "lifting", "interest" : 2, "skill" : 4 },
+	{ "name" : "swimming", "interest" : 5, "skill" : 3 },
+	{ "name" : "running", "interest" : 5, "skill" : 2} ];
+	var availability = [];
+	const FREE_SLOTS = 6;
+
+	for (var i = 0; i < matchModule.DAYS; i++) {
+		var row = [];
+		for (var j = 0; j < matchModule.TIME_SLOTS; j++) {
+			row.push(false);
+		}
+		availability.push(row);
+	}
+	for (var j = 0; j < FREE_SLOTS; j++) {
+		availability[0][j] = true;
+	}
+	user["activities"] = activities;
+	user["availability"] = availability;
+	return user;
+}
+
+/**
+	* Mock data for potential match user for match user test.
+*/
+function createTestPotentialMatchUser() {
+	var user = {};
+	var activities = [{ "name" : "basketball", "interest" : 4, "skill" : 5}, 
+	{ "name" : "running", "interest" : 5, "skill" : 2} ];
+	var availability = [];
+	const FREE_SLOTS = 4;
+
+	for (var i = 0; i < matchModule.DAYS; i++) {
+		var row = [];
+		for (var j = 0; j < matchModule.TIME_SLOTS; j++) {
+			row.push(false);
+		}
+		availability.push(row);
+	}
+	for (var j = 0; j < FREE_SLOTS; j++) {
+		availability[0][j] = true;
+	}
+	user["activities"] = activities;
+	user["availability"] = availability;
+	return user;
+}
+
+/**
+	* Test that the users are matched correctly with the best activity as
+	* expected and an expected score.
+*/
+function testMatchUser() {
+	var currUser = createTestCurrentUser();
+	var potentialUser = createTestPotentialMatchUser();
+	var result = matchModule.matchUser(currUser, potentialUser);
+	assert(result[0] === "running", "Expected activity was running, but actual activity is " + result);
+	// Expected score is a double between 26.6 and 26.7
+	assert(result[1] > 26.6);
+}
+
+/**
 	* Assert function for test cases.
 	* @param {boolean} condition Whether the condition was met
 	* @param {string} message Error message if assertion fails
@@ -100,5 +164,13 @@ function assert(condition, message) {
 
 }
 
-testGetAvailabilityMatch();
-testGetBestActivityMatch();
+/**
+	* Run all test cases for the match module.
+*/
+function runAllMatchTests() {
+	testGetAvailabilityMatch();
+	testGetBestActivityMatch();
+	testMatchUser();	
+}
+
+runAllMatchTests();

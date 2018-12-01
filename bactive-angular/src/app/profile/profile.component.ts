@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
 	userId: number;
 
 	constructor(private userService: UserService) {
-		this.userId = parseJWT(document.cookie).usr;
+		this.userId = parseJWT(document.cookie).userId;
 	}
 
 	// Get the user from the API if it has not been fetched
