@@ -5,12 +5,13 @@
 	<link rel='stylesheet' href='/stylesheets/style.css'>
 	<title>Login</title>
 </head>
-<body>
+<body class="bg-image">
 	<div class="container login-box top-buffer">
 		<div class="row">
 			<div class="col-sm-2 col-md-3 col-lg-4"></div>
 			<div class="col-sm-8 col-md-6 col-lg-4">
 				<div class="well">
+					<h1>Login</h1>
 					<% if (err !== null && err != undefined) { %>
 						<div>
 							<p style="color:red">
@@ -18,7 +19,6 @@
 							</p>
 						</div>
 					<% } %>
-					<h1>Login</h1>
 					<form action="/login" method="POST">
 						<div class="form-group">
 							<label for="email">Username</label>
