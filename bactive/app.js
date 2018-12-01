@@ -14,6 +14,7 @@ var profileRouter = require('./routes/profile');
 var matchRouter = require('./routes/match');
 var eventsRouter = require('./routes/events');
 var editRouter = require('./routes/edit');
+var apiRouter = require('./routes/api');
 
 var app = express();
 
@@ -50,6 +51,7 @@ app.use('/profile', profileRouter);
 app.use('/match', matchRouter);
 app.use('/events', eventsRouter);
 app.use('/edit', editRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
