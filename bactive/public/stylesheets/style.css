@@ -53,6 +53,10 @@ h1, h2 {
     opacity: 0.9;
 }
 
+.login-box button {
+    margin: 5px;
+}
+
 .sharp {
     border-radius: 0;
 }
