@@ -42,7 +42,11 @@ h1, h2 {
 }
 
 .login-box {
-    float: right;
+    text-align: center;
+}
+
+.login-box .well {
+    opacity: 0.9;
 }
 
 .sharp {
