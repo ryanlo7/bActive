@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
         * @param {callback} next The express routing callback function to invoke next middleware in the stack.
         * @return {Object} A JSON object that holds req, res, and next.
     */
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: 'B-Active' });
 });
 
 module.exports = router;
