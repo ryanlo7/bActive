@@ -41,3 +41,8 @@ router.get('/:userid',
 });
 
 module.exports = router;
+
+function test(){
+	
+
+}

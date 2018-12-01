@@ -1,15 +1,48 @@
 var express = require('express');
 var database = require('./database');
 var router = express.Router();
+var verify = require('./verify');
+
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('This is the match page. Main algorithm for users match with other users of similar interests here');
+router.get('/:userid', function(req, res, next) {
+  // res.send('This is the match page. Main algorithm for users match with other users of similar interests here');
+
+    var db = req.app.locals.db; //get instance of db
+	var userId = parseInt(req.params.userid);
+
+	db.collection('Users')
+			.find({'userId': userId})
+			.toArray(function(err, results) {
+				if (results.length == 0) {
+					res.status(404).send("404: userId not found");
+				} else {
+					user = results[0]; // should only be one match
+
+					if (!verify.checkLogin(req.cookies.jwt, user.email)) {
+						res.status(401).redirect('/login');
+						return;
+					}
+
+					let matches = matchUsers(req, res, next, userId);
+
+					res.render('match', {
+					 	userId: userId,
+						events: user.events,
+						matches: matches
+					});
+				}
+			});
+
+  //matchUsers(req, res, next, userId);
+
+  // res.send('alg done');
 });
 
-router.post('/', function(req, res, next) {
-
-});
+// router.post('/', function(req, res, next) {
+// 	// var userId = parseInt(req.params.userid);
+// 	// matchUsers(req, res, next, userId);
+// });
 
 const MAX_AVAILABILITY_SCORE = 6;
 const MAX_INTEREST_SCORE = 7.5;

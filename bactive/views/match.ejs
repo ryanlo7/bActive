@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel='stylesheet' href='/stylesheets/style.css'>
+	<title>Match</title>
+</head>
+<body>
+	<h1>Upcoming Events</h1>
+    <table style="text-align: center; border: 1px solid #000000; font-size: 30px;">
+    <thead style="background: #0B6FA4; font-weight: bold;">
+    <tr>
+    <th>Activity</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Meetup Location</th>
+    </tr>
+    </thead>
+    <% if(!matches) for (let i = 0; i < matches.length; i++) { %>
+        <tbody>
+        <tr>
+        <td><%- matches[i] %></td></tr>
+        
+        </tbody>
+    <% } %>
+    </tr>
+    </table>
+</body>
+</html>
