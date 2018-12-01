@@ -53,10 +53,34 @@ h1, h2 {
     opacity: 0.9;
 }
 
+.login-box button {
+    margin: 5px;
+}
+
 .sharp {
     border-radius: 0;
 }
 
 .top-buffer {
     margin-top: 100px;
+}
+
+.availability-table {
+    border:1px solid #777a7f;
+}
+
+.availability-th {
+    /*padding:20px;*/
+    margin-right: 2em;
+    margin-left: 2em;
+    border: 1px solid #777a7f;
+}
+
+.availability-td {
+    height: 30;
+    border:1px solid #777a7f;
+    padding:25px;
+}
+
+#free .availability-td {
 }

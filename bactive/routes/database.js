@@ -107,7 +107,8 @@ var insertUser = function(properties, email, password) {
 				return;
 			}
 			if (result.length !== 0) {
-				res.status(404).send(`Email already in use`);
+				// res.status(404).send(`Email already in use`);
+				res.status(404).render('register', {err: 'Email already in use.'});
 				return;
 			}
 
@@ -149,6 +150,7 @@ var insertUser = function(properties, email, password) {
 						res.status(201).render('profile', {
 							userId: newUser.userId,
 							email: newUser.email,
+							rating: { "scoreSum": 0, "numRatings": 0},
 							activities: newUser.activities,
 							availability: newUser.availability,
 							events: newUser.events

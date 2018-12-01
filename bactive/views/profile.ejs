@@ -3,11 +3,36 @@
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Profile</title>
+        <style>
+            .checked {
+                color: orange;
+            }
+        </style>
     </head>
     <body>
-    <h1>Profile <a href='/edit/<%= userId %>'> (edit) </a> </h1>
+
+    <h1>Profile 
+        <% if (isUser) { %>
+            <a href='/edit/<%= userId %>'> (edit) </a>
+        <% } %>
+    </h1>
+
     <h3>Email: <%- email %> </h3>
+    <div class="user-rating">
+        <h4>Rating:</h4>
+        <div>
+            <% for (let i = 0; i < 5; i++) { %>
+                <% if (i < rating) { %>
+                    <span class="fa fa-star checked"></span>
+                <% } else { %>
+                    <span class="fa fa-star"></span>
+                <% } %>
+            <% } %>
+        </div>
+        <h6>(<%- numRatings %>)</h6>
+    </div>
     <h2>Activities</h2>
     <table>
         <thead>
@@ -24,25 +49,33 @@
         <% } %>
     </table>
     <h2>Availability</h2>
-    <table>
+    <table class="availability-table">
         <thead>
-            <tr>
-                <th></th><th>Monday</th> <th>Tuesday</th> <th>Wednesday</th> <th>Thursday</th>
-                <th>Friday</th> <th>Saturday</th> <th>Sunday</th>
+            <tr bgcolor="#5e99d1" >
+                <th></th>
+                <th class="availability-th">Monday</th>
+                <th class="availability-th">Tuesday</th>
+                <th class="availability-th">Wednesday</th>
+                <th class="availability-th">Thursday</th>
+                <th class="availability-th">Friday</th> 
+                <th class="availability-th">Saturday</th> 
+                <th class="availability-th">Sunday</th>
             </tr>
         </thead>
         <% let hour = 0; let minutes = "00"; %>
         <% for (let i = 0; i < availability[0].length; i++) { %>
             <tr>
-                <th>
+                <th bgcolor="#5e99d1">
                     <%- hour %>:<%- minutes%>
                     <% hour = (i % 2 == 1) ? hour + 1 : hour; minutes = (minutes == "00") ? "30" : "00"; %>
                 </th>
                 <% for (let j = 0; j < availability.length; j++) { %>
                     <% if (availability[j][i]) { %>
-                        <td height="30" bgcolor="#00FF00" ></td>
+                        <td class="availability-td" id="free" bgcolor="#81c48e"></td>
+                        <!-- <td height="30" bgcolor="#00FF00" ></td> -->
                     <% } else { %>
-                        <td height="30" bgcolor="#FF0000" ></td>
+                        <td class="availability-td" id="notFree"></td>
+                        <!-- <td height="30" bgcolor="#FF0000" ></td> -->
                     <% } %>
                 <% } %>
             </tr>

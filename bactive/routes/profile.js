@@ -24,21 +24,31 @@ router.get('/:userid',
 			if (results.length == 0) {
 				res.status(404).send("404: userId not found");
 			} else {
-				user = results[0]; // should only be one match
+				let user = results[0]; // should only be one match
 
-				if (!verify.checkLogin(req.cookies.jwt, user.email)) {
-					res.status(401).redirect('/login');
-					return;
+				let isUser = false;
+				if (verify.checkLogin(req.cookies.jwt, user.email)) {
+					isUser = true;
 				}
 
 				res.render('profile', {
 				 	userId: userId,
 					email: user.email,
+					rating: calculateRating(user.rating),
+					numRatings: user.rating.numRatings,
 					activities: user.activities,
-					availability: user.availability
+					availability: user.availability,
+					isUser: isUser
 				});
 			}
 		});
 });
+
+function calculateRating(userRatingContainer) {
+	if (userRatingContainer.numRatings === 0) {
+		return 0;
+	}
+	return userRatingContainer.scoreSum / userRatingContainer.numRatings;
+}
 
 module.exports = router;

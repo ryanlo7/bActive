@@ -14,6 +14,7 @@ db.Users.insert({
 					"userId": 0,
 					"email": "user1@ucla.edu", 
 					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
+					"rating": { "scoreSum": 100, "numRatings": 25},
 					"activities": [
 						{"name": "basketball", "interest": 5, "skill": 5},
 						{"name": "lifting", "interest": 4, "skill": 3}
@@ -42,6 +43,7 @@ db.Users.insert({
 					"userId": 1,
 					"email": "user2@ucla.edu", 
 					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
+					"rating": { "scoreSum": 120, "numRatings": 25},
 					"activities": [
 						{"name": "basketball", "interest": 5, "skill": 5},
 						{"name": "lifting", "interest": 4, "skill": 3}

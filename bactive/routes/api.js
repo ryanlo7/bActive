@@ -7,19 +7,14 @@ router.get('/:userid',
 	function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
+	var included_fields = {'userId': true, 'email': true, 'rating': true, 'activities': true, 'availability': true, 'events': true, '_id': false};
 	db.collection('Users')
-		.find({'userId': userId})
+		.find({'userId': userId}).project(included_fields)
 		.toArray(function(err, results) {
 			if (results.length == 0) {
 				res.status(404).send("404: userId not found");
 			} else {
 				user = results[0]; // should only be one match
-
-				if (!verify.checkLogin(req.cookies.jwt, user.email)) {
-					res.status(401).redirect('/login');
-					return;
-				}
-
 				res.status(200).json(user);
 			}
 		});
@@ -244,5 +239,76 @@ router.delete('/event/:userid',
 		});
 });
 
+router.post('/activity/:userid',
+	function(req, res, next) {
+	var db = req.app.locals.db;
+	var userId = parseInt(req.params.userid);
+	db.collection('Users')
+		.find({'userId': userId})
+		.toArray(function(err, results) {
+			if (results.length == 0) {
+				res.status(404).send("404: userId not found");
+			} else {
+				user = results[0]; // should only be one match
+
+				if (!verify.checkLogin(req.cookies.jwt, user.email)) {
+					res.status(401).redirect('/login');
+					return;
+				}
+				if(req.body.activity === undefined) {
+					res.status(400).send('Bad request');
+					return;
+				}
+				user.activities.push(JSON.parse(req.body.activity));
+				var updated = {$set: {activities: user.activities}};
+				db.collection('Users').updateOne({'userId': userId}, updated, function(err, result) {
+					res.status(200).send('OK');
+				});
+			}
+		});
+});
+
+router.put('/:userid/:userid2',
+	function(req, res, next) {
+	var db = req.app.locals.db;
+	var userId = parseInt(req.params.userid);
+	db.collection('Users')
+		.find({'userId': userId})
+		.toArray(function(err, results) {
+			if (results.length == 0) {
+				res.status(404).send("404: userId not found");
+			} else {
+				user = results[0]; // should only be one match
+
+				if (!verify.checkLogin(req.cookies.jwt, user.email)) {
+					res.status(401).redirect('/login');
+					return;
+				}
+				if(req.body.score === undefined) {
+					res.status(400).send('Bad request');
+					return;
+				}
+				var userId2 = parseInt(req.params.userid2)
+				var ind = user.events.findIndex(cur => cur.userIds.includes(userId2));
+				if (ind === -1) {
+					res.status(400).send('Bad request');
+					return;
+				}
+				db.collection('Users')
+					.find({'userId': userId2})
+					.toArray(function(err, results2) {
+						if (results2.length == 0)
+							res.status(404).send("404: userId not found");
+						user2 = results2[0]; // should only be one match
+						user2.rating.scoreSum += Number(req.body.score);
+						user2.rating.numRatings += 1;
+						var updated = {$set: {rating: user2.rating}};
+						db.collection('Users').updateOne({'userId': userId2}, updated, function(err, result) {
+							res.status(200).send('OK');
+						});
+				});
+			}
+		});
+});
 
 module.exports = router;

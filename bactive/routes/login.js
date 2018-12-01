@@ -44,7 +44,7 @@ router.post('/',
 		}
 		bcrypt.compare(pw, result.password, function(err, rs) {
 			if(rs == true) {
-				var payload = {"exp": Math.floor(Date.now() / 1000) + (2 * 60 * 60), "usr": usr};
+				var payload = {"exp": Math.floor(Date.now() / 1000) + (2 * 60 * 60), "usr": usr, "userId": result.userId};
 				var header = {"alg": "HS256", "typ": "JWT"};
 				var cert = "C-UFRaksvPKhx1txJYFcut3QGxsafPmwCY6SCly3G6c";
 				jwt.sign(payload, cert, { algorithm: 'HS256',  header: header}, function(err, token) {
