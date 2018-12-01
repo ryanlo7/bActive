@@ -107,7 +107,8 @@ var insertUser = function(properties, email, password) {
 				return;
 			}
 			if (result.length !== 0) {
-				res.status(404).send(`Email already in use`);
+				// res.status(404).send(`Email already in use`);
+				res.status(404).render('register', {err: 'Email already in use.'});
 				return;
 			}
 
