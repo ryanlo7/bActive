@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User, UserService } from '../user.service';
 
-@Component({
-  selector: 'app-matches',
-  templateUrl: './matches.component.html',
-  styleUrls: ['./matches.component.css']
-})
-
 // Source: CS144 with Professor Cho, Project 4 JWT code
 function parseJWT(token) 
 {
@@ -15,6 +9,11 @@ function parseJWT(token)
     return JSON.parse(atob(base64));
 }
 
+@Component({
+  selector: 'app-matches',
+  templateUrl: './matches.component.html',
+  styleUrls: ['./matches.component.css']
+})
 export class MatchesComponent implements OnInit {
 	userId: number;
 
