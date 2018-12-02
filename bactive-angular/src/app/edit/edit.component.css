@@ -1,3 +1,7 @@
+.well {
+    background: rgba(225, 243, 250);
+}
+
 .availability-th {
 	border-style: solid;
 	border-width: 1px;
