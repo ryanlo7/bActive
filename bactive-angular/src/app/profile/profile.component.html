@@ -1,5 +1,22 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 <h1>Profile (edit TODO ROUTER LINK) </h1>
 <h3>Email: {{ user.email }} </h3>
+
+<div class="user-rating" *ngIf="user">
+    <h4>Rating:</h4>
+    <div>
+        <script>
+            for (let i = 0; i < calculateRating(); i++) 
+        </script>
+                <span class="fa fa-star"></span>
+        <script>
+        </script>
+    </div>
+    <h6>({{user.rating.numRatings}}) {{calculateRating()}}</h6>
+</div>
+
 <h2>Activities</h2>
 <table>
     <thead>

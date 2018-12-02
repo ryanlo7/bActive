@@ -8,7 +8,10 @@ db.createCollection("Users")
 db.createCollection("Activities")
 db.createCollection("Values")
 
-db.Values.insert({"name": "Users", "maxUserId": 2})
+db.Values.insert(
+	{"name": "Users", "maxUserId": 2},
+	{"name": "Events", "maxEventId": 2}
+)
 
 db.Users.insert({ 	
 					"userId": 0,
@@ -30,10 +33,10 @@ db.Users.insert({
 					],
 					"events": [
 						{
-							"eventId": 0,
-							"userIds": [1], 
+							"eventId": 1,
+							"userIds": [0, 1], 
+							"invitedIds": [0, 1],
 							"activity": "lifting", 
-							"day": "monday",
 							"startTime": 1518669344517, 
 							"endTime": 1518670344517,
 							"status": "matched",
@@ -62,7 +65,8 @@ db.Users.insert({
 					"events": [
 						{
 							"eventId": 1,
-							"userIds": [0], 
+							"userIds": [0, 1], 
+							"invitedIds": [0, 1],
 							"activity": "lifting", 
 							"startTime": 1518669344517, 
 							"endTime": 1518670344517,
