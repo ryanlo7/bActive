@@ -1,0 +1,72 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<div *ngIf="user">
+    <h1>Edit Profile</h1>
+    <h3>Name: 
+    	<span>
+			<input type="text" class="form-control nameBox" [(ngModel)]="user.name" name="name">
+		</span>
+    </h3>
+    <h3>Email: {{ user.email }} </h3>
+</div>
+
+<div class="user-rating" *ngIf="user">
+    <h4>Rating: </h4>
+    <div class="star-rating" *ngFor="let rating of calculateRating()">
+        <span class="fa fa-star"></span>
+    </div>
+    <h6> ({{user.rating.numRatings}})</h6>
+</div>
+
+<h2>Activities</h2>
+<div *ngIf="user">
+    <table>
+        <thead>
+            <tr>
+                <th>Activity</th> 
+                <th>Skill Level</th> 
+                <th>Interest Level</th>
+            </tr>
+        </thead>
+            <tr *ngFor="let activity of user.activities">
+                <td><input type="text" class="form-control activityNameBox" [(ngModel)]="activity.name" name="activity-name"></td>
+                <td><select [(ngModel)]="activity.skill">
+                	<option *ngFor="let x of ratingScale" [value]="activity.skill">{{x}}</option>
+                </select></td>
+                <td>{{ activity.interest }}</td>
+                <button (click)="deleteActivity(activity.name)"> Delete </button>
+            </tr>
+    </table>
+
+    <button (click)="addActivity()"> Add Activity </button>
+</div>
+<div class="schedule" *ngIf="user">
+    <h2>Availability</h2>
+    <table style="border: 1px solid #777a7f; border-spacing: 0px; width:100%;" cellspacing="0" >
+        <thead>
+            <tr bgcolor="#5e99d1">
+                <th class="availability-th"></th>
+                <th class="availability-th">Monday</th> 
+                <th class="availability-th">Tuesday</th> 
+                <th class="availability-th">Wednesday</th> 
+                <th class="availability-th">Thursday</th>
+                <th class="availability-th">Friday</th> 
+                <th class="availability-th">Saturday</th> 
+                <th class="availability-th">Sunday</th>
+            </tr>
+        </thead>
+        <tr *ngFor="let time of user.availability[0]; let i = index;">
+            <th class="availability-time-th" bgcolor="#5e99d1">
+                {{ this.tableHeadings[i] }}
+            </th>
+            <ng-container *ngFor="let day of user.availability; let j = index;">
+                <td class="availabilityCell" id="free" *ngIf="user.availability[j][i]"></td>
+                <td class="availabilityCell" id="notFree" *ngIf="!user.availability[j][i]"></td>
+            </ng-container>
+        </tr>
+    </table>
+</div>
+
+<button (click)="updateProfile()"> Save </button>
