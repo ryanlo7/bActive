@@ -14,9 +14,10 @@ db.Values.insert(
 	{"name": "Events", "maxEventId": 1}
 )
 
-db.Users.insert({ 	
+db.Users.insert({
 					"userId": 0,
-					"email": "user1@ucla.edu", 
+					"name": "Thing One",
+					"email": "user1@ucla.edu",
 					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
 					"rating": { "scoreSum": 100, "numRatings": 25},
 					"activities": [
@@ -24,7 +25,7 @@ db.Users.insert({
 						{"name": "lifting", "interest": 4, "skill": 3}
 					],
 					"availability": [
-						[true, true, true, true, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false], 
+						[true, true, true, true, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, true, true,true, false, false,false, false, false],
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
@@ -34,9 +35,10 @@ db.Users.insert({
 					],
 					"events": [0]
 })
-db.Users.insert({ 	
+db.Users.insert({
 					"userId": 1,
-					"email": "user2@ucla.edu", 
+					"name": "Thing Two",
+					"email": "user2@ucla.edu",
 					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
 					"rating": { "scoreSum": 120, "numRatings": 25},
 					"activities": [
@@ -44,7 +46,7 @@ db.Users.insert({
 						{"name": "lifting", "interest": 4, "skill": 3}
 					],
 					"availability": [
-						[true, true, true, true, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false], 
+						[true, true, true, true, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, true, true,true, false, false,false, false, false],
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
@@ -125,8 +127,8 @@ db.Events.insert(
 		"eventId": 0,
 		"acceptedIds": [], 
 		"invitedIds": [0, 1],
-		"activity": "Lifting", 
-		"startTime": 1518669344517, 
+		"activity": "Lifting",
+		"startTime": 1518669344517,
 		"endTime": 1518670344517,
 		"status": "matched",
 		"location": "Bfit"

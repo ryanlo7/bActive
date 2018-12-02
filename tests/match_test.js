@@ -25,7 +25,7 @@ function testGetAvailabilityMatch() {
 		curr_user_availability.push(row);
 		match_availability.push(row);
 	}
-	assert(matchModule.getAvailabilityMatch(curr_user_availability, match_availability)===0, 
+	assert(matchModule.getAvailabilityMatch(curr_user_availability, match_availability)["periods"]===0, 
 		"Availability match incorrect: expected 0 but got " + 
 		matchModule.getAvailabilityMatch(curr_user_availability, match_availability)  +".");
 	
@@ -38,7 +38,7 @@ function testGetAvailabilityMatch() {
 		curr_user_availability[1][j] = true;
 		match_availability[1][j] = true;
 	}
-	assert(matchModule.getAvailabilityMatch(curr_user_availability, match_availability)===SECOND_OVERLAP, 
+	assert(matchModule.getAvailabilityMatch(curr_user_availability, match_availability)["periods"]===SECOND_OVERLAP, 
 		"Availability match incorrect: expected " + SECOND_OVERLAP + " but got " + 
 		matchModule.getAvailabilityMatch(curr_user_availability, match_availability) + ".");
 	
@@ -50,7 +50,7 @@ function testGetAvailabilityMatch() {
 			match_availability[i][j] = true;
 		}
 	}
-	assert(matchModule.getAvailabilityMatch(curr_user_availability, match_availability)===matchModule.DAYS*matchModule.TIME_SLOTS, 
+	assert(matchModule.getAvailabilityMatch(curr_user_availability, match_availability)["periods"]===matchModule.DAYS*matchModule.TIME_SLOTS, 
 		"Availability match incorrect: expected " + matchModule.DAYS*matchModule.TIME_SLOTS + " but got " + 
 		matchModule.getAvailabilityMatch(curr_user_availability, match_availability) + ".");
 }
@@ -103,7 +103,7 @@ function createTestCurrentUser() {
 		availability.push(row);
 	}
 	for (var j = 0; j < FREE_SLOTS; j++) {
-		availability[0][j] = true;
+		availability[2][j] = true;
 	}
 	user["activities"] = activities;
 	user["availability"] = availability;
@@ -127,8 +127,8 @@ function createTestPotentialMatchUser() {
 		}
 		availability.push(row);
 	}
-	for (var j = 0; j < FREE_SLOTS; j++) {
-		availability[0][j] = true;
+	for (var j = 1; j <= FREE_SLOTS; j++) {
+		availability[2][j] = true;
 	}
 	user["activities"] = activities;
 	user["availability"] = availability;
@@ -143,9 +143,12 @@ function testMatchUser() {
 	var currUser = createTestCurrentUser();
 	var potentialUser = createTestPotentialMatchUser();
 	var result = matchModule.matchUser(currUser, potentialUser);
-	assert(result[0] === "running", "Expected activity was running, but actual activity is " + result);
+	assert(result["event"] === "running", "Expected activity was running, but actual activity is " + result);
 	// Expected score is a double between 26.6 and 26.7
-	assert(result[1] > 26.6);
+	assert(result["score"] > 26.6 && result["score"] < 26.7);
+	assert(result["time"][0] === 2);
+	assert(result["time"][1] === 1);
+
 }
 
 /**
