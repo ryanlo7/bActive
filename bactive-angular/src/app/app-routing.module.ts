@@ -7,7 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 const routes: Routes = [
   { path: 'events', component: EventsComponent },
   { path: 'matches', component: MatchesComponent },
-  { path: 'edit', component: ProfileComponent }
+  { path: '', component: ProfileComponent }
 ];
 
 @NgModule({
