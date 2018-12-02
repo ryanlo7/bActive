@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User, UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 // Source: CS144 with Professor Cho, Project 4 JWT code
-function parseJWT(token) 
+function parseJWT(token)
 {
     let base64Url = token.split('.')[1];
     let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -21,7 +22,7 @@ export class EditComponent implements OnInit {
 	tableHeadings: string[] = [];
 	ratingScale: number[] = [1, 2, 3, 4, 5];
 	possibleActivities: string[] = [
-		"Lifting", 
+		"Lifting",
 		"Running",
 		"Swimming",
 		"Basketball",
@@ -33,7 +34,7 @@ export class EditComponent implements OnInit {
 		"Frisbee"
 	];
 
-	constructor(private userService: UserService) {
+	constructor(private userService: UserService, private router: Router) {
 		this.userId = parseJWT(document.cookie).userId;
 	}
 
@@ -56,6 +57,11 @@ export class EditComponent implements OnInit {
 		this.userService.updateAvailability(this.user.userId, this.user.availability);
 	}
 
+    updateProfileAndReturn() : void {
+        this.updateProfile();
+        this.router.navigate(['/']);
+    }
+
 	deleteActivity(name: string) {
 		let index = -1;
 		let newActivities = [];
@@ -75,7 +81,7 @@ export class EditComponent implements OnInit {
 	}
 
 	fillTableHeadings(): void {
-		let hour = 0; 
+		let hour = 0;
 		let minutes = "00";
 
 		for (let i = 0; i < 48; i ++) {

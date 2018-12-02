@@ -279,7 +279,7 @@ router.put('/rate/:userid',
 					return;
 				}
 				user.events[ind].rated.push(userId2);
-				
+
 				db.collection('Users')
 					.find({'userId': userId2})
 					.toArray(function(err, results2) {

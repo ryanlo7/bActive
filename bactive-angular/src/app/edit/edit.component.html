@@ -6,8 +6,9 @@
 
 <div *ngIf="user">
     <h1>Edit Profile</h1>
-    <button (click)="updateProfile()"> Save </button>
-    <h3>Name: 
+    <button class="btn btn-default" (click)="updateProfile()"> Save </button>
+    <button class="btn btn-default" (click)="updateProfileAndReturn()"> Return to Profile </button>
+    <h3>Name:
     	<span>
 			<input type="text" class="form-control nameBox" [(ngModel)]="user.name" name="name">
 		</span>
@@ -52,8 +53,9 @@
 
     <button (click)="addActivity()"> Add Activity </button>
 </div>
+
+<h2>Availability</h2>
 <div class="schedule" *ngIf="user">
-    <h2>Availability</h2>
     <table style="border: 1px solid #777a7f; border-spacing: 0px; width:100%;" cellspacing="0" >
         <thead>
             <tr bgcolor="#5e99d1">
@@ -84,4 +86,3 @@
         </tr>
     </table>
 </div>
-
