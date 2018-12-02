@@ -39,6 +39,9 @@ export class User {
 export class Match {
 	event: string;
 	score: number;
+	match_id: number;
+	match_name: string;
+	match_email: string;
 	time: number[];
 	unix_time: Date;
 	location: string;
@@ -89,7 +92,22 @@ export class UserService {
 		const url = `${this.matchUrl}/${userId}`;
 
 		return this.http.get<Match[]>(url).pipe(
-			tap(res => { this.matches = res; })
+			tap(res => { 
+				this.matches = res; 
+				for (let match of res) {
+					let event: Event = {
+						eventId: 0,
+						acceptedIds: [],
+						invitedIds: [match.match_id, userId],
+						activity: match.event,
+						startTime: match.unix_time,
+						endTime: new Date(match.unix_time.getSeconds() + 180),
+						status: "matched",
+						location: match.location
+					};
+					this.http.post<Event>(`${this.apiUrl}/newevent/${userId}`, event).subscribe();
+				}
+			})
 		);
 	}
 
@@ -113,8 +131,10 @@ export class UserService {
 		const url = `${this.apiUrl}/availability/${userId}`;
 		var insert = {availability: availabilities};
 		console.log(insert);
-		this.http.put(url, insert).subscribe(
-
+		this.http.put(url, insert).pipe(
+			tap(res => {
+				this.fetchMatches(userId);
+			})
 		);
 	}
 }
