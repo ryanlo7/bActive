@@ -59,7 +59,8 @@ Document Example:
 {
 	"name": "lifting",
 	"locations": ["bfit", "wooden"],
-	"size": 2 # Size representation may change when we deal with groups
+	"sizeMin": 2,
+	"sizeMax": 2
 }
 ```
 
