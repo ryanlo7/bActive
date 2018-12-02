@@ -45,6 +45,5 @@ export class ProfileComponent implements OnInit {
 			hour = (i % 2 == 1) ? hour + 1 : hour;
 			minutes = (minutes == "00") ? "30" : "00";
 		}
-		console.log(this.tableHeadings);
 	}
 }
