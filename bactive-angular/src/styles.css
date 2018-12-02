@@ -45,6 +45,15 @@ h1, h2 {
     font-size: 30px;
 }
 
+.navbar .navbar-header {
+    font-family: 'Special Elite';
+}
+
+.navbar .navbar-nav {
+    font-family: 'Special Elite';
+}
+
+
 .login-box {
     text-align: center;
 }
