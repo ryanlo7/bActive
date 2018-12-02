@@ -55,10 +55,31 @@ function matchUsers(req, res, next, userId, matches) {
 		database.searchUsers(database.routerProperties(req, res, next), {"userId": {$ne: userId}}, matchResults, function(users, matchResultsArray) {
 			for (let i = 0; i < users.length; i ++) {
 				let potentialMatchUser = users[i];
-				matchResultsArray.push(matchUser(currUser, potentialMatchUser));
-				console.log(matchResultsArray.length)
+
+				var info = matchUser(currUser, potentialMatchUser);
+
+				// info["event"] has the name, look up in database
+
+				// //searchActivities to get location for activity
+				// database.searchActivities(database.routerProperties(req, res, next), {"name": info["event"]}, function(activities) {
+				// 	console.log(activities[0]["locations"][0]);
+				// 	info["location"] = activities[0]["locations"][0];
+				// });
+
+				matchResultsArray.push(info);
 				// do something with result - or not, just keep appending to results and return
+
 			}
+			//console.log(JSON.stringify(matchResultsArray));
+			//sorting matchResultsArray
+			matchResultsArray.sort(function(a, b){
+			    return b.score-a.score;
+			});
+
+
+			//convert time to unix time
+
+			console.log(matchResultsArray);
 			res.render('match', {
 					 	userId: userId,
 						matches: matchResultsArray,
@@ -87,12 +108,14 @@ function matchUser(curr_user, potential_match) {
 	if (activity_match["interest_score"] != 0 && availability_match_score != 0) {
 		total_score = activity_match["interest_score"] + activity_match["skill_score"] + availability_match_score;
 	}
+
 	var unix_time = getEventDate(event_time[0], event_time[1]);
 	match["event"] = activity_match["name"];
 	match["score"] = total_score;
 	match["time"] = event_time;
 	match["unix_time"] = unix_time; 
 	match["location"] = getActivityLocations()[activity_match["name"]][0];
+
 	return match;
 }
 

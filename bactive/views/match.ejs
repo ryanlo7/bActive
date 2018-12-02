@@ -15,9 +15,10 @@
     <th>Meetup Location</th>
     </thead>
     <% for (let i = 0; i < matches.length; i++) { %>
+    <!-- match["event"], match["score"], match["time"] -->
         <tbody>
         <tr>
-        <td><%- matches[i][0] %></td><td></td><td>-</td><td>-</td></tr>
+        <td><%- matches[i]["event"] %></td><td><%- matches[i]["score"] %></td><td><%- matches[i]["time"] %></td><td><%- matches[i]["location"] %></td></tr>
         <tr style="background: #D0E4F5;">
         <td>-</td><td>-</td><td>-</td><td>-</td></tr>
         </tbody>
