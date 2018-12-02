@@ -30,35 +30,35 @@ router.get('/:userid', function(req, res, next) {
 			});
 
 	const collection = db.collection("Events");
-	// function(err, result) {
-	// 	let newEvent = {
-	// 		eventId: maxUserId,
-	// 		acceptedIds: email,
-	// 		invitedIds: password,
-	// 		activity: [],
-	// 		startTime: []
-	// 		endTime: []
-	// 		status: ,
-	// 		location: 
-	// 	};
-	// 	collection.insertOne(newEvent, function (err, insertResult) {
-	// 		if (err) {
-	// 			next(err);
-	// 			return;
-	// 		}
-	// 		let newValue = {$set: {"maxUserId": maxUserId + 1}}; // this is buggy
-	// 		db.collection("Values").updateOne({"name": "Users"}, newValue, function(err, updateResult) {
-	// 			if (err) {
-	// 				next(err);
-	// 				return;
-	// 			}
-	// 			res.status(201).send('Successfully inserted new user into db.');
-	// 			// res.render('profile', {});
-	// 			return;
-	// 		});
-	// 	});
-	// return;
-	// }
+	function(err, result) {
+		let newEvent = {
+			eventId: maxUserId,
+			acceptedIds: email,
+			invitedIds: password,
+			activity: [],
+			startTime: []
+			endTime: []
+			status: ,
+			location: 
+		};
+		collection.insertOne(newEvent, function (err, insertResult) {
+			if (err) {
+				next(err);
+				return;
+			}
+			let newValue = {$set: {"maxUserId": maxUserId + 1}}; // this is buggy
+			db.collection("Values").updateOne({"name": "Users"}, newValue, function(err, updateResult) {
+				if (err) {
+					next(err);
+					return;
+				}
+				res.status(201).send('Successfully inserted new user into db.');
+				// res.render('profile', {});
+				return;
+			});
+		});
+	return;
+	}
 
 });
 
@@ -89,6 +89,15 @@ function matchUsers(req, res, next, userId, matches) {
 				let potentialMatchUser = users[i];
 
 				var info = matchUser(currUser, potentialMatchUser);
+
+				// info["event"] has the name, look up in database
+
+				// //searchActivities to get location for activity
+				// database.searchActivities(database.routerProperties(req, res, next), {"name": info["event"]}, function(activities) {
+				// 	console.log(activities[0]["locations"][0]);
+				// 	info["location"] = activities[0]["locations"][0];
+				// });
+
 				matchResultsArray.push(info);
 				// do something with result - or not, just keep appending to results and return
 
@@ -137,7 +146,6 @@ function matchUser(curr_user, potential_match) {
 	match["score"] = total_score;
 	match["time"] = event_time;
 	match["unix_time"] = unix_time; 
-	match["match_name"] = potential_match["name"];
 	//console.log(getActivityLocations()[activity_match["name"]][0])
 	match["location"] = getActivityLocations()[activity_match["name"]][0];
 
@@ -411,7 +419,6 @@ function getActivityLocations() {
 
 	return activity_locations;
 }
-
 module.exports = router;
 
 //UNCOMMENT BELOW FOR MATCHING FUNCTION TESTING PURPOSES (and comment out above 'module.exports = router')
