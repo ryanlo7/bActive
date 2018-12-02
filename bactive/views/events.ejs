@@ -82,6 +82,7 @@
     </tr>
     </thead>
     <% for (let i = 0; i < events.length; i++) { %>
+        <% if (events[i].status == "confirmed") { %> <!-- TODO: change so events[i].status === "confirmed" -->
         <tbody>
         <tr>
         <td><%- events[i].activity %></td><td><%- events[i].day %></td><td><%- events[i].time %></td><td><%- events[i].location %></td></tr>
@@ -94,6 +95,7 @@
         <tr>
         <td>-</td><td>-</td><td>-</td><td>-</td></tr>
         </tbody>
+        <% } %>
     <% } %>
     </tr>
     </table>
