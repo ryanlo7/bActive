@@ -1,39 +1,39 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<h1>Profile (edit TODO ROUTER LINK) </h1>
-<h3>Email: {{ user.email }} </h3>
+
+<div *ngIf="user">
+    <h1>Profile (edit TODO ROUTER LINK) </h1>
+    <h3>Email: {{ user.email }} </h3>
+</div>
 
 <div class="user-rating" *ngIf="user">
-    <h4>Rating:</h4>
-    <div>
-        <script>
-            for (let i = 0; i < calculateRating(); i++) 
-        </script>
-                <span class="fa fa-star"></span>
-        <script>
-        </script>
+    <h4>Rating: </h4>
+    <div class="star-rating" *ngFor="let rating of calculateRating()">
+        <span class="fa fa-star"></span>
     </div>
-    <h6>({{user.rating.numRatings}}) {{calculateRating()}}</h6>
+    <h6> ({{user.rating.numRatings}})</h6>
 </div>
 
 <h2>Activities</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Activity</th> 
-            <th>Skill Level</th> 
-            <th>Interest Level</th>
-        </tr>
-    </thead>
-        <tr *ngFor="let activity of user.activities">
-            <td>{{ activity.name }}</td>
-            <td>{{ activity.skill }}</td>
-            <td>{{ activity.interest }}</td>
-        </tr>
-</table>
-<h2>Availability</h2>
-<div class="schedule" >
+<div *ngIf="user">
+    <table>
+        <thead>
+            <tr>
+                <th>Activity</th> 
+                <th>Skill Level</th> 
+                <th>Interest Level</th>
+            </tr>
+        </thead>
+            <tr *ngFor="let activity of user.activities">
+                <td>{{ activity.name }}</td>
+                <td>{{ activity.skill }}</td>
+                <td>{{ activity.interest }}</td>
+            </tr>
+    </table>
+</div>
+<div class="schedule" *ngIf="user">
+    <h2>Availability</h2>
     <table style="border: 1px solid #777a7f; border-spacing: 0px; width:100%;" cellspacing="0" >
         <thead>
             <tr bgcolor="#5e99d1">
