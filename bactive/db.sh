@@ -30,10 +30,12 @@ db.Users.insert({
 					],
 					"events": [
 						{
+							"eventId": 0,
 							"userIds": [1], 
 							"activity": "lifting", 
 							"day": "monday",
-							"time": "1AM-2AM", 
+							"startTime": 1518669344517, 
+							"endTime": 1518670344517,
 							"status": "matched",
 							"location": "bfit"
 						}
@@ -59,10 +61,11 @@ db.Users.insert({
 					],
 					"events": [
 						{
+							"eventId": 1,
 							"userIds": [0], 
 							"activity": "lifting", 
-							"day": "monday",
-							"time": "1AM-2AM", 
+							"startTime": 1518669344517, 
+							"endTime": 1518670344517,
 							"status": "matched",
 							"location": "bfit"
 						}
@@ -70,3 +73,66 @@ db.Users.insert({
 })
 
 db.Users.find({})
+
+db.Activities.insert([
+	{
+		"name": "Lifting",
+		"locations": ["Bfit", "Wooden"],
+		"sizeMin": 2,
+		"sizeMax": 2
+	},
+	{
+		"name": "Running",
+		"locations": ["Drake Stadium", "Perimeter run"],
+		"sizeMin": 2,
+		"sizeMax": 2
+	},
+	{
+		"name": "Swimming",
+		"locations": ["Sunset Rec", "SAC", "North Pool"],
+		"sizeMin": 2,
+		"sizeMax": 2
+	},
+	{
+		"name": "Basketball",
+		"locations": ["Hitch Courts", "Wooden"],
+		"sizeMin": 2,
+		"sizeMax": 10
+	},
+	{
+		"name": "Soccer",
+		"locations": ["IM Field"],
+		"sizeMin": 2,
+		"sizeMax": 12
+	},
+	{
+		"name": "Tennis",
+		"locations": ["LA Tennis Courts"],
+		"sizeMin": 2,
+		"sizeMax": 4
+	},
+	{
+		"name": "Badminton",
+		"locations": ["Wooden"],
+		"sizeMin": 2,
+		"sizeMax": 4
+	},
+	{
+		"name": "Climbing",
+		"locations": ["Wooden"],
+		"sizeMin": 2,
+		"sizeMax": 2
+	},
+	{
+		"name": "Squash",
+		"locations": ["Wooden"],
+		"sizeMin": 2,
+		"sizeMax": 2
+	},
+	{
+		"name": "Ultimate Frisbee",
+		"locations": ["IM Field"],
+		"sizeMin": 2,
+		"sizeMax": 14
+	}
+])

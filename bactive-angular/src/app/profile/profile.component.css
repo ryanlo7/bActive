@@ -1,0 +1,35 @@
+.availabilityCell {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #777a7f;
+	background-color: #81c48e;
+}
+
+.availability-th {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #777a7f;
+	/*width: 70px;*/
+	padding: 25px;
+}
+
+.availability-time-th {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #777a7f;
+	padding: 25px;
+	width: 12%;
+}
+
+#notFree {
+	background-color: #ffffff;
+}
+
+.schedule {
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	height: 500px;
+	width: 100%;
+	overflow-y: auto;
+}
