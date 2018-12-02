@@ -9,6 +9,7 @@
     <table style="text-align: center; border: 1px solid #000000; font-size: 30px;">
     <thead style="background: #0B6FA4; font-weight: bold;">
     <tr>
+    <th>Accept?</th>
     <th>Activity</th>
     <th>Date</th>
     <th>Time</th>
@@ -17,13 +18,16 @@
     <% for (let i = 0; i < matches.length; i++) { %>
     <!-- match["event"], match["score"], match["time"] -->
         <tbody>
-        <tr>
-        <td><%- matches[i]["event"] %></td><td><%- matches[i]["score"] %></td><td><%- matches[i]["time"] %></td><td><%- matches[i]["location"] %></td></tr>
         <tr style="background: #D0E4F5;">
-        <td>-</td><td>-</td><td>-</td><td>-</td></tr>
-        </tbody>
+        <td><label class="container">
+  <input type="checkbox">
+  <span class="checkmark"></span>
+</label></td><td><%- matches[i]["event"] %></td><td><%- matches[i]["unix_time"] %></td><td><%- matches[i]["time"] %></td><td><%- matches[i]["location"] %></td></tr>
+		</tbody>
     <% } %>
     </tr>
     </table>
 </body>
 </html>
+
+
