@@ -20,7 +20,11 @@ export class NavbarComponent implements OnInit {
   }
 
   handleMatches () {
-    this.router.navigate(['/matches']);
+      this.router.navigate(['/matches']);
+  }
+
+  handleProfile () {
+      this.router.navigate(['/']);
   }
 
 }
