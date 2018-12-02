@@ -13,10 +13,11 @@ export class Activity {
 }
 
 export class Event {
+	eventId: number;
 	userId: number[];
 	activity: string;
-	day: string;
-	time: string;
+	startTime: Date;
+	endTime: Date
 	status: string;
 	location: string;
 }

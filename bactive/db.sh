@@ -30,10 +30,12 @@ db.Users.insert({
 					],
 					"events": [
 						{
+							"eventId": 0,
 							"userIds": [1], 
 							"activity": "lifting", 
 							"day": "monday",
-							"time": "1AM-2AM", 
+							"startTime": 1518669344517, 
+							"endTime": 1518670344517,
 							"status": "matched",
 							"location": "bfit"
 						}
@@ -59,10 +61,11 @@ db.Users.insert({
 					],
 					"events": [
 						{
+							"eventId": 1,
 							"userIds": [0], 
 							"activity": "lifting", 
-							"day": "monday",
-							"time": "1AM-2AM", 
+							"startTime": 1518669344517, 
+							"endTime": 1518670344517,
 							"status": "matched",
 							"location": "bfit"
 						}
