@@ -4,13 +4,9 @@
 
 <div *ngIf="user">
     <h1>Profile</h1>
-
+    <button id="edit_button" class="btn btn-default" (click)="handleEdit()">Edit Profile</button>
     <h3>Name: {{ user.name }}</h3>
     <h3>Email: {{ user.email }} </h3>
-</div>
-
-<div *ngIf="user">
-    <button id="edit_button" class="btn btn-default" (click)="handleEdit()">Edit Profile</button>
 </div>
 
 <div class="user-rating" *ngIf="user">
