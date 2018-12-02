@@ -62,8 +62,14 @@
                 {{ this.tableHeadings[i] }}
             </th>
             <ng-container *ngFor="let day of user.availability; let j = index;">
-                <td class="availabilityCell" id="free" *ngIf="user.availability[j][i]"></td>
-                <td class="availabilityCell" id="notFree" *ngIf="!user.availability[j][i]"></td>
+                <td class="availabilityCell">
+                    <div *ngIf="user.availability[j][i]">
+                        <label><input type="checkbox" checked (click)="handleCheckClick(j, i)"></label>
+                    </div>
+                    <div *ngIf="!user.availability[j][i]">
+                        <label><input type="checkbox" (click)="handleCheckClick(j, i)" ></label>
+                    </div>
+                </td>
             </ng-container>
         </tr>
     </table>

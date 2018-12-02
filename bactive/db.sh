@@ -22,6 +22,8 @@ db.Users.insert({
 					"rating": { "scoreSum": 100, "numRatings": 25},
 					"activities": [
 						{"name": "Basketball", "interest": 5, "skill": 5},
+						{"name": "Running", "interest": 3, "skill": 5},
+						{"name": "Soccer", "interest": 4, "skill": 5},
 						{"name": "Lifting", "interest": 4, "skill": 3}
 					],
 					"availability": [
