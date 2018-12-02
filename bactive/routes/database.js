@@ -43,7 +43,7 @@ var searchUsers = function(properties, criteria, results, processUsers) {
 	});
 }
 
-var searchUserEvents = function(properties, criteria, results) {
+var searchEvents = function(properties, criteria, processEvents) {
 	let req = properties.req;
 	let res = properties.res;
 	let next = properties.next;
@@ -57,9 +57,31 @@ var searchUserEvents = function(properties, criteria, results) {
 			return;
 		}
 		if (events.length === 0) {
-			res.status(404).send(`Unable to find users that met search criteria`);
+			res.status(404).send(`Unable to find events that met search criteria`);
 			return;
 		}
+		processEvents(events);
+	});
+}
+
+var searchActivities = function(properties, criteria, processActivities) {
+	let req = properties.req;
+	let res = properties.res;
+	let next = properties.next;
+
+	let db = req.app.locals.db;
+	const activityCollection = db.collection("Activities");
+
+	activityCollection.find(criteria).toArray(function(err, activities) {
+		if (err) {
+			next(err);
+			return;
+		}
+		if (activities.length === 0) {
+			//res.status(404).send(`Unable to find activities that met search criteria`);
+			return;
+		}
+		processActivities(activities);
 	});
 }
 
@@ -150,7 +172,6 @@ var insertUser = function(properties, email, password) {
 
 				let newUser = {
 					userId: maxUserId,
-					name: "B-Active User",
 					email: email,
 					password: password,
 					availability: defaultAvailability,
@@ -170,7 +191,6 @@ var insertUser = function(properties, email, password) {
 						}
 						res.status(201).render('profile', {
 							userId: newUser.userId,
-							name: newUser.name,
 							email: newUser.email,
 							rating: { "scoreSum": 0, "numRatings": 0},
 							activities: newUser.activities,
@@ -190,5 +210,6 @@ module.exports = {
 	insertUser: insertUser,
 	updateUser: updateUser,
 	searchUsers: searchUsers,
+	searchActivities: searchActivities,
 	routerProperties: routerProperties
 };

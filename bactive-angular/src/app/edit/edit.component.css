@@ -1,8 +1,9 @@
-.availabilityCell {
-	border-style: solid;
-	border-width: 1px;
-	border-color: #777a7f;
-	background-color: #81c48e;
+h1, h2 {
+    font-family: "Special Elite";
+}
+
+.well {
+    background: rgba(225, 243, 250);
 }
 
 .availability-th {
@@ -27,7 +28,7 @@
 
 .schedule {
 	border-style: solid;
-	border-width: 1px;
+	border-width: 0px;
 	border-color: black;
 	height: 500px;
 	width: 100%;
@@ -39,4 +40,28 @@
 }
 h4, h6 {
 	display: inline;
+}
+
+.availabilityCell {
+	padding:0px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #777a7f;
+}
+
+label {
+	display: block;
+	height: 90px;
+	border-width: 0px;
+	border-style: solid;
+	border-color: black;
+	margin: auto;
+}
+
+label:hover {
+	background-color: gray;
+}
+
+input[type="checkbox"] {
+	opacity: 1;
 }

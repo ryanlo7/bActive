@@ -21,8 +21,10 @@ db.Users.insert({
 					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
 					"rating": { "scoreSum": 100, "numRatings": 25},
 					"activities": [
-						{"name": "Basketball", "interest": 5, "skill": 5},
-						{"name": "Lifting", "interest": 4, "skill": 3}
+						{"name": "basketball", "interest": 5, "skill": 5},
+						{"name": "running", "interest": 3, "skill": 5},
+						{"name": "soccer", "interest": 4, "skill": 5},
+						{"name": "lifting", "interest": 4, "skill": 3}
 					],
 					"availability": [
 						[true, true, true, true, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
@@ -44,8 +46,8 @@ db.Users.insert({
 					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
 					"rating": { "scoreSum": 120, "numRatings": 25},
 					"activities": [
-						{"name": "Lifting", "interest": 5, "skill": 5},
-						{"name": "Basketball", "interest": 4, "skill": 3}
+						{"name": "lifting", "interest": 5, "skill": 5},
+						{"name": "basketball", "interest": 4, "skill": 3}
 					],
 					"availability": [
 						[true, true, true, true, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
@@ -60,79 +62,103 @@ db.Users.insert({
 						{"eventId": 0, "rated": []}
 					]
 })
+db.Users.insert({
+					"userId": 2,
+					"name": "Thing Three",
+					"email": "user3@ucla.edu",
+					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
+					"rating": { "scoreSum": 50, "numRatings": 5},
+					"activities": [
+						{"name": "lifting", "interest": 5, "skill": 5},
+						{"name": "basketball", "interest": 4, "skill": 3}
+					],
+					"availability": [
+						[false, true, true, true, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
+						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
+						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, true, true,true, false, false,false, false, false],
+						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
+						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
+						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
+						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false]
+					],
+					"events": [
+						{"eventId": 0, "rated": []}
+					]
+})
 
 db.Users.find({})
 
-db.Activities.insert([
-	{
-		"name": "Lifting",
+db.Activities.insert({
+		"name": "lifting",
 		"locations": ["Bfit", "Wooden"],
 		"imgUrl": ,
 		"sizeMin": 2,
 		"sizeMax": 2
-	},
-	{
-		"name": "Running",
+})
+db.Activities.insert({
+		"name": "running",
 		"locations": ["Drake Stadium", "Perimeter run"],
 		"sizeMin": 2,
 		"sizeMax": 2
-	},
-	{
-		"name": "Swimming",
+})
+db.Activities.insert({
+		"name": "swimming",
 		"locations": ["Sunset Rec", "SAC", "North Pool"],
 		"sizeMin": 2,
 		"sizeMax": 2
-	},
-	{
-		"name": "Basketball",
+})
+db.Activities.insert({
+		"name": "basketball",
 		"locations": ["Hitch Courts", "Wooden"],
 		"sizeMin": 2,
 		"sizeMax": 10
-	},
-	{
-		"name": "Soccer",
+})
+db.Activities.insert({
+		"name": "soccer",
 		"locations": ["IM Field"],
 		"sizeMin": 2,
 		"sizeMax": 12
-	},
-	{
-		"name": "Tennis",
+})
+db.Activities.insert({
+		"name": "tennis",
 		"locations": ["LA Tennis Courts"],
 		"sizeMin": 2,
 		"sizeMax": 4
-	},
-	{
-		"name": "Volleyball",
-		"locations": ["Sunset Rec"],
+})
+db.Activities.insert({
+		"name": "badminton",
+		"locations": ["Wooden"],
 		"sizeMin": 2,
 		"sizeMax": 4
-	},
-	{
-		"name": "Climbing",
+})
+db.Activities.insert({
+		"name": "climbing",
 		"locations": ["Wooden"],
 		"sizeMin": 2,
 		"sizeMax": 2
-	},
-	{
-		"name": "Squash",
+})
+db.Activities.insert({
+		"name": "squash",
 		"locations": ["Wooden"],
 		"sizeMin": 2,
 		"sizeMax": 2
-	},
-	{
-		"name": "Frisbee",
+})
+db.Activities.insert({
+		"name": "ultimate frisbee",
 		"locations": ["IM Field"],
 		"sizeMin": 2,
 		"sizeMax": 14
-	}
-])
+})
+
+db.Activities.find({})
+
 
 db.Events.insert(
 	{
 		"eventId": 0,
 		"acceptedIds": [], 
 		"invitedIds": [0, 1],
-		"activity": "Lifting",
+		"activity": "lifting",
 		"startTime": 1518669344517,
 		"endTime": 1518670344517,
 		"status": "matched",

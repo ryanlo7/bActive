@@ -63,6 +63,34 @@ router.get('/:userid',
 		});
 });
 
+router.put('/name/:userid',
+	function(req, res, next) {
+	var db = req.app.locals.db;
+	var userId = parseInt(req.params.userid);
+	db.collection('Users')
+		.find({'userId': userId})
+		.toArray(function(err, results) {
+			if (results.length == 0) {
+				res.status(404).send("404: userId not found");
+			} else {
+				user = results[0]; // should only be one match
+
+				if (!verify.checkLogin(req.cookies.jwt, user.email)) {
+					res.status(401).redirect('/login');
+					return;
+				}
+				if(req.body.name === undefined) {
+					res.status(400).send('Bad request');
+					return;
+				}
+				var updated = {$set: {name: req.body.name}};
+				db.collection('Users').updateOne({'userId': userId}, updated, function(err, result) {
+					res.status(200).send('OK');
+				});
+			}
+		});
+});
+
 router.put('/availability/:userid',
 	function(req, res, next) {
 	var db = req.app.locals.db;
@@ -211,35 +239,6 @@ router.delete('/activity/:userid',
 					return;
 				}
 				user.activities.splice(ind, 1);
-				var updated = {$set: {activities: user.activities}};
-				db.collection('Users').updateOne({'userId': userId}, updated, function(err, result) {
-					res.status(200).send('OK');
-				});
-			}
-		});
-});
-
-router.post('/activity/:userid',
-	function(req, res, next) {
-	var db = req.app.locals.db;
-	var userId = parseInt(req.params.userid);
-	db.collection('Users')
-		.find({'userId': userId})
-		.toArray(function(err, results) {
-			if (results.length == 0) {
-				res.status(404).send("404: userId not found");
-			} else {
-				user = results[0]; // should only be one match
-
-				if (!verify.checkLogin(req.cookies.jwt, user.email)) {
-					res.status(401).redirect('/login');
-					return;
-				}
-				if(req.body.activity === undefined) {
-					res.status(400).send('Bad request');
-					return;
-				}
-				user.activities.push(JSON.parse(req.body.activity));
 				var updated = {$set: {activities: user.activities}};
 				db.collection('Users').updateOne({'userId': userId}, updated, function(err, result) {
 					res.status(200).send('OK');
