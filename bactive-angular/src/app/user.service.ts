@@ -41,6 +41,7 @@ export class User {
 })
 export class UserService {
 	private user: User;
+	private events: Event[];
 	private apiUrl = 'http://localhost:3000/api';
 
 	constructor(private http: HttpClient) { }
@@ -58,5 +59,19 @@ export class UserService {
 
 	getUser(userId: number): User {
 		return this.user;
+	}
+	
+	fetchEvents(): Observable<Event[]> {
+		const url = `${this.apiUrl}/event`;
+
+		return this.http.get<Event[]>(url).pipe(
+			tap(res => {
+				this.events = res;
+			})
+		);
+	}
+	
+	getEvents(): Event[] {
+		return this.events;
 	}
 }
