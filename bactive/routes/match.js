@@ -28,6 +28,38 @@ router.get('/:userid', function(req, res, next) {
 					matchUsers(req, res, next, userId, matchedResults);
 				}
 			});
+
+	const collection = db.collection("Events");
+	function(err, result) {
+		let newEvent = {
+			eventId: maxUserId,
+			acceptedIds: email,
+			invitedIds: password,
+			activity: [],
+			startTime: []
+			endTime: []
+			status: ,
+			location: 
+		};
+		collection.insertOne(newEvent, function (err, insertResult) {
+			if (err) {
+				next(err);
+				return;
+			}
+			let newValue = {$set: {"maxUserId": maxUserId + 1}}; // this is buggy
+			db.collection("Values").updateOne({"name": "Users"}, newValue, function(err, updateResult) {
+				if (err) {
+					next(err);
+					return;
+				}
+				res.status(201).send('Successfully inserted new user into db.');
+				// res.render('profile', {});
+				return;
+			});
+		});
+	return;
+	}
+
 });
 
 const MAX_AVAILABILITY_SCORE = 6;
@@ -114,7 +146,21 @@ function matchUser(curr_user, potential_match) {
 	match["score"] = total_score;
 	match["time"] = event_time;
 	match["unix_time"] = unix_time; 
+	//console.log(getActivityLocations()[activity_match["name"]][0])
 	match["location"] = getActivityLocations()[activity_match["name"]][0];
+
+
+// 	function getActivityLocations() {
+// 	var activity_locations = {"lifting": ["Bfit", "Wooden"], "running": ["Drake Stadium", "Perimeter run"],
+// 						"swimming":["Sunset Rec", "SAC", "North Pool"], "basketball": ["Hitch Courts", "Wooden"],
+// 						"soccer": ["IM Field"], "tennis": ["LA Tennis Courts"], "volleyball": ["Sunset Rec"],
+// 						"climbing": ["Wooden"], "squash": ["Wooden"], "frisbee": ["IM Field"]};
+
+// 	return activity_locations;
+// }
+
+
+
 
 	return match;
 }
