@@ -49,7 +49,10 @@ export class EditComponent implements OnInit {
 	}
 
 	updateProfile(): void {
-
+		// Update the name, activities, and availabilities
+		this.userService.changeName(this.user.userId, this.user.name);
+		this.userService.updateActivities(this.user.userId, this.user.activities);
+		this.userService.updateAvailability(this.user.userId, this.user.availability);
 	}
 
 	deleteActivity(name: string) {

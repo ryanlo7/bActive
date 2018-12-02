@@ -75,9 +75,22 @@ export class UserService {
 		return this.events;
 	}
 	
-	changeName(userId: number, newName: string): Observable<any> {
+	changeName(userId: number, newName: string): void {
 		const url = `${this.apiUrl}/name/${userId}`;
 		var insert = {name: newName};
-		return this.http.put(url, insert).pipe();
+		this.http.put(url, insert).subscribe();
+	}
+
+	updateActivities(userId: number, activities: Activity[]): void {
+		const url = `${this.apiUrl}/activity/${userId}`;
+		var insert = {activity: activities};
+		this.http.post(url, insert).subscribe();
+	}
+
+	updateAvailability(userId: number, availabilities: boolean[][]): void {
+		const url = `${this.apiUrl}/availability/${userId}`;
+		var insert = {availability: availabilities};
+		console.log(insert);
+		this.http.put(url, insert).subscribe();
 	}
 }

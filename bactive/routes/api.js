@@ -111,7 +111,7 @@ router.put('/availability/:userid',
 					res.status(400).send('Bad request');
 					return;
 				}
-				var updated = {$set: {availability: JSON.parse(req.body.availability.replace(/([^\[\],\s]+)/g, '$&'))}};
+				var updated = {$set: {availability: req.body.availability}};
 				db.collection('Users').updateOne({'userId': userId}, updated, function(err, result) {
 					res.status(200).send('OK');
 				});
@@ -169,7 +169,7 @@ router.post('/activity/:userid',
 					res.status(400).send('Bad request');
 					return;
 				}
-				user.activities = JSON.parse(req.body.activity);
+				user.activities = req.body.activity;
 				var updated = {$set: {activities: user.activities}};
 				db.collection('Users').updateOne({'userId': userId}, updated, function(err, result) {
 					res.status(200).send('OK');
