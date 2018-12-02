@@ -248,7 +248,7 @@ router.post('/activity/:userid',
 		});
 });
 
-router.put('/:userid/:userid2',
+router.put('/rate/:userid',
 	function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
@@ -264,16 +264,23 @@ router.put('/:userid/:userid2',
 					res.status(401).redirect('/login');
 					return;
 				}
-				if(req.body.score === undefined) {
+				if(req.body.score === undefined || req.body.ratee === undefined || req.body.eventId === undefined) {
 					res.status(400).send('Bad request');
 					return;
 				}
-				var userId2 = parseInt(req.params.userid2)
-				var ind = user.events.findIndex(cur => cur.userIds.includes(userId2));
+				var userId2 = parseInt(req.body.ratee);
+				var ind = user.events.findIndex(cur => Number(req.body.eventId) === cur.eventId);
 				if (ind === -1) {
 					res.status(400).send('Bad request');
 					return;
 				}
+				var new_ind = user.events[ind].rated.indexOf(userId2);
+				if (new_ind !== -1) {
+					res.status(400).send('Bad request');
+					return;
+				}
+				user.events[ind].rated.push(userId2);
+				
 				db.collection('Users')
 					.find({'userId': userId2})
 					.toArray(function(err, results2) {
@@ -284,7 +291,10 @@ router.put('/:userid/:userid2',
 						user2.rating.numRatings += 1;
 						var updated = {$set: {rating: user2.rating}};
 						db.collection('Users').updateOne({'userId': userId2}, updated, function(err, result) {
-							res.status(200).send('OK');
+							updated = {$set: {events: user.events}}
+							db.collection('Users').updateOne({'userId': userId}, updated, function(err, result2) {
+								res.status(200).send('OK');
+							});
 						});
 				});
 			}
