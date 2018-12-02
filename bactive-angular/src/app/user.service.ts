@@ -14,7 +14,7 @@ export class Activity {
 
 export class Event {
 	eventId: number;
-	userId: number[];
+	acceptedIds: number[];
 	invitedIds: number[];
 	activity: string;
 	startTime: Date;

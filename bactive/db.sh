@@ -158,7 +158,7 @@ db.Events.insert(
 		"eventId": 0,
 		"acceptedIds": [], 
 		"invitedIds": [0, 1],
-		"activity": "lifting",
+		"activity": "Lifting",
 		"startTime": 1518669344517,
 		"endTime": 1518670344517,
 		"status": "matched",
