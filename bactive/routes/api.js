@@ -7,7 +7,7 @@ router.get('/:userid',
 	function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
-	var included_fields = {'userId': true, 'email': true, 'rating': true, 'activities': true, 'availability': true, 'events': true, '_id': false};
+	var included_fields = {'userId': true, 'name': true, 'email': true, 'rating': true, 'activities': true, 'availability': true, 'events': true, '_id': false};
 	db.collection('Users')
 		.find({'userId': userId}).project(included_fields)
 		.toArray(function(err, results) {

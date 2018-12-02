@@ -130,6 +130,7 @@ var insertUser = function(properties, email, password) {
 
 				let newUser = {
 					userId: maxUserId,
+					name: "B-Active User",
 					email: email,
 					password: password,
 					availability: defaultAvailability,
@@ -149,6 +150,7 @@ var insertUser = function(properties, email, password) {
 						}
 						res.status(201).render('profile', {
 							userId: newUser.userId,
+							name: newUser.name,
 							email: newUser.email,
 							rating: { "scoreSum": 0, "numRatings": 0},
 							activities: newUser.activities,
