@@ -88,6 +88,7 @@ function testGetBestActivityMatch() {
 */
 function createTestCurrentUser() {
 	var user = {};
+	user["name"] = "Alice";
 	var activities = [{ "name" : "basketball", "interest" : 4, "skill" : 5 }, 
 	{ "name" : "lifting", "interest" : 2, "skill" : 4 },
 	{ "name" : "swimming", "interest" : 5, "skill" : 3 },
@@ -115,6 +116,7 @@ function createTestCurrentUser() {
 */
 function createTestPotentialMatchUser() {
 	var user = {};
+	user["name"] = "Bob";
 	var activities = [{ "name" : "basketball", "interest" : 4, "skill" : 5}, 
 	{ "name" : "running", "interest" : 5, "skill" : 2} ];
 	var availability = [];
@@ -148,6 +150,7 @@ function testMatchUser() {
 	assert(result["score"] > 26.6 && result["score"] < 26.7);
 	assert(result["time"][0] === 2);
 	assert(result["time"][1] === 1);
+	console.log(result);
 }
 
 /**
