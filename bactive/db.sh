@@ -123,7 +123,7 @@ db.Activities.insert([
 db.Events.insert(
 	{
 		"eventId": 0,
-		"userIds": [0, 1], 
+		"acceptedIds": [], 
 		"invitedIds": [0, 1],
 		"activity": "Lifting", 
 		"startTime": 1518669344517, 

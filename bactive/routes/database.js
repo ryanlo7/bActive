@@ -43,6 +43,26 @@ var searchUsers = function(properties, criteria, results, processUsers) {
 	});
 }
 
+var searchUserEvents = function(properties, criteria, results) {
+	let req = properties.req;
+	let res = properties.res;
+	let next = properties.next;
+
+	let db = req.app.locals.db;
+	const eventCollection = db.collection("Events");
+
+	eventCollection.find(criteria).toArray(function(err, events) {
+		if (err) {
+			next(err);
+			return;
+		}
+		if (events.length === 0) {
+			res.status(404).send(`Unable to find users that met search criteria`);
+			return;
+		}
+	});
+}
+
 /**
 	* Function to return update a user's data in Users collection in MongoDB.
 	* The server returns a 404 error if unable to find a matching user in the database.
