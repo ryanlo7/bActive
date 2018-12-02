@@ -7,10 +7,11 @@ db.Values.drop()
 db.createCollection("Users")
 db.createCollection("Activities")
 db.createCollection("Values")
+db.createCollection("Events")
 
 db.Values.insert(
 	{"name": "Users", "maxUserId": 2},
-	{"name": "Events", "maxEventId": 2}
+	{"name": "Events", "maxEventId": 1}
 )
 
 db.Users.insert({ 	
@@ -31,18 +32,7 @@ db.Users.insert({
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false]
 					],
-					"events": [
-						{
-							"eventId": 1,
-							"userIds": [0, 1], 
-							"invitedIds": [0, 1],
-							"activity": "lifting", 
-							"startTime": 1518669344517, 
-							"endTime": 1518670344517,
-							"status": "matched",
-							"location": "bfit"
-						}
-					]
+					"events": [0]
 })
 db.Users.insert({ 	
 					"userId": 1,
@@ -62,18 +52,7 @@ db.Users.insert({
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false]
 					],
-					"events": [
-						{
-							"eventId": 1,
-							"userIds": [0, 1], 
-							"invitedIds": [0, 1],
-							"activity": "lifting", 
-							"startTime": 1518669344517, 
-							"endTime": 1518670344517,
-							"status": "matched",
-							"location": "bfit"
-						}
-					]
+					"events": [0]
 })
 
 db.Users.find({})
@@ -140,3 +119,16 @@ db.Activities.insert([
 		"sizeMax": 14
 	}
 ])
+
+db.Events.insert(
+	{
+		"eventId": 0,
+		"userIds": [0, 1], 
+		"invitedIds": [0, 1],
+		"activity": "Lifting", 
+		"startTime": 1518669344517, 
+		"endTime": 1518670344517,
+		"status": "matched",
+		"location": "Bfit"
+	}
+)
