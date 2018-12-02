@@ -69,4 +69,8 @@ export class EditComponent implements OnInit {
 		return Array(avg).fill(5);
 	}
 
+	handleCheckClick(row: number, col: number) {
+		this.user.availability[row][col] = !this.user.availability[row][col];
+	}
+
 }
