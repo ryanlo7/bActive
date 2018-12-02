@@ -105,8 +105,8 @@ db.Activities.insert([
 	},
 	{
 		"activityId": 6,
-		"name": "Badminton",
-		"locations": ["Wooden"],
+		"name": "Volleyball",
+		"locations": ["Sunset Rec"],
 		"sizeMin": 2,
 		"sizeMax": 4
 	},

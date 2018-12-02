@@ -34,6 +34,7 @@ router.get('/:userid',
 				res.render('profile', {
 				 	userId: userId,
 					email: user.email,
+					name: user.name,
 					rating: calculateRating(user.rating),
 					numRatings: user.rating.numRatings,
 					activities: user.activities,
