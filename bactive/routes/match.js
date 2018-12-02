@@ -145,6 +145,9 @@ function matchUser(curr_user, potential_match) {
 	match["score"] = total_score;
 	match["time"] = event_time;
 	match["unix_time"] = unix_time; 
+	match["match_name"] = potential_match["name"];
+	match["match_id"] = potential_match["userId"];
+	match["match_email"] = potential_match["email"];
 	//console.log(getActivityLocations()[activity_match["name"]][0])
 	match["location"] = getActivityLocations()[activity_match["name"]][0];
 

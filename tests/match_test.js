@@ -89,6 +89,8 @@ function testGetBestActivityMatch() {
 function createTestCurrentUser() {
 	var user = {};
 	user["name"] = "Alice";
+	user["userId"] = 0;
+	user["email"] = "alice@ucla.edu";
 	var activities = [{ "name" : "Basketball", "interest" : 4, "skill" : 5 }, 
 	{ "name" : "Lifting", "interest" : 2, "skill" : 4 },
 	{ "name" : "Swimming", "interest" : 5, "skill" : 3 },
@@ -117,6 +119,8 @@ function createTestCurrentUser() {
 function createTestPotentialMatchUser() {
 	var user = {};
 	user["name"] = "Bob";
+	user["userId"] = 1;
+	user["email"] = "bob@ucla.edu";
 	var activities = [{ "name" : "Basketball", "interest" : 4, "skill" : 5}, 
 	{ "name" : "Running", "interest" : 5, "skill" : 2} ];
 	var availability = [];
