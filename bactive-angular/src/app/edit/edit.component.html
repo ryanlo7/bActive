@@ -3,9 +3,12 @@
 </head>
 
 <div *ngIf="user">
-    <h1>Profile</h1>
-    <button id="edit_button" class="btn btn-default" (click)="handleEdit()">Edit Profile</button>
-    <h3>Name: {{ user.name }}</h3>
+    <h1>Edit Profile</h1>
+    <h3>Name: 
+    	<span>
+			<input type="text" class="form-control nameBox" [(ngModel)]="user.name" name="name">
+		</span>
+    </h3>
     <h3>Email: {{ user.email }} </h3>
 </div>
 
@@ -18,33 +21,39 @@
 </div>
 
 <h2>Activities</h2>
-<div class = "activityBoxes" *ngIf="user">
-    <div class="activityBox" *ngFor="let activity of user.activities">
-        <div class="darkBox" width="300" height="200">
-        </div>
+<div *ngIf="user">
+    <table>
+        <thead>
+            <tr>
+                <th>Activity</th> 
+                <th>Skill Level</th> 
+                <th>Interest Level</th>
+            </tr>
+        </thead>
+            <tr *ngFor="let activity of user.activities">
+                <td><input type="text" class="form-control activityNameBox" [(ngModel)]="activity.name" name="activity-name"></td>
+                <td><select [(ngModel)]="activity.skill">
+                	<option *ngFor="let x of ratingScale" [value]="activity.skill">{{x}}</option>
+                </select></td>
+                <td>{{ activity.interest }}</td>
+                <button (click)="deleteActivity(activity.name)"> Delete </button>
+            </tr>
+    </table>
 
-        <div class="activityInfo">
-            <div style="font-size: 18pt;">{{ activity.name }}</div><br>
-            Interest: {{ activity.interest }}<br>
-            Skill: {{ activity.skill }}
-        </div>
-
-        <img src={{getActivityUrl(activity.name)}} width="300" height="200">
-    </div>
+    <button (click)="addActivity()"> Add Activity </button>
 </div>
-<h2>Availability</h2>
 <div class="schedule" *ngIf="user">
-
+    <h2>Availability</h2>
     <table style="border: 1px solid #777a7f; border-spacing: 0px; width:100%;" cellspacing="0" >
         <thead>
             <tr bgcolor="#5e99d1">
                 <th class="availability-th"></th>
-                <th class="availability-th">Monday</th>
-                <th class="availability-th">Tuesday</th>
-                <th class="availability-th">Wednesday</th>
+                <th class="availability-th">Monday</th> 
+                <th class="availability-th">Tuesday</th> 
+                <th class="availability-th">Wednesday</th> 
                 <th class="availability-th">Thursday</th>
-                <th class="availability-th">Friday</th>
-                <th class="availability-th">Saturday</th>
+                <th class="availability-th">Friday</th> 
+                <th class="availability-th">Saturday</th> 
                 <th class="availability-th">Sunday</th>
             </tr>
         </thead>
@@ -59,3 +68,5 @@
         </tr>
     </table>
 </div>
+
+<button (click)="updateProfile()"> Save </button>

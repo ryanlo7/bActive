@@ -21,8 +21,8 @@ db.Users.insert({
 					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
 					"rating": { "scoreSum": 100, "numRatings": 25},
 					"activities": [
-						{"name": "basketball", "interest": 5, "skill": 5},
-						{"name": "lifting", "interest": 4, "skill": 3}
+						{"name": "Basketball", "interest": 5, "skill": 5},
+						{"name": "Lifting", "interest": 4, "skill": 3}
 					],
 					"availability": [
 						[true, true, true, true, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
@@ -33,7 +33,9 @@ db.Users.insert({
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false]
 					],
-					"events": [0]
+					"events": [
+						{"eventId": 0, "rated": []}
+					]
 })
 db.Users.insert({
 					"userId": 1,
@@ -42,8 +44,8 @@ db.Users.insert({
 					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
 					"rating": { "scoreSum": 120, "numRatings": 25},
 					"activities": [
-						{"name": "basketball", "interest": 5, "skill": 5},
-						{"name": "lifting", "interest": 4, "skill": 3}
+						{"name": "Lifting", "interest": 5, "skill": 5},
+						{"name": "Basketball", "interest": 4, "skill": 3}
 					],
 					"availability": [
 						[true, true, true, true, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
@@ -54,7 +56,9 @@ db.Users.insert({
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false]
 					],
-					"events": [0]
+					"events": [
+						{"eventId": 0, "rated": []}
+					]
 })
 
 db.Users.find({})
@@ -62,6 +66,7 @@ db.Users.find({})
 db.Activities.insert({
 		"name": "lifting",
 		"locations": ["Bfit", "Wooden"],
+		"imgUrl": ,
 		"sizeMin": 2,
 		"sizeMax": 2
 })

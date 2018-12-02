@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Special+Elite');
+
 
 a {
   color: #00B7FF;
@@ -44,6 +46,15 @@ h1, h2 {
 .jumbotron h2 {
     font-size: 30px;
 }
+
+.navbar .navbar-header {
+    font-family: 'Special Elite';
+}
+
+.navbar .navbar-nav {
+    font-family: 'Special Elite';
+}
+
 
 .login-box {
     text-align: center;

@@ -1,4 +1,5 @@
 var express = require('express');
+var moment = require('moment')
 var database = require('./database');
 var router = express.Router();
 var verify = require('./verify');
@@ -35,7 +36,6 @@ const MAX_SKILL_SCORE = 5;
 const NORMALIZED_BASE = 10.0;
 const DAYS = 7;
 const TIME_SLOTS = 48;
-
 
 /**
 	* Key function to generate matches for a single user, given the user id.
@@ -109,9 +109,12 @@ function matchUser(curr_user, potential_match) {
 		total_score = activity_match["interest_score"] + activity_match["skill_score"] + availability_match_score;
 	}
 
+	var unix_time = getEventDate(event_time[0], event_time[1]);
 	match["event"] = activity_match["name"];
 	match["score"] = total_score;
 	match["time"] = event_time;
+	match["unix_time"] = unix_time; 
+	match["location"] = getActivityLocations()[activity_match["name"]][0];
 
 	return match;
 }
@@ -332,6 +335,44 @@ function computeNormalizedScore(curr_score, curr_max) {
 	return curr_score*1.0/curr_max*NORMALIZED_BASE;
 }
 
+/**
+	* Return the time of the event in Unix Epoch time format.
+	* @param {number} day Day in database for the event, where 0 is
+	* Monday and 6 is Sunday
+	* @param {number} time_slot The timeslot in the database for the
+	* event, where 0 means midnight, one means 12:30 AM, etc.
+*/
+function getEventDate(day, time_slot) {
+	// Convert days in database to match with day of the week in moment.js,
+	// which has Sunday as 0 and Saturday as 6. In the database, the index
+	// of 0 corresponds to Monday instead, which is why we need this line.
+	if (day === 6) {
+		day = 0;
+	} else {
+		day = day + 1;
+	}
+
+	var event_date = moment().day(day);
+	event_date = event_date.toDate();
+	event_date.setHours(time_slot/2);
+	event_date.setMinutes((time_slot%2===0)?0:30);
+	event_date.setSeconds(0);
+	event_date.setMilliseconds(0);
+	return Date.parse(event_date);
+}
+
+/**
+	* Return the locations of activities.
+	* @return {Object}
+*/
+function getActivityLocations() {
+	var activity_locations = {"lifting": ["Bfit", "Wooden"], "running": ["Drake Stadium", "Perimeter run"],
+						"swimming":["Sunset Rec", "SAC", "North Pool"], "basketball": ["Hitch Courts", "Wooden"],
+						"soccer": ["IM Field"], "tennis": ["LA Tennis Courts"], "volleyball": ["Sunset Rec"],
+						"climbing": ["Wooden"], "squash": ["Wooden"], "frisbee": ["IM Field"]};
+
+	return activity_locations;
+}
 module.exports = router;
 
 //UNCOMMENT BELOW FOR MATCHING FUNCTION TESTING PURPOSES (and comment out above 'module.exports = router')
