@@ -16,9 +16,9 @@
         </tr>
 </table>
 <h2>Availability</h2>
-<table>
+<table style="border: 1px solid #777a7f;">
     <thead>
-        <tr>
+        <tr bgcolor="#5e99d1">
             <th></th>
             <th>Monday</th> 
             <th>Tuesday</th> 
@@ -29,4 +29,10 @@
             <th>Sunday</th>
         </tr>
     </thead>
+    <tr *ngFor="let time of user.availability[0]; let i = index;">
+        <th bgcolor="#5e99d1">
+            {{ this.tableHeadings[i] }}
+        </th>
+
+    </tr>
 </table>
