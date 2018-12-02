@@ -141,7 +141,7 @@ router.post('/activity/:userid',
 					res.status(400).send('Bad request');
 					return;
 				}
-				user.activities.push(JSON.parse(req.body.activity));
+				user.activities = JSON.parse(req.body.activity);
 				var updated = {$set: {activities: user.activities}};
 				db.collection('Users').updateOne({'userId': userId}, updated, function(err, result) {
 					res.status(200).send('OK');
