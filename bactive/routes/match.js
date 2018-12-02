@@ -92,6 +92,7 @@ function matchUser(curr_user, potential_match) {
 	match["score"] = total_score;
 	match["time"] = event_time;
 	match["unix_time"] = unix_time; 
+	match["location"] = getActivityLocations()[activity_match["name"]][0];
 	return match;
 }
 
@@ -337,9 +338,21 @@ function getEventDate(day, time_slot) {
 	return Date.parse(event_date);
 }
 
+/**
+	* Return the locations of activities.
+	* @return {Object}
+*/
+function getActivityLocations() {
+	var activity_locations = {"lifting": ["Bfit", "Wooden"], "running": ["Drake Stadium", "Perimeter run"],
+						"swimming":["Sunset Rec", "SAC", "North Pool"], "basketball": ["Hitch Courts", "Wooden"],
+						"soccer": ["IM Field"], "tennis": ["LA Tennis Courts"], "volleyball": ["Sunset Rec"],
+						"climbing": ["Wooden"], "squash": ["Wooden"], "frisbee": ["IM Field"]};
+
+	return activity_locations;
+}
 module.exports = router;
 
-// UNCOMMENT BELOW FOR MATCHING FUNCTION TESTING PURPOSES (and comment out above 'module.exports = router')
+//UNCOMMENT BELOW FOR MATCHING FUNCTION TESTING PURPOSES (and comment out above 'module.exports = router')
 // module.exports = {
 // 	MAX_AVAILABILITY_SCORE:MAX_AVAILABILITY_SCORE,
 // 	MAX_INTEREST_SCORE:MAX_INTEREST_SCORE,
