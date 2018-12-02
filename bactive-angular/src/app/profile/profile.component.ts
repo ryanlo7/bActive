@@ -52,6 +52,7 @@ export class ProfileComponent implements OnInit {
 		if (ratings.numRatings === 0) {
 			return 0;
 		}
-		return ratings.scoreSum / ratings.numRatings;
+		let avg = ratings.scoreSum / ratings.numRatings;
+		return Array(avg).fill(5);
 	}
 }

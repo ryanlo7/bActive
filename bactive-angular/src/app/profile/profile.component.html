@@ -5,11 +5,11 @@
 <h3>Email: {{ user.email }} </h3>
 
 <div class="user-rating" *ngIf="user">
-    <h4>Rating:</h4>
-    <div>
+    <h4>Rating: </h4>
+    <div class="star-rating" *ngFor="let rating of calculateRating()">
         <span class="fa fa-star"></span>
     </div>
-    <h6>({{user.rating.numRatings}}) {{calculateRating()}}</h6>
+    <h6> ({{user.rating.numRatings}})</h6>
 </div>
 
 <h2>Activities</h2>
