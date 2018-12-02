@@ -6,7 +6,6 @@ var verify = require('./verify');
 
 /* GET users listing. */
 router.get('/:userid', function(req, res, next) {
-  // res.send('This is the match page. Main algorithm for users match with other users of similar interests here');
 
     var db = req.app.locals.db; //get instance of db
 	var userId = parseInt(req.params.userid);
@@ -15,7 +14,7 @@ router.get('/:userid', function(req, res, next) {
 			.find({'userId': userId})
 			.toArray(function(err, results) {
 				if (results.length == 0) {
-					res.status(404).send("404: hi userId not found");
+					res.status(404).send("404: userId not found");
 				} else {
 					user = results[0]; // should only be one match
 
@@ -28,16 +27,7 @@ router.get('/:userid', function(req, res, next) {
 					matchUsers(req, res, next, userId, matchedResults);
 				}
 			});
-
-  //matchUsers(req, res, next, userId);
-
-  // res.send('alg done');
 });
-
-// router.post('/', function(req, res, next) {
-// 	// var userId = parseInt(req.params.userid);
-// 	// matchUsers(req, res, next, userId);
-// });
 
 const MAX_AVAILABILITY_SCORE = 6;
 const MAX_INTEREST_SCORE = 7.5;
