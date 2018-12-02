@@ -47,11 +47,9 @@ const TIME_SLOTS = 48;
 	* to lowest score match.
 */
 function matchUsers(req, res, next, userId, matches) {
-	// Add in code to get data from database.
 	// Pass in objects of data for two users into match user function to get score match.
 	// Keep mapping of each user to score match (i.e. dictionary). Make sure that
 	// match is not attmepted for user with himself/herself.
-	// var results = [];
 	let performMatch = function(curr_user, matchResults) {
 		currUser = curr_user[0];
 		database.searchUsers(database.routerProperties(req, res, next), {"userId": {$ne: userId}}, matchResults, function(users, matchResultsArray) {
@@ -76,22 +74,41 @@ function matchUsers(req, res, next, userId, matches) {
 	* in user.
 	* @param {Object} potential_match An object containing the user profile information for the the
 	* match candidate for the logged in user.
-	* @return {Array} An array of a matched activity and the match score.
+	* @return {Object} An object conaining matched activity, event time, and score.
 	* A score representing how good the match is between the logged in user and the potential match. 
 	* This match is based on availability, interest level, and skill level.
 */
 function matchUser(curr_user, potential_match) {
 	var availability_match_score = getAvailabilityMatchScore(curr_user["availability"], potential_match["availability"]);
 	var activity_match = getBestActivityMatch(curr_user["activities"], potential_match["activities"]);
+	var event_time = getEventStartTime(curr_user["availability"], potential_match["availability"]);
 	var total_score = 0;
-
+	var match = {};
 	if (activity_match["interest_score"] != 0 && availability_match_score != 0) {
 		total_score = activity_match["interest_score"] + activity_match["skill_score"] + availability_match_score;
 	}
-	return [activity_match["name"], total_score];
+	match["event"] = activity_match["name"];
+	match["score"] = total_score;
+	match["time"] = event_time;
+	return match;
 }
 
-
+/**
+	* Returns the best time to meet up for two users. 
+	* This is done by computing the largest overlapping block of time between the two users, and
+	* finding the start time of this largest overlapping block.
+	* @param {Array<Array<<boolean>>} curr_user_availability A list of true/false availabilities
+	* for the current user for each thirty-minute time slot on each day of the week.
+	* @param {Array<Array<<boolean>>} potential_match_availability A list of true/false availabilities
+	* for the potentialMatch for each thirty-minute time slot on each day of the week.
+	* @return {Array<number>} A day and time slot for the start of the event.
+*/
+function getEventStartTime(curr_user_availability, potential_match_availability) {
+	var availability_match = getAvailabilityMatch(curr_user_availability, potential_match_availability);
+	var day = availability_match["day"];
+	var start_time_slot = availability_match["slot"];
+	return [day, start_time_slot];
+}
 /**
 	* Returns a score for the availability match between two users. 
 	* This is done by computing the largest overlapping block of time between the two users.
@@ -103,9 +120,9 @@ function matchUser(curr_user, potential_match) {
 	* @return {number} A score representing how good the time availability match is, where 0 represents
 	* a failed match and MAX_AVAILABILITY_SCORE is the highest possible match score for this category.
 */
-
 function getAvailabilityMatchScore(curr_user_availability, potential_match_availability) {
-	var num_overlapping_periods = getAvailabilityMatch(curr_user_availability, potential_match_availability);
+	var availability_match = getAvailabilityMatch(curr_user_availability, potential_match_availability);
+	var num_overlapping_periods = availability_match["periods"];
 
 	// Thirty minutes is two short for an activity, so a match requires at least an hour of matched times.
 	// Furthermore, activity matches are not expected to have an activity for over three hours, 
@@ -127,27 +144,45 @@ function getAvailabilityMatchScore(curr_user_availability, potential_match_avail
 	* for the current user for each thirty-minute time slot on each day of the week.
 	* @param {Array<Array<<boolean>>} potential_match_availability A list of true/false availabilities
 	* for the potentialMatch for each thirty-minute time slot on each day of the week.
-	* @return {number} The maximum number of overlapping consecutive half-hours between the two users.
+	* @return {Object} The day, start time slot, and maximum number of overlapping consecutive half-hours 
+	* between the two users.
 */
 function getAvailabilityMatch(curr_user_availability, potential_match_availability) {
 	var max_sequence = 0;
 	var curr_sequence = 0;
 
+	var curr_start_day = 0;
+	var curr_start_time_slot = 0;
+	var max_start_day = 0;
+	var max_start_time_slot = 0;
+	var already_started = false;
+	var availability_match = {};
+
 	for (var i = 0; i < curr_user_availability.length; i++) {
 		for (var j = 0; j < curr_user_availability[i].length; j++) {
 			if (curr_user_availability[i][j] && potential_match_availability[i][j]) {
+				if (!already_started) {
+					curr_start_time_slot = j;
+					curr_start_day = i;
+					already_started = true;
+				}
 				curr_sequence++;
 				if (curr_sequence > max_sequence) {
+					max_start_day = curr_start_day;
+					max_start_time_slot = curr_start_time_slot;
 					max_sequence = curr_sequence;
 				}
 			}
 		 	else {
 				curr_sequence = 0;
+				already_started	= false;
 			}
 		}
 	}
-
-	return max_sequence;
+	availability_match["day"] = max_start_day;
+	availability_match["slot"] = max_start_time_slot;
+	availability_match["periods"] = max_sequence;
+	return availability_match;
 }
 
 /**
