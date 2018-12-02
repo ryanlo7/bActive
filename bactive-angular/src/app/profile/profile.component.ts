@@ -46,4 +46,12 @@ export class ProfileComponent implements OnInit {
 			minutes = (minutes == "00") ? "30" : "00";
 		}
 	}
+
+	calculateRating() {
+		let ratings = this.user.rating;
+		if (ratings.numRatings === 0) {
+			return 0;
+		}
+		return ratings.scoreSum / ratings.numRatings;
+	}
 }
