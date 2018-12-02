@@ -99,7 +99,6 @@ function matchUsers(req, res, next, userId, matches) {
 			    return b.score-a.score;
 			});
 
-
 			//convert time to unix time
 
 			console.log(matchResultsArray);
@@ -140,19 +139,6 @@ function matchUser(curr_user, potential_match) {
 	match["match_name"] = potential_match["name"];
 	//console.log(getActivityLocations()[activity_match["name"]][0])
 	match["location"] = getActivityLocations()[activity_match["name"]][0];
-
-
-// 	function getActivityLocations() {
-// 	var activity_locations = {"lifting": ["Bfit", "Wooden"], "running": ["Drake Stadium", "Perimeter run"],
-// 						"swimming":["Sunset Rec", "SAC", "North Pool"], "basketball": ["Hitch Courts", "Wooden"],
-// 						"soccer": ["IM Field"], "tennis": ["LA Tennis Courts"], "volleyball": ["Sunset Rec"],
-// 						"climbing": ["Wooden"], "squash": ["Wooden"], "frisbee": ["IM Field"]};
-
-// 	return activity_locations;
-// }
-
-
-
 
 	return match;
 }
@@ -313,7 +299,7 @@ function getBestActivityMatchFromList(activity_matches) {
 	var best_activity_match = {};
 	// Default initialization so that keys are present in the object. When using the score in other functions,
 	// handle exceptional case of having 0 interest match score (meaning no match).
-	best_activity_match["name"] = "lifting";
+	best_activity_match["name"] = "Lifting";
 	best_activity_match["skill_score"] = 0;
 	best_activity_match["interest_score"] = 0;
 	var max_score = 0;
@@ -404,10 +390,10 @@ function getEventDate(day, time_slot) {
 	* @return {Object}
 */
 function getActivityLocations() {
-	var activity_locations = {"lifting": ["Bfit", "Wooden"], "running": ["Drake Stadium", "Perimeter run"],
-						"swimming":["Sunset Rec", "SAC", "North Pool"], "basketball": ["Hitch Courts", "Wooden"],
-						"soccer": ["IM Field"], "tennis": ["LA Tennis Courts"], "volleyball": ["Sunset Rec"],
-						"climbing": ["Wooden"], "squash": ["Wooden"], "frisbee": ["IM Field"]};
+	var activity_locations = {"Lifting": ["Bfit", "Wooden"], "Running": ["Drake Stadium", "Perimeter run"],
+						"Swimming":["Sunset Rec", "SAC", "North Pool"], "Basketball": ["Hitch Courts", "Wooden"],
+						"Soccer": ["IM Field"], "Tennis": ["LA Tennis Courts"], "Volleyball": ["Sunset Rec"],
+						"Climbing": ["Wooden"], "Squash": ["Wooden"], "Frisbee": ["IM Field"]};
 
 	return activity_locations;
 }

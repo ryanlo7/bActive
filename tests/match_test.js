@@ -61,14 +61,14 @@ function testGetAvailabilityMatch() {
 	* match is selected as expected.
 */
 function testGetBestActivityMatch() {
-	var curr_user_activities = [{ "name" : "basketball", "interest" : 1, "skill" : 5 }, 
-	{ "name" : "lifting", "interest" : 2, "skill" : 4 },
-	{ "name" : "swimming", "interest" : 5, "skill" : 3 }];
+	var curr_user_activities = [{ "name" : "Basketball", "interest" : 1, "skill" : 5 }, 
+	{ "name" : "Lifting", "interest" : 2, "skill" : 4 },
+	{ "name" : "Swimming", "interest" : 5, "skill" : 3 }];
 	
-	var potential_match_activities = [{ "name" : "basketball", "interest" : 5, "skill" : 5 }, 
-	{ "name" : "lifting", "interest" : 5, "skill" : 1} ];
+	var potential_match_activities = [{ "name" : "Basketball", "interest" : 5, "skill" : 5 }, 
+	{ "name" : "Lifting", "interest" : 5, "skill" : 1} ];
 
-	assert(matchModule.getBestActivityMatch(curr_user_activities, potential_match_activities)["name"]==="lifting", 
+	assert(matchModule.getBestActivityMatch(curr_user_activities, potential_match_activities)["name"]==="Lifting", 
 		"Activity match incorrect: expected lifting" + " but got " + 
 		matchModule.getBestActivityMatch(curr_user_activities, potential_match_activities)["name"] + ".");
 
@@ -89,10 +89,10 @@ function testGetBestActivityMatch() {
 function createTestCurrentUser() {
 	var user = {};
 	user["name"] = "Alice";
-	var activities = [{ "name" : "basketball", "interest" : 4, "skill" : 5 }, 
-	{ "name" : "lifting", "interest" : 2, "skill" : 4 },
-	{ "name" : "swimming", "interest" : 5, "skill" : 3 },
-	{ "name" : "running", "interest" : 5, "skill" : 2} ];
+	var activities = [{ "name" : "Basketball", "interest" : 4, "skill" : 5 }, 
+	{ "name" : "Lifting", "interest" : 2, "skill" : 4 },
+	{ "name" : "Swimming", "interest" : 5, "skill" : 3 },
+	{ "name" : "Running", "interest" : 5, "skill" : 2} ];
 	var availability = [];
 	const FREE_SLOTS = 6;
 
@@ -117,8 +117,8 @@ function createTestCurrentUser() {
 function createTestPotentialMatchUser() {
 	var user = {};
 	user["name"] = "Bob";
-	var activities = [{ "name" : "basketball", "interest" : 4, "skill" : 5}, 
-	{ "name" : "running", "interest" : 5, "skill" : 2} ];
+	var activities = [{ "name" : "Basketball", "interest" : 4, "skill" : 5}, 
+	{ "name" : "Running", "interest" : 5, "skill" : 2} ];
 	var availability = [];
 	const FREE_SLOTS = 4;
 
@@ -145,7 +145,7 @@ function testMatchUser() {
 	var currUser = createTestCurrentUser();
 	var potentialUser = createTestPotentialMatchUser();
 	var result = matchModule.matchUser(currUser, potentialUser);
-	assert(result["event"] === "running", "Expected activity was running, but actual activity is " + result);
+	assert(result["event"] === "Running", "Expected activity was running, but actual activity is " + result);
 	// Expected score is a double between 26.6 and 26.7
 	assert(result["score"] > 26.6 && result["score"] < 26.7);
 	assert(result["time"][0] === 2);
