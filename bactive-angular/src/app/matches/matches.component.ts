@@ -17,6 +17,7 @@ function parseJWT(token)
 export class MatchesComponent implements OnInit {
 	user: User;
 	userId: number;
+	matches: Match[];
 
 
 	constructor(private userService: UserService) {
@@ -29,6 +30,14 @@ export class MatchesComponent implements OnInit {
 			this.userService.fetchUser(this.userId)
 				.subscribe(user => {
 					this.user = this.userService.getUser(this.userId);
+				});
+		}
+		this.matches = this.userService.getMatches();
+		if (this.matches == null) {
+			this.userService.fetchMatches(this.userId)
+				.subscribe(matches => {
+					this.matches = this.userService.getMatches();
+					console.log(matches);
 				});
 		}
 	}
