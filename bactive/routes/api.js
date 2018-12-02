@@ -141,7 +141,7 @@ router.post('/activity/:userid',
 					res.status(400).send('Bad request');
 					return;
 				}
-				user.activities.push(JSON.parse(req.body.activity));
+				user.activities = JSON.parse(req.body.activity);
 				var updated = {$set: {activities: user.activities}};
 				db.collection('Users').updateOne({'userId': userId}, updated, function(err, result) {
 					res.status(200).send('OK');
@@ -150,40 +150,40 @@ router.post('/activity/:userid',
 		});
 });
 
-router.put('/activity/:userid',
-	function(req, res, next) {
-	var db = req.app.locals.db;
-	var userId = parseInt(req.params.userid);
-	db.collection('Users')
-		.find({'userId': userId})
-		.toArray(function(err, results) {
-			if (results.length == 0) {
-				res.status(404).send("404: userId not found");
-			} else {
-				user = results[0]; // should only be one match
+// router.put('/activity/:userid',
+	// function(req, res, next) {
+	// var db = req.app.locals.db;
+	// var userId = parseInt(req.params.userid);
+	// db.collection('Users')
+		// .find({'userId': userId})
+		// .toArray(function(err, results) {
+			// if (results.length == 0) {
+				// res.status(404).send("404: userId not found");
+			// } else {
+				// user = results[0]; // should only be one match
 
-				if (!verify.checkLogin(req.cookies.jwt, user.email)) {
-					res.status(401).redirect('/login');
-					return;
-				}
-				if(req.body.activity === undefined) {
-					res.status(400).send('Bad request');
-					return;
-				}
-				var updated_activity = JSON.parse(req.body.activity);
-				var ind = user.activities.findIndex(cur => cur.name === updated_activity.name);
-				if (ind === -1) {
-					res.status(400).send('Bad request');
-					return;
-				}
-				user.activities[ind] = updated_activity;
-				var updated = {$set: {activities: user.activities}};
-				db.collection('Users').updateOne({'userId': userId}, updated, function(err, result) {
-					res.status(200).send('OK');
-				});
-			}
-		});
-});
+				// if (!verify.checkLogin(req.cookies.jwt, user.email)) {
+					// res.status(401).redirect('/login');
+					// return;
+				// }
+				// if(req.body.activity === undefined) {
+					// res.status(400).send('Bad request');
+					// return;
+				// }
+				// var updated_activity = JSON.parse(req.body.activity);
+				// var ind = user.activities.findIndex(cur => cur.name === updated_activity.name);
+				// if (ind === -1) {
+					// res.status(400).send('Bad request');
+					// return;
+				// }
+				// user.activities[ind] = updated_activity;
+				// var updated = {$set: {activities: user.activities}};
+				// db.collection('Users').updateOne({'userId': userId}, updated, function(err, result) {
+					// res.status(200).send('OK');
+				// });
+			// }
+		// });
+// });
 
 router.delete('/activity/:userid',
 	function(req, res, next) {
