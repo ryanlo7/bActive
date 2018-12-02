@@ -28,25 +28,25 @@
     <table>
         <thead>
             <tr>
-                <th>Activity</th>
-                <th>Skill Level</th>
-                <th>Interest Level</th>
+                <th class="activityLevel">Activity</th>
+                <th class="activityLevel">Skill Level</th>
+                <th class="activityLevel">Interest Level</th>
             </tr>
         </thead>
             <tr *ngFor="let activity of user.activities; let i = index">
-                <td><select [(ngModel)]="user.activities[i].name">
+                <td class="activityLevel"><select [(ngModel)]="user.activities[i].name">
                 	<option *ngFor="let x1 of possibleActivities" [selected]="user.activities[i].name == x1">
                 	{{x1}}</option>
                 </select></td>
-                <td><select [(ngModel)]="activity.skill">
+                <td class="activityLevel"><select [(ngModel)]="activity.skill">
                 	<option *ngFor="let x of ratingScale" [selected]="activity.skill == x">
                 	{{x}}</option>
                 </select></td>
-                <td><select [(ngModel)]="activity.interest">
+                <td class="activityLevel"><select [(ngModel)]="activity.interest">
                 	<option *ngFor="let x of ratingScale" [selected]="activity.interest == x">
                 	{{x}}</option>
                 </select></td>
-                <button (click)="deleteActivity(activity.name)"> Delete </button>
+                <td class="activityLevel"><button (click)="deleteActivity(activity.name)"> Delete </button></td>
             </tr>
     </table>
 

@@ -6,6 +6,10 @@ h1, h2 {
     background: rgba(225, 243, 250);
 }
 
+.activityLevel {
+	padding-right: 10px;
+}
+
 .availability-th {
 	border-style: solid;
 	border-width: 1px;
