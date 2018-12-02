@@ -21,8 +21,8 @@ db.Users.insert({
 					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
 					"rating": { "scoreSum": 100, "numRatings": 25},
 					"activities": [
-						{"name": "basketball", "interest": 5, "skill": 5},
-						{"name": "lifting", "interest": 4, "skill": 3}
+						{"activityId": 0, "interest": 5, "skill": 5},
+						{"activityId": 3, "interest": 4, "skill": 3}
 					],
 					"availability": [
 						[true, true, true, true, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
@@ -44,8 +44,8 @@ db.Users.insert({
 					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
 					"rating": { "scoreSum": 120, "numRatings": 25},
 					"activities": [
-						{"name": "basketball", "interest": 5, "skill": 5},
-						{"name": "lifting", "interest": 4, "skill": 3}
+						{"activityId": 3, "interest": 5, "skill": 5},
+						{"activityId": 0, "interest": 4, "skill": 3}
 					],
 					"availability": [
 						[true, true, true, true, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
@@ -65,60 +65,71 @@ db.Users.find({})
 
 db.Activities.insert([
 	{
+		"activityId": 0,
 		"name": "Lifting",
 		"locations": ["Bfit", "Wooden"],
+		"imgUrl": ,
 		"sizeMin": 2,
 		"sizeMax": 2
 	},
 	{
+		"activityId": 1,
 		"name": "Running",
 		"locations": ["Drake Stadium", "Perimeter run"],
 		"sizeMin": 2,
 		"sizeMax": 2
 	},
 	{
+		"activityId": 2,
 		"name": "Swimming",
 		"locations": ["Sunset Rec", "SAC", "North Pool"],
 		"sizeMin": 2,
 		"sizeMax": 2
 	},
 	{
+		"activityId": 3,
 		"name": "Basketball",
 		"locations": ["Hitch Courts", "Wooden"],
 		"sizeMin": 2,
 		"sizeMax": 10
 	},
 	{
+		"activityId": 4,
 		"name": "Soccer",
 		"locations": ["IM Field"],
 		"sizeMin": 2,
 		"sizeMax": 12
 	},
 	{
+		"activityId": 5,
 		"name": "Tennis",
 		"locations": ["LA Tennis Courts"],
 		"sizeMin": 2,
 		"sizeMax": 4
 	},
 	{
-		"name": "Badminton",
-		"locations": ["Wooden"],
+		"activityId": 6,
+		"name": "Volleyball",
+		"locations": ["Sunset Rec"],
 		"sizeMin": 2,
 		"sizeMax": 4
 	},
 	{
+		"activityId": 7,
 		"name": "Climbing",
 		"locations": ["Wooden"],
 		"sizeMin": 2,
 		"sizeMax": 2
 	},
 	{
+		"activityId": 8,
 		"name": "Squash",
 		"locations": ["Wooden"],
 		"sizeMin": 2,
 		"sizeMax": 2
 	},
 	{
+		"activityId": 9,
 		"name": "Ultimate Frisbee",
 		"locations": ["IM Field"],
 		"sizeMin": 2,
@@ -129,7 +140,7 @@ db.Activities.insert([
 db.Events.insert(
 	{
 		"eventId": 0,
-		"userIds": [0, 1],
+		"acceptedIds": [], 
 		"invitedIds": [0, 1],
 		"activity": "Lifting",
 		"startTime": 1518669344517,

@@ -26,6 +26,7 @@ export class Event {
 export class User {
 	userId: number;
 	email: string;
+	name: string;
 	rating: { 
 		scoreSum: number;
 		numRatings: number;
