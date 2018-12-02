@@ -74,4 +74,10 @@ export class UserService {
 	getEvents(): Event[] {
 		return this.events;
 	}
+	
+	changeName(userId: number, newName: string): Observable<any> {
+		const url = `${this.apiUrl}/event`;
+		var insert = {name: newName};
+		return this.http.put(url, insert).pipe();
+	}
 }
