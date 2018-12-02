@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User, UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 // Source: CS144 with Professor Cho, Project 4 JWT code
-function parseJWT(token) 
+function parseJWT(token)
 {
     let base64Url = token.split('.')[1];
     let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -21,7 +22,7 @@ export class ProfileComponent implements OnInit {
 	tableHeadings: string[] = [];
 	imageMap: IHash = {};
 
-	constructor(private userService: UserService) {
+	constructor(private userService: UserService, private router: Router) {
 		this.userId = parseJWT(document.cookie).userId;
 		this.imageMap["Lifting"] = "https://static1.squarespace.com/static/53de6926e4b06edf127b3ecd/t/56c51cb6555986ef347ae6ba/1455758525694/";
 		this.imageMap["Running"] = "http://lisabaylis.com/wp/wp-content/uploads/2017/07/running.jpg";
@@ -48,7 +49,7 @@ export class ProfileComponent implements OnInit {
 	}
 
 	fillTableHeadings(): void {
-		let hour = 0; 
+		let hour = 0;
 		let minutes = "00";
 
 		for (let i = 0; i < 48; i ++) {
@@ -70,8 +71,12 @@ export class ProfileComponent implements OnInit {
 	getActivityUrl(name: string) {
 		return this.imageMap[name];
 	}
+
+    handleEdit() {
+        this.router.navigate(['/edit']);
+    }
 }
 
 export interface IHash {
     [details: string] : string;
-} 
+}
