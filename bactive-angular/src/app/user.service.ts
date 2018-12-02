@@ -113,6 +113,8 @@ export class UserService {
 		const url = `${this.apiUrl}/availability/${userId}`;
 		var insert = {availability: availabilities};
 		console.log(insert);
-		this.http.put(url, insert).subscribe();
+		this.http.put(url, insert).subscribe(
+
+		);
 	}
 }
