@@ -18,7 +18,7 @@ export class Event {
 	invitedIds: number[];
 	activity: string;
 	startTime: Date;
-	endTime: Date
+	endTime: Date;
 	status: string;
 	location: string;
 }
@@ -33,7 +33,7 @@ export class User {
 	};
 	activities: Activity[];
 	availability: boolean[][];
-	events: number[];
+	events: {eventId: number, rated: number[]}[];
 }
 
 @Injectable({

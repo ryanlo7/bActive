@@ -33,7 +33,9 @@ db.Users.insert({
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false]
 					],
-					"events": [0]
+					"events": [
+						{"eventId": 0, "rated": []}
+					]
 })
 db.Users.insert({
 					"userId": 1,
@@ -54,7 +56,9 @@ db.Users.insert({
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false],
 						[false, false, false, false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false,false, false, false]
 					],
-					"events": [0]
+					"events": [
+						{"eventId": 0, "rated": []}
+					]
 })
 
 db.Users.find({})
