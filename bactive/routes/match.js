@@ -1,15 +1,43 @@
 var express = require('express');
 var database = require('./database');
 var router = express.Router();
+var verify = require('./verify');
+
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('This is the match page. Main algorithm for users match with other users of similar interests here');
+router.get('/:userid', function(req, res, next) {
+  // res.send('This is the match page. Main algorithm for users match with other users of similar interests here');
+
+    var db = req.app.locals.db; //get instance of db
+	var userId = parseInt(req.params.userid);
+
+	db.collection('Users')
+			.find({'userId': userId})
+			.toArray(function(err, results) {
+				if (results.length == 0) {
+					res.status(404).send("404: hi userId not found");
+				} else {
+					user = results[0]; // should only be one match
+
+					if (!verify.checkLogin(req.cookies.jwt, user.email)) {
+						res.status(401).redirect('/login');
+						return;
+					}
+
+					var matchedResults = [];
+					matchUsers(req, res, next, userId, matchedResults);
+				}
+			});
+
+  //matchUsers(req, res, next, userId);
+
+  // res.send('alg done');
 });
 
-router.post('/', function(req, res, next) {
-
-});
+// router.post('/', function(req, res, next) {
+// 	// var userId = parseInt(req.params.userid);
+// 	// matchUsers(req, res, next, userId);
+// });
 
 const MAX_AVAILABILITY_SCORE = 6;
 const MAX_INTEREST_SCORE = 7.5;
@@ -28,23 +56,28 @@ const TIME_SLOTS = 48;
 	* @return {!Array} A sorted array of matching users, from highest score match
 	* to lowest score match.
 */
-function matchUsers(req, res, next, userId) {
+function matchUsers(req, res, next, userId, matches) {
 	// Add in code to get data from database.
 	// Pass in objects of data for two users into match user function to get score match.
 	// Keep mapping of each user to score match (i.e. dictionary). Make sure that
 	// match is not attmepted for user with himself/herself.
-	let performMatch = function(curr_user) {
+	// var results = [];
+	let performMatch = function(curr_user, matchResults) {
 		currUser = curr_user[0];
-		database.searchUsers(database.routerProperties(req, res, next), {"userId": userId}, function(users) {
+		database.searchUsers(database.routerProperties(req, res, next), {}, matchResults, function(users, matchResultsArray) {
 			for (let i = 0; i < users.length; i ++) {
 				let potentialMatchUser = users[i];
-				let result = matchUser(currUser, potentialMatchUser);
-				// do something with result
+				matchResultsArray.push(matchUser(currUser, potentialMatchUser));
+				console.log(matchResultsArray.length)
+				// do something with result - or not, just keep appending to results and return
 			}
+			res.render('match', {
+					 	userId: userId,
+						matches: matchResultsArray,
+					});
 		});
 	};
-	database.searchUsers(database.routerProperties(req, res, next), {"userId": userId}, performMatch);
-
+	database.searchUsers(database.routerProperties(req, res, next), {"userId": userId}, matches, performMatch);
 }
 
 /**
@@ -251,17 +284,20 @@ function computeNormalizedScore(curr_score, curr_max) {
 	return curr_score*1.0/curr_max*NORMALIZED_BASE;
 }
 
-module.exports = {
-	MAX_AVAILABILITY_SCORE:MAX_AVAILABILITY_SCORE,
-	MAX_INTEREST_SCORE:MAX_INTEREST_SCORE,
-	MAX_SKILL_SCORE:MAX_SKILL_SCORE,
- 	NORMALIZED_BASE:NORMALIZED_BASE,
-	DAYS:DAYS,
-	TIME_SLOTS:TIME_SLOTS,
-	matchUsers:matchUsers,
-	matchUser:matchUser,
-	getAvailabilityMatchScore:getAvailabilityMatchScore,
-	getAvailabilityMatch:getAvailabilityMatch,
-	getBestActivityMatch:getBestActivityMatch,
-	router
-};
+module.exports = router;
+
+//UNCOMMENT BELOW FOR MATCHING FUNCTION TESTING PURPOSES (and comment out above 'module.exports = router')
+// module.exports = {
+// 	MAX_AVAILABILITY_SCORE:MAX_AVAILABILITY_SCORE,
+// 	MAX_INTEREST_SCORE:MAX_INTEREST_SCORE,
+// 	MAX_SKILL_SCORE:MAX_SKILL_SCORE,
+//  	NORMALIZED_BASE:NORMALIZED_BASE,
+// 	DAYS:DAYS,
+// 	TIME_SLOTS:TIME_SLOTS,
+// 	matchUsers:matchUsers,
+// 	matchUser:matchUser,
+// 	getAvailabilityMatchScore:getAvailabilityMatchScore,
+// 	getAvailabilityMatch:getAvailabilityMatch,
+// 	getBestActivityMatch:getBestActivityMatch,
+// 	router
+// };

@@ -48,7 +48,7 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/profile', profileRouter);
-// app.use('/match', matchRouter);
+app.use('/match', matchRouter);
 app.use('/events', eventsRouter);
 app.use('/edit', editRouter);
 app.use('/api', apiRouter);

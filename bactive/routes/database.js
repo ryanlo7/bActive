@@ -22,7 +22,7 @@ var routerProperties = function(req, res, next) {
 	* @param {callback} processUsers A callback function to be invoked on the resulting set of users found.
 	* @return {Void}
 */
-var searchUsers = function(properties, criteria, processUsers) {
+var searchUsers = function(properties, criteria, results, processUsers) {
 	let req = properties.req;
 	let res = properties.res;
 	let next = properties.next;
@@ -39,7 +39,7 @@ var searchUsers = function(properties, criteria, processUsers) {
 			res.status(404).send(`Unable to find users that met search criteria`);
 			return;
 		}
-		processUsers(users);
+		processUsers(users, results);
 	});
 }
 
@@ -107,7 +107,8 @@ var insertUser = function(properties, email, password) {
 				return;
 			}
 			if (result.length !== 0) {
-				res.status(404).send(`Email already in use`);
+				// res.status(404).send(`Email already in use`);
+				res.status(404).render('register', {err: 'Email already in use.'});
 				return;
 			}
 
