@@ -6,10 +6,33 @@ import { catchError, map, tap } from 'rxjs/operators';
 const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
 const options = {headers, responseType: 'text' as 'text'};
 
+export class Activity {
+	name: string; 
+	interest: number; 
+	skill: number;
+}
+
+export class Event {
+	userId: number[];
+	activity: string;
+	day: string;
+	time: string;
+	status: string;
+	location: string;
+}
+
+export class User {
+	userId: number;
+	email: string;
+	password: string;
+	activities: Activity[];
+	availability: boolean[][];
+	events: Event[];
+}
+
 @Injectable({
 	providedIn: 'root'
 })
-
 export class UserService {
 	private user: User;
 	private apiUrl = 'http://localhost:3000/api';
@@ -30,18 +53,4 @@ export class UserService {
 	getUser(userId: number): User {
 		return this.user;
 	}
-}
-
-export class User {
-	userId: number;
-	email: string;
-	password: string;
-	activities: { name: string, interest: number, skill: number }[];
-	availability: boolean[][];
-	events: { userId: number[], 
-			activity: string, 
-			day: string, 
-			time: string, 
-			status: string, 
-			location: string }[];
 }
