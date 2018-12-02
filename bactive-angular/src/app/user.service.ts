@@ -76,7 +76,7 @@ export class UserService {
 	}
 	
 	changeName(userId: number, newName: string): Observable<any> {
-		const url = `${this.apiUrl}/event`;
+		const url = `${this.apiUrl}/name/${userId}`;
 		var insert = {name: newName};
 		return this.http.put(url, insert).pipe();
 	}
