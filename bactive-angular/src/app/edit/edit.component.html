@@ -2,9 +2,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
+<div class="container-fluid well">
+
 <div *ngIf="user">
     <h1>Edit Profile</h1>
-    <h3>Name: 
+    <h3>Name:
     	<span>
 			<input type="text" class="form-control nameBox" [(ngModel)]="user.name" name="name">
 		</span>
@@ -25,8 +27,8 @@
     <table>
         <thead>
             <tr>
-                <th>Activity</th> 
-                <th>Skill Level</th> 
+                <th>Activity</th>
+                <th>Skill Level</th>
                 <th>Interest Level</th>
             </tr>
         </thead>
@@ -48,12 +50,12 @@
         <thead>
             <tr bgcolor="#5e99d1">
                 <th class="availability-th"></th>
-                <th class="availability-th">Monday</th> 
-                <th class="availability-th">Tuesday</th> 
-                <th class="availability-th">Wednesday</th> 
+                <th class="availability-th">Monday</th>
+                <th class="availability-th">Tuesday</th>
+                <th class="availability-th">Wednesday</th>
                 <th class="availability-th">Thursday</th>
-                <th class="availability-th">Friday</th> 
-                <th class="availability-th">Saturday</th> 
+                <th class="availability-th">Friday</th>
+                <th class="availability-th">Saturday</th>
                 <th class="availability-th">Sunday</th>
             </tr>
         </thead>
@@ -73,6 +75,8 @@
             </ng-container>
         </tr>
     </table>
+</div>
+
 </div>
 
 <button (click)="updateProfile()"> Save </button>
