@@ -32,7 +32,7 @@ export class User {
 	};
 	activities: Activity[];
 	availability: boolean[][];
-	events: Event[];
+	events: number[];
 }
 
 @Injectable({
