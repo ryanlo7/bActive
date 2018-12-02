@@ -2,6 +2,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
+<div class="container-fluid well">
+
 <div *ngIf="user">
     <h1>Profile</h1>
     <button id="edit_button" class="btn btn-default" (click)="handleEdit()">Edit Profile</button>
@@ -58,4 +60,6 @@
             </ng-container>
         </tr>
     </table>
+</div>
+
 </div>
