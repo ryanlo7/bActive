@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, UserService } from '../user.service';
+import { User, UserService, Match } from '../user.service';
 
 // Source: CS144 with Professor Cho, Project 4 JWT code
 function parseJWT(token) 
@@ -15,18 +15,22 @@ function parseJWT(token)
   styleUrls: ['./matches.component.css']
 })
 export class MatchesComponent implements OnInit {
+	user: User;
 	userId: number;
+
 
 	constructor(private userService: UserService) {
 		this.userId = parseJWT(document.cookie).userId;
 	}
 
 	ngOnInit() {
-		this.runMatch();
-	}
-
-	runMatch(): void {
-		
+		this.user = this.userService.getUser(this.userId);
+		if (this.user == null) {
+			this.userService.fetchUser(this.userId)
+				.subscribe(user => {
+					this.user = this.userService.getUser(this.userId);
+				});
+		}
 	}
 
 }

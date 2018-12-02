@@ -111,10 +111,10 @@ function matchUsers(req, res, next, userId, matches) {
 			//convert time to unix time
 
 			console.log(matchResultsArray);
-			res.render('match', {
-					 	userId: userId,
-						matches: matchResultsArray,
-					});
+			res.status(200).json({
+			 	userId: userId,
+				matches: matchResultsArray,
+			});
 		});
 	};
 	database.searchUsers(database.routerProperties(req, res, next), {"userId": userId}, matches, performMatch);

@@ -36,13 +36,23 @@ export class User {
 	events: {eventId: number, rated: number[]}[];
 }
 
+export class Match {
+	event: string;
+	score: number;
+	time: number[];
+	unix_time: Date;
+	location: string;
+}
+
 @Injectable({
 	providedIn: 'root'
 })
 export class UserService {
 	private user: User;
 	private events: Event[];
+	private matches: Match[];
 	private apiUrl = 'http://localhost:3000/api';
+	private matchUrl = 'http://localhost:3000/match';
 
 	constructor(private http: HttpClient) { }
 
@@ -73,6 +83,18 @@ export class UserService {
 	
 	getEvents(): Event[] {
 		return this.events;
+	}
+
+	fetchMatches(userId: number): Observable<Match[]> {
+		const url = `${this.matchUrl}/${userId}`;
+
+		return this.http.get<Match[]>(url).pipe(
+			tap(res => { this.matches = res; })
+		);
+	}
+
+	getMatches(): Match[] {
+		return this.matches;
 	}
 	
 	changeName(userId: number, newName: string): void {
