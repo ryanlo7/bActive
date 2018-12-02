@@ -18,7 +18,7 @@ h1, h2 {
 	border-style: solid;
 	border-width: 1px;
 	border-color: #777a7f;
-	padding: 25px;
+	padding: 5px;
 	width: 12%;
 }
 
@@ -51,7 +51,7 @@ h4, h6 {
 
 label {
 	display: block;
-	height: 90px;
+	height: 100%;
 	border-width: 0px;
 	border-style: solid;
 	border-color: black;
