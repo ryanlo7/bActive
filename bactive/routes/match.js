@@ -64,7 +64,7 @@ function matchUsers(req, res, next, userId, matches) {
 	// var results = [];
 	let performMatch = function(curr_user, matchResults) {
 		currUser = curr_user[0];
-		database.searchUsers(database.routerProperties(req, res, next), {}, matchResults, function(users, matchResultsArray) {
+		database.searchUsers(database.routerProperties(req, res, next), {"userId": {$ne: userId}}, matchResults, function(users, matchResultsArray) {
 			for (let i = 0; i < users.length; i ++) {
 				let potentialMatchUser = users[i];
 				matchResultsArray.push(matchUser(currUser, potentialMatchUser));
