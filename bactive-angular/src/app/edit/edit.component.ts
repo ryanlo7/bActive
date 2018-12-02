@@ -20,17 +20,18 @@ export class EditComponent implements OnInit {
 	userId: number;
 	tableHeadings: string[] = [];
 	ratingScale: number[] = [1, 2, 3, 4, 5];
-	possibleActivities: string[] = ["Lifting", 
-									"Running",
-									"Swimming",
-									"Basketball",
-									"Soccer",
-									"Tennis",
-									"Volleyball",
-									"Climbing",
-									"Squash",
-									"Frisbee"
-									];
+	possibleActivities: string[] = [
+		"Lifting", 
+		"Running",
+		"Swimming",
+		"Basketball",
+		"Soccer",
+		"Tennis",
+		"Volleyball",
+		"Climbing",
+		"Squash",
+		"Frisbee"
+	];
 
 	constructor(private userService: UserService) {
 		this.userId = parseJWT(document.cookie).userId;

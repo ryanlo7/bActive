@@ -71,8 +71,8 @@ export class UserService {
 		return this.user;
 	}
 	
-	fetchEvents(): Observable<Event[]> {
-		const url = `${this.apiUrl}/event`;
+	fetchEvents(userId: number): Observable<Event[]> {
+		const url = `${this.apiUrl}/event/${userId}`;
 
 		return this.http.get<Event[]>(url).pipe(
 			tap(res => {
