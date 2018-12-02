@@ -40,3 +40,23 @@
 h4, h6 {
 	display: inline;
 }
+
+img {
+	width: 300px;
+	height: 200px;
+
+}
+
+.darkBox {
+	background-color: #000000;
+	opacity: 0.3;
+	width:300px;
+	height: 200px;
+	position: absolute;
+}
+.activityInfo {
+	color: white;
+	padding-top: 120px;
+	padding-left: 10px;
+	opcaity: 1;
+}
