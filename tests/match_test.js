@@ -148,7 +148,6 @@ function testMatchUser() {
 	assert(result["score"] > 26.6 && result["score"] < 26.7);
 	assert(result["time"][0] === 2);
 	assert(result["time"][1] === 1);
-
 }
 
 /**
