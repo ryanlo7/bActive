@@ -6,7 +6,8 @@
 
 <div *ngIf="user">
     <h1>Edit Profile</h1>
-    <h3>Name:
+    <button (click)="updateProfile()"> Save </button>
+    <h3>Name: 
     	<span>
 			<input type="text" class="form-control nameBox" [(ngModel)]="user.name" name="name">
 		</span>
@@ -32,12 +33,19 @@
                 <th>Interest Level</th>
             </tr>
         </thead>
-            <tr *ngFor="let activity of user.activities">
-                <td><input type="text" class="form-control activityNameBox" [(ngModel)]="activity.name" name="activity-name"></td>
-                <td><select [(ngModel)]="activity.skill">
-                	<option *ngFor="let x of ratingScale" [value]="activity.skill">{{x}}</option>
+            <tr *ngFor="let activity of user.activities; let i = index">
+                <td><select [(ngModel)]="user.activities[i].name">
+                	<option *ngFor="let x1 of possibleActivities" [selected]="user.activities[i].name == x1">
+                	{{x1}}</option>
                 </select></td>
-                <td>{{ activity.interest }}</td>
+                <td><select [(ngModel)]="activity.skill">
+                	<option *ngFor="let x of ratingScale" [selected]="activity.skill == x">
+                	{{x}}</option>
+                </select></td>
+                <td><select [(ngModel)]="activity.interest">
+                	<option *ngFor="let x of ratingScale" [selected]="activity.interest == x">
+                	{{x}}</option>
+                </select></td>
                 <button (click)="deleteActivity(activity.name)"> Delete </button>
             </tr>
     </table>
@@ -77,6 +85,3 @@
     </table>
 </div>
 
-</div>
-
-<button (click)="updateProfile()"> Save </button>

@@ -20,6 +20,17 @@ export class EditComponent implements OnInit {
 	userId: number;
 	tableHeadings: string[] = [];
 	ratingScale: number[] = [1, 2, 3, 4, 5];
+	possibleActivities: string[] = ["Lifting", 
+									"Running",
+									"Swimming",
+									"Basketball",
+									"Soccer",
+									"Tennis",
+									"Volleyball",
+									"Climbing",
+									"Squash",
+									"Frisbee"
+									];
 
 	constructor(private userService: UserService) {
 		this.userId = parseJWT(document.cookie).userId;
@@ -42,11 +53,21 @@ export class EditComponent implements OnInit {
 	}
 
 	deleteActivity(name: string) {
-
+		let index = -1;
+		let newActivities = [];
+		for(let i = 0; i < this.user.activities.length; i++) {
+			if (this.user.activities[i].name != name) {
+				newActivities.push(this.user.activities[i])
+			}
+		}
+		this.user.activities = newActivities;
+		console.log('deleting: ' + name);
+		console.log(this.user.activities);
 	}
 
 	addActivity() {
-
+		// push default settings
+		this.user.activities.push({"name": "Lifting", "skill": 1, "interest": 1});
 	}
 
 	fillTableHeadings(): void {
