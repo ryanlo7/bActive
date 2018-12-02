@@ -19,9 +19,20 @@ export class ProfileComponent implements OnInit {
 	user: User;
 	userId: number;
 	tableHeadings: string[] = [];
+	imageMap: IHash = {};
 
 	constructor(private userService: UserService) {
 		this.userId = parseJWT(document.cookie).userId;
+		this.imageMap["Lifting"] = "https://static1.squarespace.com/static/53de6926e4b06edf127b3ecd/t/56c51cb6555986ef347ae6ba/1455758525694/";
+		this.imageMap["Running"] = "http://lisabaylis.com/wp/wp-content/uploads/2017/07/running.jpg";
+		this.imageMap["Swimming"] = "https://cdn.swimswam.com/wp-content/uploads/2018/02/stock-by-Mike-Lewis-LDM_1946.jpg";
+		this.imageMap["Basketball"] = "https://ak5.picdn.net/shutterstock/videos/18113245/thumb/1.jpg";
+		this.imageMap["Soccer"] = "http://www.bagnet.org/storage/05/17/23/16/729_486_5936517d8d288.jpg";
+		this.imageMap["Tennis"] = "https://tennisracquetcentral.com/wp-content/uploads/2018/02/Tennis-Balls.jpg";
+		this.imageMap["Volleyball"] = "https://www.longbeachny.gov/vertical/Sites/%7BC3C1054A-3D3A-41B3-8896-814D00B86D2A%7D/uploads/bigstock-Beach-Volleyball-Silhouette-81799844_(1).jpg";
+		this.imageMap["Climbing"] = "http://yourboulder.com/wp-content/uploads/2013/02/adult-courses1-e1360807803429.jpg";
+		this.imageMap["Squash"] = "https://data.englandsquash.com/files?fileName=0600776f-047c-4853-92f2-bb6a87601341.jpg";
+		this.imageMap["Frisbee"] = "https://childlikefaith.com/wp-content/uploads/2015/10/ultimate-frisbee-catch.jpg";
 	}
 
 	// Get the user from the API if it has not been fetched
@@ -55,4 +66,12 @@ export class ProfileComponent implements OnInit {
 		let avg = ratings.scoreSum / ratings.numRatings;
 		return Array(avg).fill(5);
 	}
+
+	getActivityUrl(name: string) {
+		return this.imageMap[name];
+	}
 }
+
+export interface IHash {
+    [details: string] : string;
+} 
