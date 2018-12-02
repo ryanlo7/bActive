@@ -1,3 +1,7 @@
+h1, h2, h3 {
+    font-family: "Special Elite";
+}
+
 .availabilityCell {
 	border-style: solid;
 	border-width: 1px;
