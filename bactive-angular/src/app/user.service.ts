@@ -61,7 +61,11 @@ export class UserService {
 
 	constructor(private http: HttpClient) { }
 
-	// Get the user from the API
+	/**
+		* Initial call to User Service to populate array users.
+		* Calls the following server-side API: GET /api/users.
+		* @return {Observable<any>} An Observable object that promises population of user array once API request finishes.
+	*/
 	fetchUser(): Observable<any> {
 		const url = `${this.apiUrl}/users`;
 
@@ -71,14 +75,26 @@ export class UserService {
 			})
 		);
 	}
-
+	
+	/**
+		* Returns user with given userId if it exists in users array.
+		* If no user with given userId found, returns null instead.
+		* @param {number} userId The express routing HTTP client request object.
+		* @return {User} The User object with the matching userId, or null if none found.
+	*/
 	getUser(userId: number): User {
 		if (this.users === undefined || this.users === null || this.users.length === 0) {
 			return null;
 		}
 		return this.users.find(cur => cur.userId === userId);
 	}
-
+	
+	/**
+		* Initial call to populate events array with events that user with id userId is invited to.
+		* Calls the following server-side API: GET /api/events/:userId.
+		* @param {number} userId The userId whose events we are searching for.
+		* @return {Observable<Event[]>} An Observable object that promises population of events array once API request finishes.
+	*/
 	fetchEvents(userId: number): Observable<Event[]> {
 		const url = `${this.apiUrl}/events/${userId}`;
 
@@ -89,10 +105,21 @@ export class UserService {
 		);
 	}
 
+	/**
+		* Returns events array, which contains events that user that's using this User Service was invited to.
+		* Requires call to fetchEvents(userId: number) prior to execution for correct output.
+		* @return {Event[]} The array of events that the user was invited to.
+	*/
 	getEvents(): Event[] {
 		return this.events;
 	}
 
+	/**
+		* Initial call to populate matchedEvents array with events that user with id userId has been matched to.
+		* Calls the following server-side API: GET /api/matchedevents/:userId.
+		* @param {number} userId The userId whose events we are searching for.
+		* @return {Observable<Event[]>} An Observable object that promises population of matchedEvents array once API request finishes.
+	*/
 	fetchMatchedEvents(userId: number): Observable<Event[]> {
 		const url = `${this.apiUrl}/matchedevents/${userId}`;
 
@@ -103,10 +130,21 @@ export class UserService {
 		);
 	}
 
+	/**
+		* Returns matchedEvents array, which contains events that user that's using this User Service has been matched to.
+		* Requires call to fetchMatchedEvents(userId: number) prior to execution for correct output.
+		* @return {Event[]} The array of events that the user has been matched to.
+	*/
 	getMatchedEvents(): Event[] {
 		return this.matchedEvents;
 	}
 
+	/**
+		* Initial call to populate confirmedEvents array with confirmed events that user with id userId has been matched to.
+		* Calls the following server-side API: GET /api/confirmedevents/:userId.
+		* @param {number} userId The userId whose events we are searching for.
+		* @return {Observable<Event[]>} An Observable object that promises population of confirmedEvents array once API request finishes.
+	*/
 	fetchConfirmedEvents(userId: number): Observable<Event[]> {
 		const url = `${this.apiUrl}/confirmedevents/${userId}`;
 
@@ -117,10 +155,21 @@ export class UserService {
 		);
 	}
 
+	/**
+		* Returns confirmedEvents array, which contains confirmed events that user that's using this User Service has been matched to.
+		* Requires call to fetchConfirmedEvents(userId: number) prior to execution for correct output.
+		* @return {Event[]} The array of confirmed events that the user has been matched to.
+	*/
 	getConfirmedEvents(): Event[] {
 		return this.confirmedEvents;
 	}
 
+	/**
+		* Initial call to populate pendingEvents array with pending events that user with id userId has been matched to.
+		* Calls the following server-side API: GET /api/pendingevents/:userId.
+		* @param {number} userId The userId whose events we are searching for.
+		* @return {Observable<Event[]>} An Observable object that promises population of pendingEvents array once API request finishes.
+	*/
 	fetchPendingEvents(userId: number): Observable<Event[]> {
 		const url = `${this.apiUrl}/pendingevents/${userId}`;
 
@@ -131,11 +180,21 @@ export class UserService {
 		);
 	}
 
+	/**
+		* Returns confirmedEvents array, which contains pending events that user that's using this User Service has been matched to.
+		* Requires call to fetchPendingEvents(userId: number) prior to execution for correct output.
+		* @return {Event[]} The array of pending events that the user has been matched to.
+	*/
 	getPendingEvents(): Event[] {
 		return this.pendingEvents;
 	}
 
-	// this makes the call to the api to create matched events
+	/**
+		* Finds best matches of current user, then creates corresponding events and populates server.
+		* Calls the following server-side APIs: GET /match/:userId, POST /event/:userId.
+		* @param {number} userId The userId whose matches we are computing.
+		* @return {Observable<Event[]>} An Observable object that promises population of events collection with appropriate events.
+	*/
 	fetchMatches(userId: number): Observable<Match[]> {
 		const url = `${this.matchUrl}/${userId}`;
 
@@ -157,19 +216,40 @@ export class UserService {
 			})
 		);
 	}
-
+	
+	/**
+		* Updates name of user with user id userId to newName.
+		* Calls the following server-side API: PUT /name/:userId, body: {name: newName}
+		* @param {number} userId The userId whose name we are changing.
+		* @param {string} newName The updated name that we are setting for user with user id userId.
+		* @return {void}
+	*/
 	changeName(userId: number, newName: string): void {
 		const url = `${this.apiUrl}/name/${userId}`;
 		var insert = {name: newName};
 		this.http.put(url, insert).subscribe();
 	}
 
+	/**
+		* Updates activities array of user with user id userId to input array activities.
+		* Calls the following server-side API: PUT /activity/:userId, body: {activity: activities}
+		* @param {number} userId The userId whose activities we are updating.
+		* @param {Activity[]} activities The updated array of activities that we are setting for user with user id userId.
+		* @return {void}
+	*/
 	updateActivities(userId: number, activities: Activity[]): void {
 		const url = `${this.apiUrl}/activity/${userId}`;
 		var insert = {activity: activities};
 		this.http.post(url, insert).subscribe();
 	}
 
+	/**
+		* Updates availabilities array of user with user id userId to input array availabilities.
+		* Calls the following server-side API: PUT /availability/:userId, body: {availability: availabilities}
+		* @param {number} userId The userId whose availabilities we are updating.
+		* @param {boolean[][]} activities The updated array (7 by 48) of availabilities that we are setting for user with user id userId.
+		* @return {void}
+	*/
 	updateAvailability(userId: number, availabilities: boolean[][]): void {
 		const url = `${this.apiUrl}/availability/${userId}`;
 		var insert = {availability: availabilities};
@@ -181,7 +261,12 @@ export class UserService {
 		);
 	}
 
-	// must delete event from local cache and db
+	/**
+		* Deletes event from database with event id removeEventId. Deletes event from matchedEvents, pendingEvents, and confirmedEvents arrays.
+		* Calls the following server-side API: DELETE /event/:removeEventId.
+		* @param {number} removeEventId The event id of the event we are deleting.
+		* @return {void}
+	*/
 	deleteEvent(removeEventId: number): void {
 		const url = `${this.apiUrl}/event/${removeEventId}`;
 
@@ -215,7 +300,12 @@ export class UserService {
 		console.log('deleting event');
 	}
 
-	// update status of event. must update local cache and db
+	/**
+		* Updates event in database whose event id matches updatedEvent.eventId. Updates matchedEvents, pendingEvents, and confirmedEvents arrays.
+		* Calls the following server-side API: PUT /event/:updatedEvent.eventId, body: {event: updatedEvent}
+		* @param {Event} updatedEvent The updated event that we are sending to the server.
+		* @return {void}
+	*/
 	updateEvent(updatedEvent: Event): void {
 		const url = `${this.apiUrl}/event/${updatedEvent.eventId}`;
 		var update = {event: updatedEvent};
@@ -243,6 +333,15 @@ export class UserService {
 		console.log('updating event');
 	}
 
+	/**
+		* Allows user to rate another user for an event.
+		* Calls the following server-side API: PUT /rate/:userId, body: {ratee: otherId, eventId: eventId, score: rating}
+		* @param {number} userId The user who is doing the rating.
+		* @param {number} otherId The user who is being rated.
+		* @param {number} eventId The event that the rating is being done for.
+		* @param {number} rating The rating that the user is giving.
+		* @return {void}
+	*/
 	rateUser(userId: number, otherId: number, eventId: number, rating: number): void {
 		const url = `${this.apiUrl}/rate/${userId}`;
 		var insert = {
