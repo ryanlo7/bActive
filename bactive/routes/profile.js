@@ -3,18 +3,19 @@ var router = express.Router();
 var verify = require('./verify');
 
 /* GET user information. */
-router.get('/:userid',
-	/**
-		* Function to handle GET requests for user profile page.
-		* Render the profile page, or return a 404 error if the userID is not in the MongoDB database,
-		* or redirect to the login page with a 401 status code if the JSON web token does not verify.
-		* @param {Object} req The express routing HTTP client request object,
-		* whose parameters include the userID.
-		* @param {Object} res The express routing HTTP client response object.
-		* @param {callback} next The express routing callback function to invoke next middleware in the stack.
-		* @return {Object} A JSON object that holds req, res, and next.
-	*/
-	function(req, res, next) {
+
+/**
+	* Function to handle GET requests for user profile page.
+	* Render the profile page, or return a 404 error if the userID is not in the MongoDB database,
+	* or redirect to the login page with a 401 status code if the JSON web token does not verify.
+	* @deprecated
+	* @param {Object} req The express routing HTTP client request object,
+	* whose parameters include the userID.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Object} A JSON object that holds req, res, and next.
+*/
+var profileGet = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 
@@ -32,7 +33,7 @@ router.get('/:userid',
 				}
 
 				res.render('profile', {
-				 	userId: userId,
+					userId: userId,
 					email: user.email,
 					name: user.name,
 					rating: calculateRating(user.rating),
@@ -43,8 +44,15 @@ router.get('/:userid',
 				});
 			}
 		});
-});
+}
 
+router.get('/:userid', profileGet);
+
+/**
+	Calculates a rating for a user.
+	@param {Object} userRatingContainer The container that holds the user ratings.
+	@return {number}
+*/
 function calculateRating(userRatingContainer) {
 	if (userRatingContainer.numRatings === 0) {
 		return 0;
