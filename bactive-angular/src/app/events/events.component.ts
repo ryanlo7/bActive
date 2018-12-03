@@ -18,6 +18,7 @@ export class EventsComponent implements OnInit {
 	user: User;
 	userId: number;
 	events: Event[];
+    pendingEvents: Event[];
     confirmedEvents: Event[];
     imageMap: IHash = {};
 
@@ -51,6 +52,13 @@ export class EventsComponent implements OnInit {
 					this.events = this.userService.getEvents();
 				});
 		}
+        this.pendingEvents = this.userService.getPendingEvents();
+        if (this.pendingEvents == null) {
+            this.userService.fetchPendingEvents(this.userId)
+                .subscribe(pendingEvents => {
+                    this.pendingEvents = this.userService.getPendingEvents();
+                });
+        }
         this.confirmedEvents = this.userService.getConfirmedEvents();
         if (this.confirmedEvents == null) {
             this.userService.fetchConfirmedEvents(this.userId)
