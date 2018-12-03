@@ -11,7 +11,7 @@ db.createCollection("Values")
 db.createCollection("Events")
 
 db.Values.insert(
-	{"name": "Users", "maxUserId": 2},
+	{"name": "Users", "maxUserId": 3},
 	{"name": "Events", "maxEventId": 1}
 )
 

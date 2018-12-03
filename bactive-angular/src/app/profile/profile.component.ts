@@ -27,14 +27,6 @@ export class ProfileComponent implements OnInit {
 	constructor(private userService: UserService, 
 		private router: Router,
 		private route : ActivatedRoute) {
-		this.userId = parseJWT(document.cookie).userId;
-
-		// + converts to a number
-		const id = +this.route.snapshot.paramMap.get('id');
-		if (id != null && id != this.userId) {
-			this.userId = id;
-			this.publicView = true;
-		}
 
 		this.imageMap["Lifting"] = "https://static1.squarespace.com/static/53de6926e4b06edf127b3ecd/t/56c51cb6555986ef347ae6ba/1455758525694/";
 		this.imageMap["Running"] = "http://lisabaylis.com/wp/wp-content/uploads/2017/07/running.jpg";
@@ -50,6 +42,14 @@ export class ProfileComponent implements OnInit {
 
 	// Get the user from the API if it has not been fetched
 	ngOnInit() {
+		this.userId = parseJWT(document.cookie).userId;
+
+		// + converts to a number
+		const id = +this.route.snapshot.paramMap.get('id');
+		if (id != null && id != this.userId) {
+			this.userId = id;
+			this.publicView = true;
+		}
 		this.fillTableHeadings();
 		this.user = this.userService.getUser(this.userId);
 		if (this.user == null) {

@@ -173,7 +173,9 @@ var insertUser = function(properties, email, password) {
 				let newUser = {
 					userId: maxUserId,
 					email: email,
+					name: "Active Member",
 					password: password,
+					rating: { "scoreSum": 0, "numRatings": 0},
 					availability: defaultAvailability,
 					activities: [],
 					events: []
@@ -189,14 +191,7 @@ var insertUser = function(properties, email, password) {
 							next(err);
 							return;
 						}
-						res.status(201).render('profile', {
-							userId: newUser.userId,
-							email: newUser.email,
-							rating: { "scoreSum": 0, "numRatings": 0},
-							activities: newUser.activities,
-							availability: newUser.availability,
-							events: newUser.events
-						});
+						res.redirect('/active/');
 						return;
 					});
 				});
