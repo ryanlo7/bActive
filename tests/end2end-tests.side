@@ -2,7 +2,7 @@
   "id": "47eed249-7c44-4fa0-84b9-df53c8cbef04",
   "version": "1.1",
   "name": "BActive",
-  "url": "http://localhost:3000/login",
+  "url": "http://localhost:3000/",
   "tests": [{
     "id": "bcc9d571-64f2-466c-bf2b-e4cf2256e677",
     "name": "Login to profile page",
@@ -479,6 +479,119 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "84d1ef39-446b-48b1-ac8d-4cc586b654d0",
+    "name": "Register",
+    "commands": [{
+      "id": "e593bc0e-0f1f-4148-9ebc-b390451653e7",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a7256bbc-5b54-4266-9e38-0beb20032104",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "768x723",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "85ab0152-af7c-436d-8413-e191bc2241af",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Register",
+      "targets": [
+        ["linkText=Register", "linkText"],
+        ["css=p:nth-child(2) > .btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Register')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/register')]", "xpath:href"],
+        ["xpath=//p[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c6881e49-cde2-46ff-8b37-77563b96d216",
+      "comment": "",
+      "command": "click",
+      "target": "id=name",
+      "targets": [
+        ["id=name", "id"],
+        ["name=name", "name"],
+        ["css=#name", "css"],
+        ["css=#name", "css:finder"],
+        ["xpath=//input[@id='name']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0d128061-2a3d-424b-af92-c2c4bc7ea5aa",
+      "comment": "",
+      "command": "type",
+      "target": "id=name",
+      "targets": [
+        ["id=name", "id"],
+        ["name=name", "name"],
+        ["css=#name", "css"],
+        ["css=#name", "css:finder"],
+        ["xpath=//input[@id='name']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Joe Bruin"
+    }, {
+      "id": "13aaead4-aa08-4873-a91e-cfa0094252e9",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "bruin@ucla.edu"
+    }, {
+      "id": "34eca1b8-388e-4495-84ad-c00513e69f83",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "password"
+    }, {
+      "id": "949eed56-c784-4276-974c-75319969f709",
+      "comment": "",
+      "command": "type",
+      "target": "id=password_confirmation",
+      "targets": [
+        ["id=password_confirmation", "id"],
+        ["name=password_confirmation", "name"],
+        ["css=#password_confirmation", "css"],
+        ["css=#password_confirmation", "css:finder"],
+        ["xpath=//input[@id='password_confirmation']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "password"
+    }, {
+      "id": "4153b7da-c34d-4cfe-b3db-e5d846b5b0ca",
+      "comment": "",
+      "command": "click",
+      "target": "css=button.btn.btn-default",
+      "targets": [
+        ["css=button.btn.btn-default", "css"],
+        ["css=.btn:nth-child(5)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "b8d5ff5f-5b1a-4f2d-aec1-d981fc208780",
@@ -486,7 +599,7 @@
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["bcc9d571-64f2-466c-bf2b-e4cf2256e677", "d2de4ae4-a4a2-4fc0-ac39-4a9de28d73df", "e616210f-17b4-4d9b-ab4c-535b8b8b11ea", "1a658e51-c6c6-4731-b725-a8eccfa1680c"]
+    "tests": ["bcc9d571-64f2-466c-bf2b-e4cf2256e677", "d2de4ae4-a4a2-4fc0-ac39-4a9de28d73df", "e616210f-17b4-4d9b-ab4c-535b8b8b11ea", "1a658e51-c6c6-4731-b725-a8eccfa1680c", "84d1ef39-446b-48b1-ac8d-4cc586b654d0"]
   }],
   "urls": ["http://localhost:3000/", "http://localhost:3000/login"],
   "plugins": []

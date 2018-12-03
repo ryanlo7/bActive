@@ -81,7 +81,7 @@ The first six tests were run using Postman.
 Tests 7-9 were run using Mocha, a JavaScript test framework. This test was run using the npm test command from inside the tests folder. Note that in order for the npm test to run, the module.exports line must be un-commented in the bottom of the match.js file. The line to un-comment out is also mentioned in a comment in the match.js file, but the reason it was commented out was because the module.exports for the test case file was interfering with the module.exports for the router. Therefore,
 after running npm test, the exported line was commented again so that the web application page would run as desired.
 
-Tests 10-13 are end to end tests run using the Selenium IDE, which is available as both a Chrome and Firefox extension. Note that before running the tests, the database should be reset with the test users by running `mongo < db.sh` inside the `bactive/bactive` folder. The four tests are compiled into a unified test suite, which can be run all at once consecutively using the 'Run all tests' button. The test cases pass when the tests run to completion without errors in logging or stalls. 
+Tests 10-14 are end to end tests run using the Selenium IDE, which is available as both a Chrome and Firefox extension. Note that before running the tests, the database should be reset with the test users by running `mongo < db.sh` inside the `bactive/bactive` folder. The four tests are compiled into a unified test suite, which can be run all at once consecutively using the 'Run all tests' button. The test cases pass when the tests run to completion without errors in logging or stalls. 
 
 The respective descriptions are in the code in the ‘tests’ folder, as well as our report for part B and C. We have described them below as well:
 
@@ -138,6 +138,10 @@ This test case is contingent on the success of Test Case 10. Once logged in, the
 Test Case 13: Log in to other user, accept event, and rate user
 
 This test case is contingent on the success of Test Case 12. The test logs in to a different account, goes to the Matches page, and should see an event waiting for acceptance/decline in the 'Pending' category (since we accepted from the other user). Upon clicking the 'Accept' button, the event is removed from the Matches page, and is added to the Events page. Navigating to the Events page using the navigation bar, the user can view upcoming and past events. The default confirmed event is a past event, so we are able to give a rating to the other user and submit it, which removes the rating option from the Event page. 
+
+Test Case 14: Registering a new user
+
+This test case goes to the BActive home page, clicks the 'register' button, fills in all the fields necessary to register a new user, and clicks the 'register' button. This takes the user to the newly created user's default profile page. 
 
 
 ## Team:
