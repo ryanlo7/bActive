@@ -75,7 +75,13 @@ Document Example:
 
 ## TESTING:
 We have implemented 5 test cases in testcases.json as well as server-side test cases in match.js.
-Their respective descriptions are in the code in the ‘tests’ folder, as well as our report for part B. We have described them below as well:
+
+The first six tests were run using Postman. 
+
+Tests 7-9 were run using Mocha, a JavaScript test framework. This test was run using the npm test command from inside the tests folder. Note that in order for the npm test to run, the module.exports line must be un-commented in the bottom of the match.js file. The line to un-comment out is also mentioned in a comment in the match.js file, but the reason it was commented out was because the module.exports for the test case file was interfering with the module.exports for the router. Therefore,
+after running npm test, the exported line was commented again so that the web application page would run as desired.
+
+The respective descriptions are in the code in the ‘tests’ folder, as well as our report for part B and C. We have described them below as well:
 
 Test Case 1: Login Page HTTP GET
 
@@ -103,13 +109,18 @@ This was a basic use-case test designed to test whether the events page displays
 
 Test Case 7: Unit Test for Time Availability Match
 
-This was a unit test case in JavaScript to test whether the time availability match between two users was computed correctly. To test this, we fill two time availability matrices with values for availability of two users. Then, we compare the time availabilities of the two users and call the function to compute the maximum overlap in availability between the two users. Assert statements are used to check that the computed overlap is correct for each of three cases that will be described below; the true value of maximum overlap is known since the availability arrays were created with a known number of overlap. 
+This was a unit test case in JavaScript to test whether the time availability match between two users was computed correctly. To test this, we fill two time availability matrices with values for availability of two users. Then, we compare the time availabilities of the two users and call the function to compute the maximum overlap in availability between the two users. Assert statements are used to check that the computed overlap is correct for each of three cases that will be described below; the true value of maximum overlap is known since the availability arrays were created with a known number of overlap.
 
-Three different availability matrix combinations are tested with the assert statements in this function to ensure that the maximum overlap is as expected: one combination ensures that the function returns 0 when there is no match, one combination ensures that if there are two matching time periods, the largest availability is returned, and the third combination ensures that contiguous time periods are detected across multiple days (i.e. if two users are available from late night on one day to the morning on the other day, we must detect this).
+Three different availability matrix combinations are tested with the assert statements in this function to ensure that the maximum overlap is as expected: one combination ensures that the function returns 0 when there is no match, one combination ensures that if there are two matching time periods, the largest availability is returned, and the third combination ensures that contiguous time periods are detected across multiple days (i.e. if two users are available from late night on one day to the morning on the other day, we must detect this). This test was run on Mocha, a JavaScript test framework.
 
 Test Case 8: Unit Test for Activity Match
 
-This was a unit test case in JavaScript to determine whether the correct activity was selected given two users’ activity preferences. The true best activity is known prior to the test case since the activity arrays are manually filled with synthetic activity data. The function uses assert statements to check that the expected activity is selected from the lists when determining the best match. Furthermore, the function also uses assert statements to verify that the interest and skill level scores are within bounds of the expected scores (between 0, and the constant used for the maximum score post normalization). 
+This was a unit test case in JavaScript to determine whether the correct activity was selected given two users’ activity preferences. The true best activity is known prior to the test case since the activity arrays are manually filled with synthetic activity data. The function uses assert statements to check that the expected activity is selected from the lists when determining the best match. Furthermore, the function also uses assert statements to verify that the interest and skill level scores are within bounds of the expected scores (between 0, and the constant used for the maximum score post normalization). This test was run on Mocha, a JavaScript test framework.
+
+Test Case 9: Unit Test for User Match
+
+This new test case was added in part C. This was a unit test case in JavaScript to determine whether the match object was being correctly populated with activity and event information. Since the matching algorithm is deterministic, given two mock users, the expected best activity match by applying the algorithm is known. Then, we can use the assert statements from the Mocha library to test whether the match information filled by matchUser is the same as the expected information. 
+
 
 ## Team:
 Name: ActiveBruins  
