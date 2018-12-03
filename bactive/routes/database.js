@@ -1,4 +1,4 @@
-
+var jwt = require('jsonwebtoken');
 /**
 	* Function to return a JSON object containing the express router properties.
 	* @param {Object} req The express routing HTTP client request object.
@@ -193,7 +193,13 @@ var insertUser = function(properties, name, email, password) {
 							return;
 						}
 
-						res.redirect(`/active/#/profile/${newUser.userId}`);
+						var payload = {"exp": Math.floor(Date.now() / 1000) + (2 * 60 * 60), "usr": newUser.email, "userId": newUser.userId};
+						var header = {"alg": "HS256", "typ": "JWT"};
+						var cert = "C-UFRaksvPKhx1txJYFcut3QGxsafPmwCY6SCly3G6c";
+						jwt.sign(payload, cert, { algorithm: 'HS256',  header: header}, function(err, token) {
+							res.cookie("jwt", token, {});
+							res.redirect(`/active/#/profile/${newUser.userId}`);
+						});
 						return;
 					});
 				});
