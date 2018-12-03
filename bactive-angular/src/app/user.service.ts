@@ -282,7 +282,7 @@ export class UserService {
 			tap(res => {
 				this.fetchMatches(userId);
 			})
-		);
+		).subscribe();
 	}
 
 	/**
