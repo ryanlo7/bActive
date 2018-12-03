@@ -5,54 +5,118 @@
 
 <div class="container-fluid well">
     <h1>Confirmed Events</h1>
-    <div *ngIf="events">
-        <div *ngFor="let event of events">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="eventBox">
-                    <div class="darkBox" width="300" height="200"></div>
-                    <div class="eventInfo">
-                        <div style="font-size: 18pt;">{{ event.activity }}</div>
-                    </div>
-                    <img src={{getActivityUrl(event.activity)}} width="300" height="200">
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <table class="table table-bordered">
-                        <tr>
-                            <td>Participants</td>
-                            <td><span *ngFor="let id of event.invitedIds">{{ getUserName(id) }}<br /></span></td>
-                        </tr>
-                        <tr>
-                            <td>Start Time</td>
-                            <td>{{ event.startTime | date: 'd MMM yyyy' }}, {{ event.startTime | date: 'hh:mm a' }}</td>
-                        </tr>
-                        <tr>
-                            <td>End Time</td>
-                            <td>{{ event.endTime | date: 'd MMM yyyy' }}, {{ event.endTime | date: 'hh:mm a' }}</td>
-                        </tr>
-                        <tr>
-                            <td>Location</td>
-                            <td>{{ event.location }}</td>
-                        </tr>
-                    </table>
-                </div>
+    <div *ngIf="confirmedEvents">
+        <div *ngFor="let event of confirmedEvents">
+            <div *ngIf="!isPastEvent(event.endTime)">
                 <div class="row">
-                    <div class="col-sm-12">
-                        <h3>How was your experience?</h3>
-                        <p>Rate your fellow B-Active users for this event.</p>
-                        <table class="center table table-bordered">
-                            <tr *ngFor="let otherId of event.invitedIds">
-                                <td>
-                                    {{ getUserName(otherId) }}
-                                </td>
-                                <td><select [(ngModel)]="ratings[event.eventId.toString() + ' ' + otherId.toString()]">
-                                    <option *ngFor="let x of ratingScale" [selected]="ratings[event.eventId.toString() + ' ' + otherId.toString()] == x">
-                                    {{x}}</option>
-                                </select></td>
-                                <td><button class="btn btn-default" (click)="rateUser(otherId, event.eventId, ratings[event.eventId.toString() + ' ' + otherId.toString()])"> Rate User </button></td>
+                    <div class="col-sm-6">
+                        <div class="eventBox">
+                        <div class="darkBox" width="300" height="200"></div>
+                        <div class="eventInfo">
+                            <div style="font-size: 18pt;">{{ event.activity }}</div>
+                        </div>
+                        <img src={{getActivityUrl(event.activity)}} width="300" height="200">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Participants</td>
+                                <td><span *ngFor="let id of event.invitedIds">{{ getUserName(id) }}<br /></span></td>
+                            </tr>
+                            <tr>
+                                <td>Start Time</td>
+                                <td>{{ event.startTime | date: 'd MMM yyyy' }}, {{ event.startTime | date: 'hh:mm a' }}</td>
+                            </tr>
+                            <tr>
+                                <td>End Time</td>
+                                <td>{{ event.endTime | date: 'd MMM yyyy' }}, {{ event.endTime | date: 'hh:mm a' }}</td>
+                            </tr>
+                            <tr>
+                                <td>Location</td>
+                                <td>{{ event.location }}</td>
                             </tr>
                         </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3>How was your experience?</h3>
+                            <p>Rate your fellow B-Active users for this event.</p>
+                            <table class="center table table-bordered">
+                                <tr *ngFor="let otherId of event.invitedIds">
+                                    <td>
+                                        {{ getUserName(otherId) }}
+                                    </td>
+                                    <td><select [(ngModel)]="ratings[event.eventId.toString() + ' ' + otherId.toString()]">
+                                        <option *ngFor="let x of ratingScale" [selected]="ratings[event.eventId.toString() + ' ' + otherId.toString()] == x">
+                                        {{x}}</option>
+                                    </select></td>
+                                    <td><button class="btn btn-default" (click)="rateUser(otherId, event.eventId, ratings[event.eventId.toString() + ' ' + otherId.toString()])"> Rate User </button></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="container-fluid well">
+    <h1>Past Events</h1>
+    <div *ngIf="confirmedEvents">
+        <div *ngFor="let event of confirmedEvents">
+            <div *ngIf="isPastEvent(event.endTime)">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="eventBox">
+                        <div class="darkBox" width="300" height="200"></div>
+                        <div class="eventInfo">
+                            <div style="font-size: 18pt;">{{ event.activity }}</div>
+                        </div>
+                        <img src={{getActivityUrl(event.activity)}} width="300" height="200">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Participants</td>
+                                <td><span *ngFor="let id of event.invitedIds">{{ getUserName(id) }}<br /></span></td>
+                            </tr>
+                            <tr>
+                                <td>Start Time</td>
+                                <td>{{ event.startTime | date: 'd MMM yyyy' }}, {{ event.startTime | date: 'hh:mm a' }}</td>
+                            </tr>
+                            <tr>
+                                <td>End Time</td>
+                                <td>{{ event.endTime | date: 'd MMM yyyy' }}, {{ event.endTime | date: 'hh:mm a' }}</td>
+                            </tr>
+                            <tr>
+                                <td>Location</td>
+                                <td>{{ event.location }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3>How was your experience?</h3>
+                            <p>Rate your fellow B-Active users for this event.</p>
+                            <table class="center table table-bordered">
+                                <tr *ngFor="let otherId of event.invitedIds">
+                                    <td>
+                                        {{ getUserName(otherId) }}
+                                    </td>
+                                    <td><select [(ngModel)]="ratings[event.eventId.toString() + ' ' + otherId.toString()]">
+                                        <option *ngFor="let x of ratingScale" [selected]="ratings[event.eventId.toString() + ' ' + otherId.toString()] == x">
+                                        {{x}}</option>
+                                    </select></td>
+                                    <td><button class="btn btn-default" (click)="rateUser(otherId, event.eventId, ratings[event.eventId.toString() + ' ' + otherId.toString()])"> Rate User </button></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
