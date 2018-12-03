@@ -138,13 +138,13 @@ function matchUser(curr_user, potential_match) {
 
 	var unix_time = getEventDate(event_time[0], event_time[1]);
 	match["event"] = activity_match["name"];
+	match["user_id"] = curr_user["userId"];
 	match["score"] = total_score;
 	match["time"] = event_time;
 	match["unix_time"] = unix_time; 
 	match["match_name"] = potential_match["name"];
 	match["match_id"] = potential_match["userId"];
 	match["match_email"] = potential_match["email"];
-	//console.log(getActivityLocations()[activity_match["name"]][0])
 	match["location"] = getActivityLocations()[activity_match["name"]][0];
 
 	return match;
@@ -404,6 +404,7 @@ function getActivityLocations() {
 
 	return activity_locations;
 }
+
 module.exports = router;
 
 //UNCOMMENT BELOW FOR MATCHING FUNCTION TESTING PURPOSES (and comment out above 'module.exports = router')
