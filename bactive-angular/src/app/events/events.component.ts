@@ -40,7 +40,7 @@ export class EventsComponent implements OnInit {
 	ngOnInit() {
 		this.user = this.userService.getUser(this.userId);
 		if (this.user == null) {
-			this.userService.fetchUser(this.userId)
+			this.userService.fetchUser()
 				.subscribe(user => {
 					this.user = this.userService.getUser(this.userId);
 				});
@@ -73,16 +73,16 @@ export class EventsComponent implements OnInit {
     }
 
     getUserName(userId: number): String {
-        console.log(userId);
+        // console.log(userId);
         var user: User;
         user = this.userService.getUser(userId);
         if (user == null) {
-            this.userService.fetchUser(userId)
+            this.userService.fetchUser()
                 .subscribe(user => {
                     user = this.userService.getUser(userId);
                 });
         }
-        console.log(user.name);
+        // console.log(user.name);
         return user.name;
     }
 

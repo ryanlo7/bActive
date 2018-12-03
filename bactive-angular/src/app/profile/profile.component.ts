@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
 	imageMap: IHash = {};
 	publicView: boolean = false;
 
-	constructor(private userService: UserService, 
+	constructor(private userService: UserService,
 		private router: Router,
 		private route : ActivatedRoute) {
 		this.userId = parseJWT(document.cookie).userId;
@@ -64,7 +64,7 @@ export class ProfileComponent implements OnInit {
 		this.fillTableHeadings();
 		this.user = this.userService.getUser(this.userId);
 		if (this.user == null) {
-			this.userService.fetchUser(this.userId)
+			this.userService.fetchUser()
 				.subscribe(user => {
 					this.user = this.userService.getUser(this.userId);
 				});
