@@ -84,17 +84,8 @@ export class EventsComponent implements OnInit {
     }
 
 
-    rateUser(userId: number, eventId: number, rating: number): void {
-        if (eventId === undefined) {
-            console.log("EVENTID UNDEFINED!");
-        }
-        if (userId === undefined) {
-            console.log("USERID UNDEFINED!");
-        }
-        var s = eventId.toString() + ' ' + userId.toString();
-        console.log(s);
-        console.log(this.ratings[s]);
-		this.userService.rateUser(userId, eventId, rating);
+    rateUser(otherId: number, eventId: number, rating: number): void {
+		this.userService.rateUser(this.userId, otherId, eventId, rating);
 	}
 }
 

@@ -243,10 +243,10 @@ export class UserService {
 		console.log('updating event');
 	}
 
-	rateUser(userId: number, eventId: number, rating: number): void {
+	rateUser(userId: number, otherId: number, eventId: number, rating: number): void {
 		const url = `${this.apiUrl}/rate/${userId}`;
 		var insert = {
-			ratee: userId,
+			ratee: otherId,
 			eventId: eventId,
 			score: rating
 		}

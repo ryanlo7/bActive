@@ -192,7 +192,7 @@ var insertUser = function(properties, name, email, password) {
 							next(err);
 							return;
 						}
-						
+
 						res.redirect(`/active/profile/${newUser.userId}`);
 						return;
 					});
@@ -227,9 +227,9 @@ var insertEvent = function(properties, myUserId, friendUserId, activity, startTi
 
 	var invitedIds = [myUserId, friendUserId];
 	invitedIds.sort();
-	
 
-	eventCollection.find({"invitedIds": invitedIds, "activity": activity, "startTime": startTime, "endTime": endTime}).toArray( //check invitedIds, activity, startTime, endTime aren't in 
+
+	eventCollection.find({"invitedIds": invitedIds, "activity": activity, "startTime": startTime, "endTime": endTime}).toArray( //check invitedIds, activity, startTime, endTime aren't in
 		function(err, result) {
 			if (err) {
 				next(err);
@@ -243,7 +243,7 @@ var insertEvent = function(properties, myUserId, friendUserId, activity, startTi
 
 
 			//console.log(valuesCollection);
-			valuesCollection.find({"name": "Users"}).toArray(function(err, resId) { //to get maxEventId for new eventId 
+			valuesCollection.find({"name": "Users"}).toArray(function(err, resId) { //to get maxEventId for new eventId
 				if (err) {
 					next(err);
 					return;
