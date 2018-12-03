@@ -273,6 +273,7 @@ router.put('/name/:userid', putNameUserID);
 var putAvailabilityUserID = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
+	console.log(req.body.availability);
 	db.collection('Users')
 		.find({'userId': userId})
 		.toArray(function(err, results) {
@@ -289,6 +290,7 @@ var putAvailabilityUserID = function(req, res, next) {
 					res.status(400).send('Bad request');
 					return;
 				}
+				
 				var updated = {$set: {availability: req.body.availability}};
 				db.collection('Users').updateOne({'userId': userId}, updated, function(err, result) {
 					res.status(200).send('OK');
@@ -366,6 +368,7 @@ var postActivityUserID = function(req, res, next) {
 					return;
 				}
 				user.activities = req.body.activity;
+				console.log(user.activities);
 				var updated = {$set: {activities: user.activities}};
 				db.collection('Users').updateOne({'userId': userId}, updated, function(err, result) {
 					res.status(200).send('OK');
