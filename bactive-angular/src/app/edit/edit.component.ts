@@ -96,7 +96,7 @@ export class EditComponent implements OnInit {
 		if (ratings.numRatings === 0) {
 			return 0;
 		}
-		let avg = ratings.scoreSum / ratings.numRatings;
+		let avg = Math.ceil(ratings.scoreSum / ratings.numRatings);
 		return Array(avg).fill(5);
 	}
 
