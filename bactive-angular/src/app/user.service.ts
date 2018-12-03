@@ -180,4 +180,66 @@ export class UserService {
 			})
 		);
 	}
+
+	// must delete event from local cache and db
+	deleteEvent(removeEventId: number): void {
+		const url = `${this.apiUrl}/event/${removeEventId}`;
+
+		let found: boolean = false;
+		for(let i = 0; i < this.matchedEvents.length; i++) {
+			if (this.matchedEvents[i].eventId == removeEventId) {
+				found = true;
+				this.matchedEvents.splice(i, 1);
+			}
+		}
+
+		if (!found) {
+			for(let i = 0; i < this.pendingEvents.length; i++) {
+				if (this.pendingEvents[i].eventId == removeEventId) {
+					found = true;
+					this.pendingEvents.splice(i, 1);
+				}
+			}
+		}
+
+		if (!found) {
+			for(let i = 0; i < this.confirmedEvents.length; i++) {
+				if (this.confirmedEvents[i].eventId == removeEventId) {
+					found = true;
+					this.confirmedEvents.splice(i, 1);
+				}
+			}
+		}
+
+		this.http.delete(url, options).subscribe();
+		console.log('deleting event');
+	}
+
+	// update status of event. must update local cache and db
+	updateEvent(updatedEvent: Event): void {
+		const url = `${this.apiUrl}/event/${updatedEvent.eventId}`;
+		var update = {event: updatedEvent};
+
+		let found: boolean = false;
+		for(let i = 0; i < this.matchedEvents.length; i++) {
+			if (this.matchedEvents[i].eventId == updatedEvent.eventId) {
+				found = true;
+				this.pendingEvents.push(updatedEvent);
+				this.matchedEvents.splice(i, 1);
+			}
+		}
+
+		if (!found) {
+			for(let i = 0; i < this.pendingEvents.length; i++) {
+				if (this.pendingEvents[i].eventId == updatedEvent.eventId) {
+					found = true;
+					this.confirmedEvents.push(updatedEvent);
+					this.pendingEvents.splice(i, 1);
+				}
+			}
+		}
+
+		this.http.put(url, update).subscribe();
+		console.log('updating event');
+	}
 }

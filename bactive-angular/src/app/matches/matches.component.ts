@@ -56,12 +56,63 @@ export class MatchesComponent implements OnInit {
 	// add the userId to the accepted array. If all invited have accepted,
 	// change the status to confirmed. Otherwise, set the status of the event
 	// to pending or invited
-	acceptEvent(eventId: number, userId: number) {
+	acceptEvent(eventId: number, userId: number): void {
+		// search through matched
+		let found: boolean = false;
+		for(let i = 0; i < this.matchedEvents.length; i++) {
+			if (this.matchedEvents[i].eventId == eventId) {
+				found = true;
+				console.log(this.matchedEvents[i]);
+				let newEvent: Event = this.matchedEvents[i];
+				newEvent.acceptedIds.push(userId);
+				newEvent.status = "pending";
+				this.pendingEvents.push(newEvent);
+				this.userService.updateEvent(newEvent);
+				console.log(newEvent);
+				this.matchedEvents.splice(i, 1);
+				break;
+			}
+		}
+
+		if (!found) {
+			// serach through pending. if accepted, this means moved to confirmed
+			for(let i = 0; i < this.pendingEvents.length; i++) {
+				if (this.pendingEvents[i].eventId == eventId) {
+					let newEvent: Event = this.matchedEvents[i];
+					newEvent.acceptedIds.push(userId);
+					newEvent.status = "confirmed";
+					this.userService.updateEvent(newEvent);
+					this.pendingEvents.splice(i, 1);
+					break;
+				}
+			}
+		}
+
+		console.log(eventId);
 
 	}
 
-	declineEvent(eventId: number, userId: number) {
+	declineEvent(eventId: number): void {
+		let found: boolean = false;
+		for(let i = 0; i < this.matchedEvents.length; i++) {
+			if (this.matchedEvents[i].eventId == eventId) {
+				found = true;
+				this.userService.deleteEvent(eventId);
+				this.matchedEvents.splice(i, 1);
+				break;
+			}
+		}
 
+		if (!found) {
+			// serach through pending. if accepted, this means moved to confirmed
+			for(let i = 0; i < this.pendingEvents.length; i++) {
+				if (this.pendingEvents[i].eventId == eventId) {
+					this.userService.deleteEvent(eventId);
+					this.pendingEvents.splice(i, 1);
+					break;
+				}
+			}
+		}
 	}
 
 }
