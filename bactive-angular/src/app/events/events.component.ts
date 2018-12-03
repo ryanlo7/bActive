@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User, UserService, Event } from '../user.service';
 
 // Source: CS144 with Professor Cho, Project 4 JWT code
-function parseJWT(token) 
+function parseJWT(token)
 {
     let base64Url = token.split('.')[1];
     let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -18,8 +18,9 @@ export class EventsComponent implements OnInit {
 	user: User;
 	userId: number;
 	events: Event[];
+    confirmedEvents: Event[];
 
-	constructor(private userService: UserService) { 
+	constructor(private userService: UserService) {
 		this.userId = parseJWT(document.cookie).userId;
 	}
 
@@ -38,6 +39,13 @@ export class EventsComponent implements OnInit {
 					this.events = this.userService.getEvents();
 				});
 		}
+        this.confirmedEvents = this.userService.getConfirmedEvents();
+        if (this.confirmedEvents == null) {
+            this.userService.fetchConfirmedEvents(this.userId)
+                .subscribe(confirmedEvents => {
+                    this.confirmedEvents = this.userService.getConfirmedEvents();
+                });
+        }
 	}
 
 }

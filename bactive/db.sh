@@ -3,6 +3,7 @@ use bActiveServer
 db.Users.drop()
 db.Activities.drop()
 db.Values.drop()
+db.Events.drop()
 
 db.createCollection("Users")
 db.createCollection("Activities")
@@ -156,7 +157,7 @@ db.Activities.find({})
 db.Events.insert(
 	{
 		"eventId": 0,
-		"acceptedIds": [], 
+		"acceptedIds": [],
 		"invitedIds": [0, 1],
 		"activity": "Lifting",
 		"startTime": 1518669344517,

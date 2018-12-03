@@ -1,9 +1,34 @@
 <head>
+    <title>B-Active - Matches</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
 <div class="container-fluid well">
-	<div>
-		<p>{{matches}}</p>
+	<h2>Matched Events</h2>
+	<div class="matched" *ngIf="user">
+	    <table>
+	        <thead>
+	            <tr>
+	                <th>Activity</th>
+	                <th>Date</th>
+	                <th>Start Time</th>
+	                <th>End Time</th>
+	                <th>Invited</th>
+	                <th>Location</th>
+	                <th>Accept?</th>
+	            </tr>
+	        </thead>
+	            <tr *ngFor="let event of matchedEvents; let i = index">
+	                <td>{{event.activity}}</td>
+	                <td>{{event.startTime | date: 'd MMM yyyy'}}</td>
+	                <td>{{event.startTime | date: 'hh:mm a'}}</td>
+	                <td>{{event.endTime | date: 'hh:mm a'}}</td>
+	                <td>{{event.invitedIds}}</td>
+	                <td>{{event.location}}</td>
+	                <td><button (click)="acceptEvent(event.eventId, userId)"> Accept! </button></td>
+	                <td><button (click)="declineEvent(event.eventId, userId)"> Decline </button></td>
+	            </tr>
+	    </table>
 	</div>
 </div>

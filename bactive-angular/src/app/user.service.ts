@@ -7,8 +7,8 @@ const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
 const options = {headers, responseType: 'text' as 'text'};
 
 export class Activity {
-	name: string; 
-	interest: number; 
+	name: string;
+	interest: number;
 	skill: number;
 }
 
@@ -27,7 +27,7 @@ export class User {
 	userId: number;
 	email: string;
 	name: string;
-	rating: { 
+	rating: {
 		scoreSum: number;
 		numRatings: number;
 	};
@@ -53,7 +53,9 @@ export class Match {
 export class UserService {
 	private user: User;
 	private events: Event[];
-	private matches: Match[];
+	private matchedEvents: Event[];
+	private confirmedEvents: Event[];
+	private pendingEvents: Event[];
 	private apiUrl = 'http://localhost:3000/api';
 	private matchUrl = 'http://localhost:3000/match';
 
@@ -73,9 +75,9 @@ export class UserService {
 	getUser(userId: number): User {
 		return this.user;
 	}
-	
+
 	fetchEvents(userId: number): Observable<Event[]> {
-		const url = `${this.apiUrl}/event/${userId}`;
+		const url = `${this.apiUrl}/events/${userId}`;
 
 		return this.http.get<Event[]>(url).pipe(
 			tap(res => {
@@ -83,17 +85,59 @@ export class UserService {
 			})
 		);
 	}
-	
+
 	getEvents(): Event[] {
 		return this.events;
 	}
 
+	fetchMatchedEvents(userId: number): Observable<Event[]> {
+		const url = `${this.apiUrl}/matchedevents/${userId}`;
+
+		return this.http.get<Event[]>(url).pipe(
+			tap(res => {
+				this.matchedEvents = res;
+			})
+		);
+	}
+	
+	getMatchedEvents(): Event[] {
+		return this.matchedEvents;
+	}
+
+	fetchConfirmedEvents(userId: number): Observable<Event[]> {
+		const url = `${this.apiUrl}/confirmedevents/${userId}`;
+
+		return this.http.get<Event[]>(url).pipe(
+			tap(res => {
+				this.confirmedEvents = res;
+			})
+		);
+	}
+	
+	getConfirmedEvents(): Event[] {
+		return this.confirmedEvents;
+	}
+
+	fetchPendingEvents(userId: number): Observable<Event[]> {
+		const url = `${this.apiUrl}/pendingevents/${userId}`;
+
+		return this.http.get<Event[]>(url).pipe(
+			tap(res => {
+				this.pendingEvents = res;
+			})
+		);
+	}
+	
+	getPendingEvents(): Event[] {
+		return this.pendingEvents;
+	}
+
+	// this makes the call to the api to create matched events
 	fetchMatches(userId: number): Observable<Match[]> {
 		const url = `${this.matchUrl}/${userId}`;
 
 		return this.http.get<Match[]>(url).pipe(
 			tap(res => { 
-				this.matches = res; 
 				for (let match of res) {
 					let event: Event = {
 						eventId: 0,
@@ -105,16 +149,12 @@ export class UserService {
 						status: "matched",
 						location: match.location
 					};
-					this.http.post<Event>(`${this.apiUrl}/newevent/${userId}`, event).subscribe();
+					this.http.post<Event>(`${this.apiUrl}/event/${userId}`, event).subscribe();
 				}
 			})
 		);
 	}
 
-	getMatches(): Match[] {
-		return this.matches;
-	}
-	
 	changeName(userId: number, newName: string): void {
 		const url = `${this.apiUrl}/name/${userId}`;
 		var insert = {name: newName};

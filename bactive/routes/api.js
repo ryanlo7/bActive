@@ -53,16 +53,6 @@ router.get('/pendingevents/:userid',
 		});
 });
 
-router.get('/invitedevents/:userid',
-	function(req, res, next) {
-	var db = req.app.locals.db;
-	var userId = parseInt(req.params.userid);
-	db.collection('Events')
-		.find({'invitedIds': userId, 'status': 'invited'}).toArray(function(err, result) {
-			res.status(200).json(result);
-		});
-});
-
 router.post('/event',
 	function(req, res, next) {
 	var db = req.app.locals.db;

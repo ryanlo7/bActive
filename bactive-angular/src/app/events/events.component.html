@@ -1,3 +1,15 @@
-<p>
-  events works!
-</p>
+<head>
+    <title>B-Active - Events</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid well">
+    <h1>Events</h1>
+    <div *ngIf="events">
+        <ul>
+            <li *ngFor="let event of events">
+                {{ event.activity }}
+            </li>
+        </ul>
+    </div>
+</div>

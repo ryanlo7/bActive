@@ -43,8 +43,7 @@ Document Example:
 			# Defining statuses:
 			# "matched" = event has been suggested to both users, neither has accepted
 			# "confirmed" = both users have accepted
-			# "pending" = user 1 has accepted, user 2 has not accepted yet
-			# "invited" = user 1 has not accepted, user 2 has accepted
+			# "pending" = one user has accepted, but not all
 			"status": "matched",
 			"location": "bfit" # default to first location in Activities collection, changeable after confirmed
 		},
