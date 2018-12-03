@@ -27,6 +27,17 @@ export class ProfileComponent implements OnInit {
 	constructor(private userService: UserService, 
 		private router: Router,
 		private route : ActivatedRoute) {
+		this.userId = parseJWT(document.cookie).userId;
+
+		// If the link that led to the profile page is from /profile, display the public view
+		if ( this.route.snapshot.url.length > 0) {
+			const id = +this.route.snapshot.paramMap.get('id');
+			console.log('hi');
+			if (id != null && id != this.userId) {
+				this.userId = id;
+				this.publicView = true;
+			}
+		}
 
 		this.imageMap["Lifting"] = "https://static1.squarespace.com/static/53de6926e4b06edf127b3ecd/t/56c51cb6555986ef347ae6ba/1455758525694/";
 		this.imageMap["Running"] = "http://lisabaylis.com/wp/wp-content/uploads/2017/07/running.jpg";
