@@ -211,6 +211,88 @@ var insertUser = function(properties, email, password) {
 	);
 }
 
+
+
+/**
+	* Function to insert a new event into the Events collection in MongoDB.
+	* The server returns a 404 error if the event in the request body is already in use.
+	* Otherwise it creates a new event with the given ,
+	* and adds it to the MongoDB database,
+	* returning a 201 status code.
+	* @param {Object} properties JSON object containing the express router properties.
+	* @param {string} email The email of the new user.
+	* @param {string} password The password of the new user that is encrypted with bcrypt.
+	* @return {Void}
+*/
+var insertEvent = function(properties, myUserId, friendUserId, activity, startTime, endTime, location) {
+	let req = properties.req;
+	let res = properties.res;
+	let next = properties.next;
+
+	let db = req.app.locals.db;
+	const eventCollection = db.collection("Events");
+	const valuesCollection = db.collection("Values");
+
+	var invitedIds = [myUserId, friendUserId];
+	invitedIds.sort();
+	
+
+	eventCollection.find({"invitedIds": invitedIds, "activity": activity, "startTime": startTime, "endTime": endTime}).toArray( //check invitedIds, activity, startTime, endTime aren't in 
+		function(err, result) {
+			if (err) {
+				next(err);
+				return;
+			}
+			if (result.length !== 0) { //event already exists
+				//res.status(404).send(`Event already in use`);
+				res.status(404).render('register', {err: 'Event already in use.'});
+				return;
+			}
+
+			valuesCollection.find({"name": "Events"}).toArray(function(err, resId) { //to get maxEventId for new eventId 
+				if (err) {
+					next(err);
+					return;
+				}
+				let maxEventId = resId[0].maxEventId; //grab maxEventId from Values collection
+
+				let newEvent = {
+					eventId: maxEventId,
+					acceptedIds: [],
+					invitedIds: invitedIds,
+					activity: activity,
+					startTime: startTime,
+					endTime: endTime,
+					status: "matched",
+					location: location
+				};
+				eventCollection.insertOne(newEvent, function (err, insertResult) { //insert event to db
+					if (err) {
+						next(err);
+						return;
+					}
+					let newValue = {$set: {"maxEventId": maxEventId + 1}}; // this is buggy?
+					valuesCollection.updateOne({"name": "Events"}, newValue, function(err, updateResult) {
+						if (err) {
+							next(err);
+							return;
+						}
+						res.redirect(`/active/match/${myUserId}`);
+
+						// res.status(201).render('match', {
+						// 	newEvent
+						// });
+						return;
+					});
+				});
+			});
+			return;
+		}
+	);
+}
+
+
+
 module.exports = {
 	insertUser: insertUser,
 	updateUser: updateUser,
