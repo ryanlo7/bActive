@@ -1,6 +1,8 @@
 # B Active
 
-Github.io: https://ryanlo7.github.io/bActive/
+Github.io documentation: https://ryanlo7.github.io/bActive/
+
+All functions located on the global link.
 
 ## ABOUT THIS PROJECT
 
