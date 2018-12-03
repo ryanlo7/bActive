@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User, UserService, Event } from '../user.service';
 
 // Source: CS144 with Professor Cho, Project 4 JWT code
-function parseJWT(token) 
+function parseJWT(token)
 {
     let base64Url = token.split('.')[1];
     let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -28,7 +28,7 @@ export class MatchesComponent implements OnInit {
 	ngOnInit() {
 		this.user = this.userService.getUser(this.userId);
 		if (this.user == null) {
-			this.userService.fetchUser(this.userId)
+			this.userService.fetchUser()
 				.subscribe(user => {
 					this.user = this.userService.getUser(this.userId);
 				});
