@@ -17,7 +17,8 @@ function parseJWT(token)
 export class MatchesComponent implements OnInit {
 	user: User;
 	userId: number;
-	matches: Match[];
+	matchedEvents: Event[];
+	pendingEvents: Event[];
 
 
 	constructor(private userService: UserService) {
@@ -32,14 +33,35 @@ export class MatchesComponent implements OnInit {
 					this.user = this.userService.getUser(this.userId);
 				});
 		}
-		this.matches = this.userService.getMatches();
-		if (this.matches == null) {
-			this.userService.fetchMatches(this.userId)
+
+		this.matchedEvents = this.userService.getMatchedEvents();
+		if (this.matchedEvents == null) {
+			this.userService.fetchMatchedEvents(this.userId)
 				.subscribe(matches => {
-					this.matches = this.userService.getMatches();
+					this.matchedEvents = this.userService.getMatchedEvents();
 					console.log(matches);
 				});
 		}
+
+		this.pendingEvents = this.userService.getPendingEvents();
+		if (this.pendingEvents == null) {
+			this.userService.fetchPendingEvents(this.userId)
+				.subscribe(pending => {
+					this.pendingEvents = this.userService.getPendingEvents();
+					console.log(pending);
+				});
+		}
+	}
+
+	// add the userId to the accepted array. If all invited have accepted,
+	// change the status to confirmed. Otherwise, set the status of the event
+	// to pending or invited
+	acceptEvent(eventId: number, userId: number) {
+
+	}
+
+	declineEvent(eventId: number, userId: number) {
+
 	}
 
 }

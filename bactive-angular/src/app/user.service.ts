@@ -53,8 +53,9 @@ export class Match {
 export class UserService {
 	private user: User;
 	private events: Event[];
-	private confirmedEvents: Event[];
-	private matches: Match[];
+	private matchedEvents: Events[];
+	private confirmedEvents: Events[];
+	private pendingEvents: Events[];
 	private apiUrl = 'http://localhost:3000/api';
 	private matchUrl = 'http://localhost:3000/match';
 
@@ -89,6 +90,20 @@ export class UserService {
 		return this.events;
 	}
 
+	fetchMatchedEvents(userId: number): Observable<Event[]> {
+		const url = `${this.apiUrl}/matchedevents/${userId}`;
+
+		return this.http.get<Event[]>(url).pipe(
+			tap(res => {
+				this.matchedEvents = res;
+			})
+		);
+	}
+	
+	getMatchedEvents(): Event[] {
+		return this.matchedEvents;
+	}
+
 	fetchConfirmedEvents(userId: number): Observable<Event[]> {
 		const url = `${this.apiUrl}/confirmedevents/${userId}`;
 
@@ -98,17 +113,31 @@ export class UserService {
 			})
 		);
 	}
-
+	
 	getConfirmedEvents(): Event[] {
 		return this.confirmedEvents;
 	}
 
+	fetchPendingEvents(userId: number): Observable<Event[]> {
+		const url = `${this.apiUrl}/pendingevents/${userId}`;
+
+		return this.http.get<Event[]>(url).pipe(
+			tap(res => {
+				this.pendingEvents = res;
+			})
+		);
+	}
+	
+	getPendingEvents(): Event[] {
+		return this.pendingEvents;
+	}
+
+	// this makes the call to the api to create matched events
 	fetchMatches(userId: number): Observable<Match[]> {
 		const url = `${this.matchUrl}/${userId}`;
 
 		return this.http.get<Match[]>(url).pipe(
-			tap(res => {
-				this.matches = res;
+			tap(res => { 
 				for (let match of res) {
 					let event: Event = {
 						eventId: 0,
@@ -120,16 +149,12 @@ export class UserService {
 						status: "matched",
 						location: match.location
 					};
-					this.http.post<Event>(`${this.apiUrl}/newevent/${userId}`, event).subscribe();
+					this.http.post<Event>(`${this.apiUrl}/event/${userId}`, event).subscribe();
 				}
 			})
 		);
 	}
-
-	getMatches(): Match[] {
-		return this.matches;
-	}
-
+	
 	changeName(userId: number, newName: string): void {
 		const url = `${this.apiUrl}/name/${userId}`;
 		var insert = {name: newName};
