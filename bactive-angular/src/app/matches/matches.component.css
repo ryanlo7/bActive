@@ -11,6 +11,25 @@ button {
     background: rgba(225, 243, 250);
 }
 
+.table {
+    background: white;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: rgba(195, 230, 243);
+    font-family: 'Special Elite';
+}
+
+th {
+    background: rgba(210, 237, 247);
+}
+
+th, td {
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    border-width: 0px;
+}
+/*
 table {
     border-collapse: collapse;
     width: 100%;
@@ -21,5 +40,6 @@ th, td {
     text-align: left;
     padding: 8px;
 }
+*/
 
 tr:nth-child(even) {background-color: #f2f2f2;}

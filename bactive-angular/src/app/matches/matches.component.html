@@ -7,7 +7,7 @@
 <div class="container-fluid well">
 	<h2>Matched Events</h2>
 	<div class="matched" *ngIf="user">
-	    <table>
+	    <table class="table table-bordered">
 	        <thead>
 	            <tr>
 	                <th>Activity</th>
@@ -30,8 +30,10 @@
 	                	</a>
 	                </td>
 	                <td>{{event.location}}</td>
-	                <td><button (click)="acceptEvent(event.eventId, userId); console.log('pushed')"> Accept! </button></td>
-	                <td><button (click)="declineEvent(event.eventId)"> Decline </button></td>
+	                <td>
+                        <button class="btn btn-default" (click)="acceptEvent(event.eventId, userId); console.log('pushed')"> Accept! </button>
+	                    <button class="btn btn-default" (click)="declineEvent(event.eventId)"> Decline </button>
+                    </td>
 	            </tr>
 	    </table>
 	</div>
@@ -40,7 +42,7 @@
 <div class="container-fluid well">
 	<h2>Pending Events</h2>
 	<div class="matched" *ngIf="user">
-	    <table>
+	    <table class="table table-bordered">
 	        <thead>
 	            <tr>
 	                <th>Activity</th>
@@ -63,8 +65,10 @@
 	                	</a>
 	                </td>
 	                <td>{{event.location}}</td>
-	                <td><button *ngIf="hasNotAccepted(event.eventId)" (click)="acceptEvent(event.eventId, userId)"> Accept! </button></td>
-	                <td><button (click)="declineEvent(event.eventId)"> Cancel </button></td>
+	                <td>
+                        <button class="btn btn-default" *ngIf="hasNotAccepted(event.eventId)" (click)="acceptEvent(event.eventId, userId)"> Accept! </button>
+	                    <button class="btn btn-default" (click)="declineEvent(event.eventId)"> Cancel </button>
+                    </td>
 	            </tr>
 	    </table>
 	</div>
