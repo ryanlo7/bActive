@@ -7,89 +7,54 @@
     <h1>Events</h1>
     <div *ngIf="events">
     <h2>Confirmed Events</h2>
-        <div class="row" *ngFor="let event of events">
-            <div class="col-sm-6">
-                <div class="eventBox">
-                <div class="darkBox" width="300" height="200"></div>
-                <div class="eventInfo">
-                    <div style="font-size: 18pt;">{{ event.activity }}</div>
+        <div *ngFor="let event of events">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="eventBox">
+                    <div class="darkBox" width="300" height="200"></div>
+                    <div class="eventInfo">
+                        <div style="font-size: 18pt;">{{ event.activity }}</div>
+                    </div>
+                    <img src={{getActivityUrl(event.activity)}} width="300" height="200">
+                    </div>
                 </div>
-                <img src={{getActivityUrl(event.activity)}} width="300" height="200">
+                <div class="col-sm-6">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>Participants</td>
+                            <td><span *ngFor="let id of event.invitedIds">{{ getUserName(id) }}<br /></span></td>
+                        </tr>
+                        <tr>
+                            <td>Start Time</td>
+                            <td>{{ event.startTime | date: 'd MMM yyyy' }}, {{ event.startTime | date: 'hh:mm a' }}</td>
+                        </tr>
+                        <tr>
+                            <td>End Time</td>
+                            <td>{{ event.endTime | date: 'd MMM yyyy' }}, {{ event.endTime | date: 'hh:mm a' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td>{{ event.location }}</td>
+                        </tr>
+                    </table>
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <table class="table table-bordered">
-                    <tr>
-                        <td>Participants</td>
-                        <td><span *ngFor="let id of event.invitedIds">{{ getUserName(id) }}<br /></span></td>
-                    </tr>
-                    <tr>
-                        <td>Start Time</td>
-                        <td>{{ event.startTime | date: 'd MMM yyyy' }}, {{ event.startTime | date: 'hh:mm a' }}</td>
-                    </tr>
-                    <tr>
-                        <td>End Time</td>
-                        <td>{{ event.endTime | date: 'd MMM yyyy' }}, {{ event.endTime | date: 'hh:mm a' }}</td>
-                    </tr>
-                    <tr>
-                        <td>Location</td>
-                        <td>{{ event.location }}</td>
-                    </tr>
-                </table>
-            </div>
-            <div *ngIf="user">
-                <table>
-                    <tr *ngFor="let otherId of event.acceptedIds">
-                        <td>
-                            {{ getUserName(otherId) }}
-                        </td>
-                        <td><select [(ngModel)]="ratings[user.userId][otherId]">
-                            <option *ngFor="let x of ratingScale" [selected]="ratings[user.userId][otherId] == x">
-                            {{x}}</option>
-                        </select></td>
-                        <td><button class="btn btn-default" (click)="rateUser(id, event.eventId, ratings[user.userId][otherId])"> Delete </button></td>
-                    </tr>
-                </table>
+                <div class="row">
+                    <table>
+                        <tr *ngFor="let otherId of event.invitedIds">
+                            <td>
+                                {{ getUserName(otherId) }}
+                            </td>
+                            <td><select [(ngModel)]="ratings[event.eventId.toString() + ' ' + otherId.toString()]">
+                                <option *ngFor="let x of ratingScale" [selected]="ratings[event.eventId.toString() + ' ' + otherId.toString()] == x">
+                                {{x}}</option>
+                            </select></td>
+                            <td><button class="btn btn-default" (click)="rateUser(otherId, event.eventId, ratings[event.eventId.toString() + ' ' + otherId.toString()])"> Rate User </button></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
 
-
-
-
-    </div>
-    <div *ngIf="pendingEvents">
-        <h2>Pending Events</h2>
-        <div class="row" *ngFor="let event of pendingEvents">
-            <div class="col-sm-6">
-                <div class="eventBox">
-                <div class="darkBox" width="300" height="200"></div>
-                <div class="eventInfo">
-                    <div style="font-size: 18pt;">{{ event.activity }}</div>
-                </div>
-                <img src={{getActivityUrl(event.activity)}} width="300" height="200">
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <table class="table table-bordered">
-                    <tr>
-                        <td>Participants</td>
-                        <td><span *ngFor="let id of event.invitedIds">{{ getUserName(id) }}<br /></span></td>
-                    </tr>
-                    <tr>
-                        <td>Start Time</td>
-                        <td>{{ event.startTime | date: 'd MMM yyyy' }}, {{ event.startTime | date: 'hh:mm a' }}</td>
-                    </tr>
-                    <tr>
-                        <td>End Time</td>
-                        <td>{{ event.endTime | date: 'd MMM yyyy' }}, {{ event.endTime | date: 'hh:mm a' }}</td>
-                    </tr>
-                    <tr>
-                        <td>Location</td>
-                        <td>{{ event.location }}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
     </div>
 
 

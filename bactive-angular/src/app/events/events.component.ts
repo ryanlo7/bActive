@@ -22,7 +22,7 @@ export class EventsComponent implements OnInit {
     confirmedEvents: Event[];
     imageMap: IHash = {};
     ratingScale: number[] = [1, 2, 3, 4, 5];
-    ratings: number[][]; // First arg is rater ID, second argumenet is ratee ID. Value stored in that entry is score.
+    ratings: JHash = {}; // First argument is eventId + " " + rateeId. Value stored in that entry is score.
 
 	constructor(private userService: UserService) {
 		this.userId = parseJWT(document.cookie).userId;
@@ -84,9 +84,24 @@ export class EventsComponent implements OnInit {
     }
 
 
-
+    rateUser(userId: number, eventId: number, rating: number): void {
+        if (eventId === undefined) {
+            console.log("EVENTID UNDEFINED!");
+        }
+        if (userId === undefined) {
+            console.log("USERID UNDEFINED!");
+        }
+        var s = eventId.toString() + ' ' + userId.toString();
+        console.log(s);
+        console.log(this.ratings[s]);
+		this.userService.rateUser(userId, eventId, rating);
+	}
 }
 
 export interface IHash {
     [details: string] : string;
+}
+
+export interface JHash {
+    [details: string] : number;
 }

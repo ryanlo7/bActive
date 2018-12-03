@@ -13,7 +13,7 @@
       <li><a (click)="handleMatches()">Matches</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-        <li><a routerLink="/profile/{{user.userId}}">Logout</a></li>
+        <li><a *ngIf="user" routerLink="/profile/{{user.userId}}">Logout</a></li>
     </ul>
   </div>
 </nav>
