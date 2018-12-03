@@ -43,47 +43,47 @@ var searchUsers = function(properties, criteria, results, processUsers) {
 	});
 }
 
-var searchEvents = function(properties, criteria, processEvents) {
-	let req = properties.req;
-	let res = properties.res;
-	let next = properties.next;
+// var searchEvents = function(properties, criteria, processEvents) {
+// 	let req = properties.req;
+// 	let res = properties.res;
+// 	let next = properties.next;
 
-	let db = req.app.locals.db;
-	const eventCollection = db.collection("Events");
+// 	let db = req.app.locals.db;
+// 	const eventCollection = db.collection("Events");
 
-	eventCollection.find(criteria).toArray(function(err, events) {
-		if (err) {
-			next(err);
-			return;
-		}
-		if (events.length === 0) {
-			res.status(404).send(`Unable to find events that met search criteria`);
-			return;
-		}
-		processEvents(events);
-	});
-}
+// 	eventCollection.find(criteria).toArray(function(err, events) {
+// 		if (err) {
+// 			next(err);
+// 			return;
+// 		}
+// 		if (events.length === 0) {
+// 			res.status(404).send(`Unable to find events that met search criteria`);
+// 			return;
+// 		}
+// 		processEvents(events);
+// 	});
+// }
 
-var searchActivities = function(properties, criteria, processActivities) {
-	let req = properties.req;
-	let res = properties.res;
-	let next = properties.next;
+// var searchActivities = function(properties, criteria, processActivities) {
+// 	let req = properties.req;
+// 	let res = properties.res;
+// 	let next = properties.next;
 
-	let db = req.app.locals.db;
-	const activityCollection = db.collection("Activities");
+// 	let db = req.app.locals.db;
+// 	const activityCollection = db.collection("Activities");
 
-	activityCollection.find(criteria).toArray(function(err, activities) {
-		if (err) {
-			next(err);
-			return;
-		}
-		if (activities.length === 0) {
-			//res.status(404).send(`Unable to find activities that met search criteria`);
-			return;
-		}
-		processActivities(activities);
-	});
-}
+// 	activityCollection.find(criteria).toArray(function(err, activities) {
+// 		if (err) {
+// 			next(err);
+// 			return;
+// 		}
+// 		if (activities.length === 0) {
+// 			//res.status(404).send(`Unable to find activities that met search criteria`);
+// 			return;
+// 		}
+// 		processActivities(activities);
+// 	});
+// }
 
 /**
 	* Function to return update a user's data in Users collection in MongoDB.
@@ -269,12 +269,14 @@ var insertEvent = function(properties, myUserId, friendUserId, activity, startTi
 						return;
 					}
 					let newValue = {$set: {"maxEventId": maxEventId + 1}}; // this is buggy?
-					valuesCollection.updateOne({"name": "Events"}, newValue, function(err, updateResult) {
+					valuesCollection.updateOne({"name": "Events"}, newValue, function(err, updateResult) { //update maxEventId in Values collection
 						if (err) {
 							next(err);
 							return;
 						}
-						res.redirect(`/active/match/${myUserId}`);
+
+						next();
+						//res.redirect(`/active/match/${myUserId}`);
 
 						// res.status(201).render('match', {
 						// 	newEvent

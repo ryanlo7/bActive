@@ -85,7 +85,7 @@ function matchUsers(req, res, next, userId, matches) {
 			//convert time to unix time
 
 			console.log(matchResultsArray);
-			res.status(200).json(matchResultsArray);
+			//res.status(200).json(matchResultsArray);
 		});
 	};
 	database.searchUsers(database.routerProperties(req, res, next), {"userId": userId}, matches, performMatch);
