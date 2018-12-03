@@ -19,7 +19,7 @@ export class MatchesComponent implements OnInit {
 	userId: number;
 	matchedEvents: Event[];
 	pendingEvents: Event[];
-
+	confirmedEvents: Event[];
 
 	constructor(private userService: UserService) {
 		this.userId = parseJWT(document.cookie).userId;
@@ -49,6 +49,15 @@ export class MatchesComponent implements OnInit {
 				.subscribe(pending => {
 					this.pendingEvents = this.userService.getPendingEvents();
 					console.log(pending);
+				});
+		}
+
+		this.confirmedEvents = this.userService.getConfirmedEvents();
+		if (this.confirmedEvents == null) {
+			this.userService.fetchConfirmedEvents(this.userId)
+				.subscribe(confirmed => {
+					this.confirmedEvents = this.userService.getConfirmedEvents();
+					console.log(confirmed);
 				});
 		}
 	}
