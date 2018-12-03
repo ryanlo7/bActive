@@ -5,7 +5,7 @@
 ### Where the code is.
 
 - Source code is in the bactive directory. Front-end code is in bactive/views, back-end code is in bactive/routes.
-- Test cases are included in testcases.json.
+- Test cases are included in the tests folder. testcases.json has postman tests, while the test folder within tests has the JavaScript unit tests.
 - Included libraries are node packages, and should be under bactive/node_modules.
 
 ## DATABASE FORMAT:
@@ -19,8 +19,8 @@ Document Example:
 	"email": "user1@ucla.edu",
 	"password": "hashed password",
 	"activities": [
-		{"name": "basketball", "interest": 5, "skill": 5}, # interest and skill rankings out of 5, 5 being the highest
-		{"name": "lifting", "interest": 4, "skill": 3},
+		{"name": "Basketball", "interest": 5, "skill": 5}, # interest and skill rankings out of 5, 5 being the highest
+		{"name": "Lifting", "interest": 4, "skill": 3},
 		...
 	],
 	"availability": [
@@ -37,7 +37,7 @@ Document Example:
 	"events": [
 		{
 			"userId": [2], # who you matched with; array is for the case of group events
-			"activity": "lifting", # suggested activity
+			"activity": "Lifting", # suggested activity
 			"day": "monday",
 			"time": "4PM-6:30PM", # the largest interval that matches
 			# Defining statuses:
@@ -56,7 +56,7 @@ Collection: Activities
 Document Example:
 ```
 {
-	"name": "lifting",
+	"name": "Lifting",
 	"locations": ["bfit", "wooden"],
 	"sizeMin": 2,
 	"sizeMax": 2
@@ -74,7 +74,7 @@ Document Example:
 - `DELETE /api/deleteactivity/:userid` requires event=[JSON object of activity to delete] in body
 
 ## TESTING:
-We have implemented 5 test cases in testcases.json as well as server-side test cases in match.js.
+We have implemented 5 test cases in testcases.json as well as server-side test cases in match.js. Further front-end testing was done in Selenium.
 
 The first six tests were run using Postman. 
 
