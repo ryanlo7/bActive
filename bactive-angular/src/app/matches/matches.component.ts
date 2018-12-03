@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, UserService, Match } from '../user.service';
+import { User, UserService, Event } from '../user.service';
 
 // Source: CS144 with Professor Cho, Project 4 JWT code
 function parseJWT(token) 

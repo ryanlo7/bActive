@@ -7,7 +7,7 @@
 
 <div *ngIf="user">
     <h1>{{ user.name }}</h1>
-    <p><button id="edit_button" class="btn btn-default" (click)="handleEdit()">Edit Profile</button></p>
+    <p><button *ngIf="!publicView" id="edit_button" class="btn btn-default" (click)="handleEdit()">Edit Profile</button></p>
     <h4>Email: {{ user.email }} </h4>
 </div>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User, UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 // Source: CS144 with Professor Cho, Project 4 JWT code
 function parseJWT(token)
@@ -21,9 +22,20 @@ export class ProfileComponent implements OnInit {
 	userId: number;
 	tableHeadings: string[] = [];
 	imageMap: IHash = {};
+	publicView: boolean = false;
 
-	constructor(private userService: UserService, private router: Router) {
+	constructor(private userService: UserService, 
+		private router: Router,
+		private route : ActivatedRoute) {
 		this.userId = parseJWT(document.cookie).userId;
+
+		// + converts to a number
+		const id = +this.route.snapshot.paramMap.get('id');
+		if (id != null && id != this.userId) {
+			this.userId = id;
+			this.publicView = true;
+		}
+
 		this.imageMap["Lifting"] = "https://static1.squarespace.com/static/53de6926e4b06edf127b3ecd/t/56c51cb6555986ef347ae6ba/1455758525694/";
 		this.imageMap["Running"] = "http://lisabaylis.com/wp/wp-content/uploads/2017/07/running.jpg";
 		this.imageMap["Swimming"] = "https://cdn.swimswam.com/wp-content/uploads/2018/02/stock-by-Mike-Lewis-LDM_1946.jpg";

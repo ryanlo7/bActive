@@ -53,9 +53,9 @@ export class Match {
 export class UserService {
 	private user: User;
 	private events: Event[];
-	private matchedEvents: Events[];
-	private confirmedEvents: Events[];
-	private pendingEvents: Events[];
+	private matchedEvents: Event[];
+	private confirmedEvents: Event[];
+	private pendingEvents: Event[];
 	private apiUrl = 'http://localhost:3000/api';
 	private matchUrl = 'http://localhost:3000/match';
 
@@ -154,7 +154,7 @@ export class UserService {
 			})
 		);
 	}
-	
+
 	changeName(userId: number, newName: string): void {
 		const url = `${this.apiUrl}/name/${userId}`;
 		var insert = {name: newName};

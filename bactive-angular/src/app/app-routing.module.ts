@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'events', component: EventsComponent },
   { path: 'matches', component: MatchesComponent },
   { path: 'edit', component: EditComponent },
-  { path: '', component: ProfileComponent }
+  { path: '', component: ProfileComponent },
+  { path: 'profile/:id', component: ProfileComponent, runGuardsAndResolvers: 'paramsChange' }
 ];
 
 @NgModule({
