@@ -12,6 +12,46 @@ router.get('/event',
 		});
 });
 
+router.get('/events/:userid',
+	function(req, res, next) {
+	var db = req.app.locals.db;
+	var userId = parseInt(req.params.userid);
+	db.collection('Events')
+		.find({'invitedIds': userId}).toArray(function(err, result) {
+			res.status(200).json(result);
+		});
+});
+
+
+router.get('/matchedevents/:userid',
+	function(req, res, next) {
+	var db = req.app.locals.db;
+	var userId = parseInt(req.params.userid);
+	db.collection('Events')
+		.find({'invitedIds': userId, 'status': 'matched'}).toArray(function(err, result) {
+			res.status(200).json(result);
+		});
+});
+
+router.get('/confirmedevents/:userid',
+	function(req, res, next) {
+	var db = req.app.locals.db;
+	var userId = parseInt(req.params.userid);
+	db.collection('Events')
+		.find({'invitedIds': userId, 'status': 'confirmed'}).toArray(function(err, result) {
+			res.status(200).json(result);
+		});
+});
+
+router.get('/pendingevents/:userid',
+	function(req, res, next) {
+	var db = req.app.locals.db;
+	var userId = parseInt(req.params.userid);
+	db.collection('Events')
+		.find({'invitedIds': userId, 'status': 'pending'}).toArray(function(err, result) {
+			res.status(200).json(result);
+		});
+});
 
 router.post('/event',
 	function(req, res, next) {
@@ -279,7 +319,7 @@ router.put('/rate/:userid',
 					return;
 				}
 				user.events[ind].rated.push(userId2);
-				
+
 				db.collection('Users')
 					.find({'userId': userId2})
 					.toArray(function(err, results2) {

@@ -66,3 +66,7 @@ h1, h2 {
 .login-box button {
     margin: 5px;
 }
+
+.well {
+    background: rgba(225, 243, 250);
+}

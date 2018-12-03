@@ -11,6 +11,11 @@ h1, h2 {
     font-family: "Special Elite";
 }
 
+button {
+    font-family: "Special Elite";
+    margin: 5px;
+}
+
 #edit_buttion {
     float: right;
 }
