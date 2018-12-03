@@ -4,9 +4,8 @@
 </head>
 
 <div class="container-fluid well">
-    <h1>Events</h1>
+    <h1>Confirmed Events</h1>
     <div *ngIf="events">
-    <h2>Confirmed Events</h2>
         <div *ngFor="let event of events">
             <div class="row">
                 <div class="col-sm-6">
@@ -39,18 +38,22 @@
                     </table>
                 </div>
                 <div class="row">
-                    <table>
-                        <tr *ngFor="let otherId of event.invitedIds">
-                            <td>
-                                {{ getUserName(otherId) }}
-                            </td>
-                            <td><select [(ngModel)]="ratings[event.eventId.toString() + ' ' + otherId.toString()]">
-                                <option *ngFor="let x of ratingScale" [selected]="ratings[event.eventId.toString() + ' ' + otherId.toString()] == x">
-                                {{x}}</option>
-                            </select></td>
-                            <td><button class="btn btn-default" (click)="rateUser(otherId, event.eventId, ratings[event.eventId.toString() + ' ' + otherId.toString()])"> Rate User </button></td>
-                        </tr>
-                    </table>
+                    <div class="col-sm-12">
+                        <h3>How was your experience?</h3>
+                        <p>Rate your fellow B-Active users for this event.</p>
+                        <table class="center table table-bordered">
+                            <tr *ngFor="let otherId of event.invitedIds">
+                                <td>
+                                    {{ getUserName(otherId) }}
+                                </td>
+                                <td><select [(ngModel)]="ratings[event.eventId.toString() + ' ' + otherId.toString()]">
+                                    <option *ngFor="let x of ratingScale" [selected]="ratings[event.eventId.toString() + ' ' + otherId.toString()] == x">
+                                    {{x}}</option>
+                                </select></td>
+                                <td><button class="btn btn-default" (click)="rateUser(otherId, event.eventId, ratings[event.eventId.toString() + ' ' + otherId.toString()])"> Rate User </button></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

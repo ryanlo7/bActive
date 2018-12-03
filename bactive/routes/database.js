@@ -297,6 +297,6 @@ module.exports = {
 	insertEvent: insertEvent,
 	updateUser: updateUser,
 	searchUsers: searchUsers,
-	searchActivities: searchActivities,
+//	searchActivities: searchActivities,
 	routerProperties: routerProperties
 };
