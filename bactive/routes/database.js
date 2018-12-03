@@ -172,10 +172,12 @@ var insertUser = function(properties, email, password) {
 
 				let newUser = {
 					userId: maxUserId,
+					name: "dummy",
 					email: email,
 					password: password,
-					availability: defaultAvailability,
+					rating: { "scoreSum": 0, "numRatings": 0},
 					activities: [],
+					availability: defaultAvailability,
 					events: []
 				};
 				userCollection.insertOne(newUser, function (err, insertResult) {
@@ -192,10 +194,13 @@ var insertUser = function(properties, email, password) {
 						res.status(201).render('profile', {
 							userId: newUser.userId,
 							email: newUser.email,
-							rating: { "scoreSum": 0, "numRatings": 0},
+							name: newUser.name,
+							rating: 0,
+							numRatings: newUser.rating.numRatings,
 							activities: newUser.activities,
 							availability: newUser.availability,
-							events: newUser.events
+							//events: newUser.events,
+							isUser: true
 						});
 						return;
 					});
