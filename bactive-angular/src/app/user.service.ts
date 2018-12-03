@@ -99,7 +99,7 @@ export class UserService {
 			})
 		);
 	}
-	
+
 	getMatchedEvents(): Event[] {
 		return this.matchedEvents;
 	}
@@ -113,7 +113,7 @@ export class UserService {
 			})
 		);
 	}
-	
+
 	getConfirmedEvents(): Event[] {
 		return this.confirmedEvents;
 	}
@@ -127,7 +127,7 @@ export class UserService {
 			})
 		);
 	}
-	
+
 	getPendingEvents(): Event[] {
 		return this.pendingEvents;
 	}
@@ -137,7 +137,7 @@ export class UserService {
 		const url = `${this.matchUrl}/${userId}`;
 
 		return this.http.get<Match[]>(url).pipe(
-			tap(res => { 
+			tap(res => {
 				for (let match of res) {
 					let event: Event = {
 						eventId: 0,

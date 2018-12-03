@@ -64,6 +64,20 @@ export class EventsComponent implements OnInit {
         return this.imageMap[name];
     }
 
+    getUserName(userId: number): String {
+        console.log(userId);
+        var user: User;
+        user = this.userService.getUser(userId);
+        if (user == null) {
+            this.userService.fetchUser(userId)
+                .subscribe(user => {
+                    user = this.userService.getUser(userId);
+                });
+        }
+        console.log(user.name);
+        return user.name;
+    }
+
 }
 
 export interface IHash {
