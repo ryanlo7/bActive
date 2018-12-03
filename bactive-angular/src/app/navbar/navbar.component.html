@@ -5,7 +5,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">{{ user.name }}</a>
+      <a class="navbar-brand" *ngIf="user" href="#">B-Active: {{ user.name }}</a>
     </div>
     <ul class="nav navbar-nav">
       <li><a (click)="handleProfile()">Profile</a></li>

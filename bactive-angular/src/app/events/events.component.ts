@@ -18,6 +18,7 @@ export class EventsComponent implements OnInit {
 	user: User;
 	userId: number;
 	events: Event[];
+    confirmedEvents: Event[];
 
 	constructor(private userService: UserService) {
 		this.userId = parseJWT(document.cookie).userId;
@@ -38,6 +39,13 @@ export class EventsComponent implements OnInit {
 					this.events = this.userService.getEvents();
 				});
 		}
+        this.confirmedEvents = this.userService.getConfirmedEvents();
+        if (this.confirmedEvents == null) {
+            this.userService.fetchConfirmedEvents(this.userId)
+                .subscribe(confirmedEvents => {
+                    this.confirmedEvents = this.userService.getConfirmedEvents();
+                });
+        }
 	}
 
 }
