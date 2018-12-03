@@ -77,11 +77,19 @@ export class EventsComponent implements OnInit {
         var user: User;
         user = this.userService.getUser(userId);
         if (user == null) {
+            return null;
+        }
+
+
+        /*
+        if (user == null) {
             this.userService.fetchUser()
-                .subscribe(user => {
+                .subscribe(u => {
                     user = this.userService.getUser(userId);
                 });
         }
+        while (user == null) {}
+        */
         // console.log(user.name);
         return user.name;
     }
