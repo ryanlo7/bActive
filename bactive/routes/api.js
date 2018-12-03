@@ -86,6 +86,22 @@ router.delete('/event',
 		});
 });
 
+router.get('/users',
+	function(req, res, next) {
+	var db = req.app.locals.db;
+	var userId = parseInt(req.params.userid);
+	var included_fields = {'userId': true, 'name': true, 'email': true, 'rating': true, 'activities': true, 'availability': true, 'events': true, '_id': false};
+	db.collection('Users')
+		.find().project(included_fields)
+		.toArray(function(err, results) {
+			if (results.length == 0) {
+				res.status(404).send("404: userId not found");
+			} else {
+				res.status(200).json(results);
+			}
+		});
+});
+
 router.get('/:userid',
 	function(req, res, next) {
 	var db = req.app.locals.db;
