@@ -37,7 +37,25 @@
                     </tr>
                 </table>
             </div>
+            <div *ngIf="user">
+                <table>
+                    <tr *ngFor="let otherId of event.acceptedIds">
+                        <td>
+                            {{ getUserName(otherId) }}
+                        </td>
+                        <td><select [(ngModel)]="ratings[user.userId][otherId]">
+                            <option *ngFor="let x of ratingScale" [selected]="ratings[user.userId][otherId] == x">
+                            {{x}}</option>
+                        </select></td>
+                        <td><button class="btn btn-default" (click)="rateUser(id, event.eventId, ratings[user.userId][otherId])"> Delete </button></td>
+                    </tr>
+                </table>
+            </div>
         </div>
+
+
+
+
     </div>
     <div *ngIf="pendingEvents">
         <h2>Pending Events</h2>
@@ -73,4 +91,6 @@
             </div>
         </div>
     </div>
+
+
 </div>

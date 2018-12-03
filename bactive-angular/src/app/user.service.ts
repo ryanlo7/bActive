@@ -180,4 +180,14 @@ export class UserService {
 			})
 		);
 	}
+
+	rateUser(userId: number, eventId: number, rating: number): void {
+		const url = `${this.apiUrl}/rate/${userId}`;
+		var insert = {
+			ratee: userId,
+			eventId: eventId,
+			score: rating
+		}
+		this.http.put(url, insert).subscribe();
+	}
 }

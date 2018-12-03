@@ -21,6 +21,8 @@ export class EventsComponent implements OnInit {
     pendingEvents: Event[];
     confirmedEvents: Event[];
     imageMap: IHash = {};
+    ratingScale: number[] = [1, 2, 3, 4, 5];
+    ratings: number[][]; // First arg is rater ID, second argumenet is ratee ID. Value stored in that entry is score.
 
 	constructor(private userService: UserService) {
 		this.userId = parseJWT(document.cookie).userId;
@@ -73,26 +75,15 @@ export class EventsComponent implements OnInit {
     }
 
     getUserName(userId: number): String {
-        // console.log(userId);
         var user: User;
         user = this.userService.getUser(userId);
         if (user == null) {
             return null;
         }
-
-
-        /*
-        if (user == null) {
-            this.userService.fetchUser()
-                .subscribe(u => {
-                    user = this.userService.getUser(userId);
-                });
-        }
-        while (user == null) {}
-        */
-        // console.log(user.name);
         return user.name;
     }
+
+
 
 }
 
