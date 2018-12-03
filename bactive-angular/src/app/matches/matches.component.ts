@@ -14,6 +14,10 @@ function parseJWT(token)
   templateUrl: './matches.component.html',
   styleUrls: ['./matches.component.css']
 })
+/**
+    * A class representing the component which allows the user to see her matches.
+    * @class MatchesComponent
+*/
 export class MatchesComponent implements OnInit {
 	user: User;
 	userId: number;
@@ -21,10 +25,20 @@ export class MatchesComponent implements OnInit {
 	pendingEvents: Event[];
 	confirmedEvents: Event[];
 
+    /**
+        * Creates a MatchesComponent.
+        * @param {UserService} userService The userService.
+    */
 	constructor(private userService: UserService) {
 		this.userId = parseJWT(document.cookie).userId;
 	}
 
+    /**
+        * Function which runs at MatchesComponent's initialisation.
+        * Get the user from the API if it has not been fetched.
+        * Do the same for matched events, pending events, confirmed events.
+        * @return {Void}
+    */
 	ngOnInit() {
 		this.user = this.userService.getUser(this.userId);
 		if (this.user == null) {
@@ -62,7 +76,11 @@ export class MatchesComponent implements OnInit {
 		}
 	}
 
-	// given a pending event, return true if use has not accepted
+	/**
+        * Given a pending event, return true if user has not accepted
+        * @param {number} eventId The ID of the event.
+        * @return {boolean} True if user has not accepted this event.
+    */
 	hasNotAccepted(eventId: number): boolean {
 		for(let i = 0; i < this.pendingEvents.length; i++) {
 			if (eventId == this.pendingEvents[i].eventId) {
@@ -77,6 +95,11 @@ export class MatchesComponent implements OnInit {
 		return false;
 	}
 
+    /**
+        * Gets the name of the user with id userId.
+        * @param {number} userId The ID of the user.
+        * @return {String} The name of the user.
+    */
 	getUserName(userId: number): String {
         var user: User;
         user = this.userService.getUser(userId);
@@ -87,6 +110,11 @@ export class MatchesComponent implements OnInit {
         return user.name;
     }
 
+    /**
+        * Gets the other participant in an event.
+        * @param {Array<number>} userId The IDs of the users in the event.
+        * @return {number} The ID of the other participant in an event.
+    */
     otherParticipant(invitedIds: number[]): number {
     	if (invitedIds[0] == this.userId) {
     		return invitedIds[1];
@@ -95,9 +123,14 @@ export class MatchesComponent implements OnInit {
     	return invitedIds[0];
     }
 
-	// add the userId to the accepted array. If all invited have accepted,
-	// change the status to confirmed. Otherwise, set the status of the event
-	// to pending or invited
+    /**
+        * Adds the userId to the accepted array. If all invited have accepted,
+    	* changes the status to confirmed. Otherwise, sets the status of the event
+    	* to pending or invited.
+        * @param {number} eventId The ID of the event.
+        * @param {number} userId The ID of the user.
+        * @return {Void}
+    */
 	acceptEvent(eventId: number, userId: number): void {
 		// search through matched
 		let found: boolean = false;
@@ -134,6 +167,12 @@ export class MatchesComponent implements OnInit {
 
 	}
 
+    /**
+        * Removes the userId from the accepted array. Sets the status of the event
+    	* to pending or just matched.
+        * @param {number} eventId The ID of the event.
+        * @return {Void}
+    */
 	declineEvent(eventId: number): void {
 		let found: boolean = false;
 		for(let i = 0; i < this.matchedEvents.length; i++) {

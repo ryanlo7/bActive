@@ -3,7 +3,12 @@ import { User, UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
-// Source: CS144 with Professor Cho, Project 4 JWT code
+/**
+    * Parses a JSON Web Token.
+    * Source: CS144 with Professor Cho, Project 4 JWT code
+    * @param {Object} token A JSON Web Token.
+    * @return {String} The parsed JSON Web Token, as a string.
+*/
 function parseJWT(token)
 {
     let base64Url = token.split('.')[1];
@@ -16,7 +21,10 @@ function parseJWT(token)
 	templateUrl: './profile.component.html',
 	styleUrls: ['./profile.component.css']
 })
-
+/**
+    * A class representing the component which allows the user to edit her profile.
+    * @class ProfileComponent
+*/
 export class ProfileComponent implements OnInit {
 	user: User;
 	userId: number;
@@ -24,6 +32,13 @@ export class ProfileComponent implements OnInit {
 	imageMap: IHash = {};
 	publicView: boolean = false;
 
+    /**
+        * Creates a ProfileComponent.
+        * Also fills the imageMap hash-map.
+        * @param {UserService} userService The userService.
+        * @param {Router} router The router.
+        * @param {ActivedRoute} route The activated route.
+    */
 	constructor(private userService: UserService,
 		private router: Router,
 		private route : ActivatedRoute) {
@@ -50,7 +65,11 @@ export class ProfileComponent implements OnInit {
 		this.imageMap["Frisbee"] = "https://childlikefaith.com/wp-content/uploads/2015/10/ultimate-frisbee-catch.jpg";
 	}
 
-	// Get the user from the API if it has not been fetched
+    /**
+        * Function which runs at EditComponent's initialisation.
+        * Get the user from the API if it has not been fetched.
+        * @return {Void}
+    */
 	ngOnInit() {
 		this.userId = parseJWT(document.cookie).userId;
 
@@ -70,6 +89,10 @@ export class ProfileComponent implements OnInit {
 		}
 	}
 
+    /**
+        * Populates the availability table with half-hour times.
+        * @return {Void}
+    */
 	fillTableHeadings(): void {
 		let hour = 0;
 		let minutes = "00";
@@ -81,6 +104,10 @@ export class ProfileComponent implements OnInit {
 		}
 	}
 
+    /**
+        * Calculates the rating of the user.
+        * @return {Array} An array of numbers, of length 5, for which the appropriate number of entries are full.
+    */
 	calculateRating() {
 		let ratings = this.user.rating;
 		if (ratings.numRatings === 0) {
@@ -90,10 +117,19 @@ export class ProfileComponent implements OnInit {
 		return Array(avg).fill(5);
 	}
 
+    /**
+        * Gets the URL for the image of the activity.
+        * @param {String} name The name of the activity.
+        * @return {String} The URL for the image of the activity.
+    */
 	getActivityUrl(name: string) {
 		return this.imageMap[name];
 	}
 
+    /**
+      * Function which routes to edit page when user clicks on edit in navbar.
+      * @return {Void}
+    */
     handleEdit() {
         this.router.navigate(['/edit']);
     }

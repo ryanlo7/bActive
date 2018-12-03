@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { User, UserService } from '../user.service';
 import { Router } from '@angular/router';
 
-// Source: CS144 with Professor Cho, Project 4 JWT code
+/**
+    * Parses a JSON Web Token.
+    * Source: CS144 with Professor Cho, Project 4 JWT code
+    * @param {Object} token A JSON Web Token.
+    * @return {String} The parsed JSON Web Token, as a string.
+*/
 function parseJWT(token)
 {
     let base64Url = token.split('.')[1];
@@ -15,6 +20,10 @@ function parseJWT(token)
 	templateUrl: './edit.component.html',
 	styleUrls: ['./edit.component.css']
 })
+/**
+    * A class representing the component which allows the user to edit her profile.
+    * @class EditComponent
+*/
 export class EditComponent implements OnInit {
 
   	user: User;
@@ -34,11 +43,20 @@ export class EditComponent implements OnInit {
 		"Frisbee"
 	];
 
+    /**
+        * Creates an EditComponent.
+        * @param {UserService} userService The userService.
+        * @param {Router} router The router.
+    */
 	constructor(private userService: UserService, private router: Router) {
 		this.userId = parseJWT(document.cookie).userId;
 	}
 
-	// Get the user from the API if it has not been fetched
+    /**
+        * Function which runs at EditComponent's initialisation.
+        * Get the user from the API if it has not been fetched.
+        * @return {Void}
+    */
 	ngOnInit() {
 		this.fillTableHeadings();
 		this.user = this.userService.getUser(this.userId);
@@ -50,18 +68,31 @@ export class EditComponent implements OnInit {
 		}
 	}
 
+    /**
+        * Updates the name, activities, and availabilities.
+        * @return {Void}
+    */
 	updateProfile(): void {
-		// Update the name, activities, and availabilities
 		this.userService.changeName(this.user.userId, this.user.name);
 		this.userService.updateActivities(this.user.userId, this.user.activities);
 		this.userService.updateAvailability(this.user.userId, this.user.availability);
 	}
 
+    /**
+        * Updates the name, activities, and availabilities, and then
+        * navigates back to the user's profile.
+        * @return {Void}
+    */
     updateProfileAndReturn() : void {
         this.updateProfile();
-        this.router.navigate(['/']);
+        this.router.navigate([`/profile/${this.userId}`]);
     }
 
+    /**
+        * Deletes activity from this user.
+        * @param {String} name The name of the activity to be deleted.
+        * @return {Void}
+    */
 	deleteActivity(name: string) {
 		let index = -1;
 		let newActivities = [];
@@ -75,11 +106,19 @@ export class EditComponent implements OnInit {
 		console.log(this.user.activities);
 	}
 
+    /**
+        * Adds a default activity to the user's activities.
+        * @return {Void}
+    */
 	addActivity() {
 		// push default settings
 		this.user.activities.push({"name": "Lifting", "skill": 1, "interest": 1});
 	}
 
+    /**
+        * Populates the availability table with half-hour times.
+        * @return {Void}
+    */
 	fillTableHeadings(): void {
 		let hour = 0;
 		let minutes = "00";
@@ -91,6 +130,10 @@ export class EditComponent implements OnInit {
 		}
 	}
 
+    /**
+        * Calculates the rating of the user.
+        * @return {Array} An array of numbers, of length 5, for which the appropriate number of entries are full.
+    */
 	calculateRating() {
 		let ratings = this.user.rating;
 		if (ratings.numRatings === 0) {
@@ -100,8 +143,11 @@ export class EditComponent implements OnInit {
 		return Array(avg).fill(5);
 	}
 
+    /**
+        * Handles checking if a click has happened in the availability table.
+        * @return {Void}
+    */
 	handleCheckClick(row: number, col: number) {
 		this.user.availability[row][col] = !this.user.availability[row][col];
 	}
-
 }
