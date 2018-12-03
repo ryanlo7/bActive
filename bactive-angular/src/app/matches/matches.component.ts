@@ -66,7 +66,7 @@ export class MatchesComponent implements OnInit {
 				let newEvent: Event = this.matchedEvents[i];
 				newEvent.acceptedIds.push(userId);
 				newEvent.status = "pending";
-				this.pendingEvents.push(newEvent);
+				//this.pendingEvents.push(newEvent);
 				this.userService.updateEvent(newEvent);
 				console.log(newEvent);
 				this.matchedEvents.splice(i, 1);

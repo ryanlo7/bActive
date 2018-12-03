@@ -75,20 +75,25 @@ router.post('/event',
 
 router.put('/event/:eventId',
 	function(req, res, next) {
-		var eventId = parseInt(req.params.eventid);
+		var eventId = parseInt(req.params.eventId);
 		var db = req.app.locals.db;
 		var event = req.body.event;
 		console.log(event);
 		var updateObj = { $set: {acceptedIds: event.acceptedIds,
 										status: event.status} };
+
 		db.collection('Events').updateOne({'eventId': eventId}, updateObj, function(err, result) {
+						if (err) {
+							console.log(errorHandler(err));
+						}
 						res.status(200).send('OK');
+
 					});
 });
 
 router.delete('/event/:eventId',
 	function(req, res, next) {
-		var eventId = parseInt(req.params.eventid);
+		var eventId = parseInt(req.params.eventId);
 		var db = req.app.locals.db;
 		db.collection('Events')
 			.deleteOne({'eventId': eventId}, function(err, results) {
