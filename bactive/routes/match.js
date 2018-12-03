@@ -26,12 +26,14 @@ router.get('/:userid', function(req, res, next) {
 
 					var matchedResults = [];
 					matchUsers(req, res, next, userId, matchedResults);
+
+					//db call to insertEvent here:
+					database.insertEvent(database.routerProperties(req, res, next), matchedResults["user_id"], matchedResults["match_id"], matchedResults["event"], matchedResults["unix_time"], matchedResults["end_time"], matchedResults["location"]);
+
 				}
 			});
 
-	//db call to insertEvent here:
-	database.insertEvent(database.routerProperties(req, res, next), matchedResults["user_id"], matchedResults["match_id"], matchedResults["event"], matchedResults["unix_time"], matchedResults["end_time"], matchedResults["location"]);
-
+	
 });
 
 const MAX_AVAILABILITY_SCORE = 6;
