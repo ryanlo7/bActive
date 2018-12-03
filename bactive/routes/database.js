@@ -241,11 +241,16 @@ var insertEvent = function(properties, myUserId, friendUserId, activity, startTi
 				return;
 			}
 
-			valuesCollection.find({"name": "Events"}).toArray(function(err, resId) { //to get maxEventId for new eventId 
+
+			//console.log(valuesCollection);
+			valuesCollection.find({"name": "Users"}).toArray(function(err, resId) { //to get maxEventId for new eventId 
 				if (err) {
 					next(err);
 					return;
 				}
+				console.log(resId);
+				// console.log(resId);
+
 				let maxEventId = resId[0].maxEventId; //grab maxEventId from Values collection
 
 				let newEvent = {
@@ -287,6 +292,7 @@ var insertEvent = function(properties, myUserId, friendUserId, activity, startTi
 
 module.exports = {
 	insertUser: insertUser,
+	insertEvent: insertEvent,
 	updateUser: updateUser,
 	searchUsers: searchUsers,
 	searchActivities: searchActivities,
