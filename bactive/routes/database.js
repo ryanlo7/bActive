@@ -177,10 +177,6 @@ var insertUser = function(properties, email, password) {
 					name: "Active Member",
 					password: password,
 					rating: { "scoreSum": 0, "numRatings": 0},
-<<<<<<< HEAD
-					availability: defaultAvailability,
-=======
->>>>>>> b19af159ffb1e421476539b94809584bd8a71381
 					activities: [],
 					availability: defaultAvailability,
 					events: []
