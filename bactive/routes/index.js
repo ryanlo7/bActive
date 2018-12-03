@@ -15,6 +15,6 @@ var indexGet = function(req, res, next) {
     res.render('index', { title: 'B-Active' });
 }
 
-router.get('/', );
+router.get('/', indexGet);
 
 module.exports = router;
