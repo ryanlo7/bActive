@@ -62,7 +62,7 @@ export class UserService {
 	constructor(private http: HttpClient) { }
 
 	// Get the user from the API
-	fetchUser(): Observable<User[]> {
+	fetchUser(): Observable<any> {
 		const url = `${this.apiUrl}/users`;
 
 		return this.http.get<User[]>(url).pipe(
@@ -73,11 +73,10 @@ export class UserService {
 	}
 
 	getUser(userId: number): User {
-<<<<<<< HEAD
-		return this.users.find(cur => cur.userId === number);
-=======
+		if (this.users === undefined || this.users === null || this.users.length === 0) {
+			return null;
+		}
 		return this.users.find(cur => cur.userId === userId);
->>>>>>> ffa9775238f8337c270c00290691de13fc7e5afd
 	}
 
 	fetchEvents(userId: number): Observable<Event[]> {
