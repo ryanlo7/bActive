@@ -3,58 +3,111 @@ var router = express.Router();
 var verify = require('./verify');
 const bcrypt = require('bcryptjs');
 
-router.get('/event',
-	function(req, res, next) {
+/**
+	* Middleware function to get event from database.
+	* API to access this function: GET /api/event
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var getEvent = function(req, res, next) {
 	var db = req.app.locals.db;
 	db.collection('Events')
 		.find().toArray(function(err, result) {
 			res.status(200).json(result);
 		});
-});
+}
 
-router.get('/events/:userid',
-	function(req, res, next) {
+router.get('/event', getEvent);
+
+/**
+	* Middleware function to get events from database that user with id userid is invited to.
+	* API to access this function: GET /api/events/:userid
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var getEventsUserID = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 	db.collection('Events')
 		.find({'invitedIds': userId}).toArray(function(err, result) {
 			res.status(200).json(result);
 		});
-});
+}
 
+router.get('/events/:userid', getEventsUserID);
 
-router.get('/matchedevents/:userid',
-	function(req, res, next) {
+/**
+	* Middleware function to get events from database that user with id userid has been matched to.
+	* API to access this function: GET /api/matchedevents/:userid
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var getMatchedEventsUserID = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 	db.collection('Events')
 		.find({'invitedIds': userId, 'status': 'matched'}).toArray(function(err, result) {
 			res.status(200).json(result);
 		});
-});
+}
 
-router.get('/confirmedevents/:userid',
-	function(req, res, next) {
+
+router.get('/matchedevents/:userid', getMatchedEventsUserID);
+
+/**
+	* Middleware function to get confirmed events from database that user with id userid has been matched to.
+	* API to access this function: GET /api/confirmedevents/:userid
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var getConfirmedEventsUserID = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 	db.collection('Events')
 		.find({'invitedIds': userId, 'status': 'confirmed'}).toArray(function(err, result) {
 			res.status(200).json(result);
 		});
-});
+}
 
-router.get('/pendingevents/:userid',
-	function(req, res, next) {
+
+router.get('/confirmedevents/:userid', getConfirmedEventsUserID);
+
+/**
+	* Middleware function to get pending events from database that user with id userid has been matched to.
+	* API to access this function: GET /api/pendingevents/:userid
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var getPendingEventsUserID = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 	db.collection('Events')
 		.find({'invitedIds': userId, 'status': 'pending'}).toArray(function(err, result) {
 			res.status(200).json(result);
 		});
-});
+}
 
-router.post('/event',
-	function(req, res, next) {
+router.get('/pendingevents/:userid', getPendingEventsUserID);
+
+/**
+	* Middleware function to post an event to the database.
+	* API to access this function: POST /api/event
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var postEvent = function(req, res, next) {
 	var db = req.app.locals.db;
 	db.collection('Values')
 		.findOne({'name': 'Events'}, function(err, result) {
@@ -71,38 +124,65 @@ router.post('/event',
 					});
 				});
 		});
-});
+}
 
-router.put('/event/:eventId',
-	function(req, res, next) {
-		var eventId = parseInt(req.params.eventId);
-		var db = req.app.locals.db;
-		var event = req.body.event;
-		console.log(event);
-		var updateObj = { $set: {acceptedIds: event.acceptedIds,
-										status: event.status} };
+router.post('/event', postEvent);
 
-		db.collection('Events').updateOne({'eventId': eventId}, updateObj, function(err, result) {
-						if (err) {
-							console.log(errorHandler(err));
-						}
-						res.status(200).send('OK');
+/**
+	* Middleware function to update event in database with id eventId.
+	* API to access this function: PUT /api/event/:eventId
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var putEventEventID = function(req, res, next) {
+	var eventId = parseInt(req.params.eventId);
+	var db = req.app.locals.db;
+	var event = req.body.event;
+	console.log(event);
+	var updateObj = { $set: {acceptedIds: event.acceptedIds,
+									status: event.status} };
 
-					});
-});
+	db.collection('Events').updateOne({'eventId': eventId}, updateObj, function(err, result) {
+					if (err) {
+						console.log(errorHandler(err));
+					}
+					res.status(200).send('OK');
 
-router.delete('/event/:eventId',
-	function(req, res, next) {
-		var eventId = parseInt(req.params.eventId);
-		var db = req.app.locals.db;
-		db.collection('Events')
-			.deleteOne({'eventId': eventId}, function(err, results) {
-				res.status(200).send('OK');
-			});
-});
+				});
+}
 
-router.get('/users',
-	function(req, res, next) {
+router.put('/event/:eventId', putEventEventID);
+
+/**
+	* Middleware function to delete event in database with id eventId.
+	* API to access this function: DELETE /api/event/:eventId
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var deleteEventEventID = function(req, res, next) {
+	var eventId = parseInt(req.params.eventId);
+	var db = req.app.locals.db;
+	db.collection('Events')
+		.deleteOne({'eventId': eventId}, function(err, results) {
+			res.status(200).send('OK');
+		});
+}
+
+router.delete('/event/:eventId', deleteEventEventID);
+
+/**
+	* Middleware function to get array of JSON objects representing all users.
+	* API to access this function: GET /api/users
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var getUsers = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 	var included_fields = {'userId': true, 'name': true, 'email': true, 'rating': true, 'activities': true, 'availability': true, 'events': true, '_id': false};
@@ -115,10 +195,19 @@ router.get('/users',
 				res.status(200).json(results);
 			}
 		});
-});
+}
 
-router.get('/:userid',
-	function(req, res, next) {
+router.get('/users', getUsers);
+
+/**
+	* Middleware function to get user with id userid.
+	* API to access this function: GET /api/:userid
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var getUserID = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 	var included_fields = {'userId': true, 'name': true, 'email': true, 'rating': true, 'activities': true, 'availability': true, 'events': true, '_id': false};
@@ -132,10 +221,19 @@ router.get('/:userid',
 				res.status(200).json(user);
 			}
 		});
-});
+}
 
-router.put('/name/:userid',
-	function(req, res, next) {
+router.get('/:userid', getUserID);
+
+/**
+	* Middleware function to put a name into the user with id userid.
+	* API to access this function: PUT /api/name/:userid
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var putNameUserID = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 	db.collection('Users')
@@ -160,10 +258,19 @@ router.put('/name/:userid',
 				});
 			}
 		});
-});
+}
 
-router.put('/availability/:userid',
-	function(req, res, next) {
+router.put('/name/:userid', putNameUserID);
+
+/**
+	* Middleware function to update an availability cell for user with id userid.
+	* API to access this function: PUT /api/availability/:userid
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var putAvailabilityUserID = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 	db.collection('Users')
@@ -188,10 +295,19 @@ router.put('/availability/:userid',
 				});
 			}
 		});
-});
+}
 
-router.put('/password/:userid',
-	function(req, res, next) {
+router.put('/availability/:userid', putAvailabilityUserID);
+
+/**
+	* Middleware function to update the password for user with id userid.
+	* API to access this function: PUT /api/password/:userid
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var putPasswordUserID = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 	db.collection('Users')
@@ -218,10 +334,19 @@ router.put('/password/:userid',
 				});
 			}
 		});
-});
+}
 
-router.post('/activity/:userid',
-	function(req, res, next) {
+router.put('/password/:userid', putPasswordUserID);
+
+/**
+	* Middleware function to update an activity for user with id userid.
+	* API to access this function: POST /api/activity/:userid
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var postActivityUserID = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 	db.collection('Users')
@@ -247,7 +372,9 @@ router.post('/activity/:userid',
 				});
 			}
 		});
-});
+}
+
+router.post('/activity/:userid', postActivityUserID);
 
 // router.put('/activity/:userid',
 	// function(req, res, next) {
@@ -284,8 +411,15 @@ router.post('/activity/:userid',
 		// });
 // });
 
-router.delete('/activity/:userid',
-	function(req, res, next) {
+/**
+	* Middleware function to delete an activity for user with id userid.
+	* API to access this function: DELETE /api/activity/:userid
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var deleteActivityUserID = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 	db.collection('Users')
@@ -316,10 +450,19 @@ router.delete('/activity/:userid',
 				});
 			}
 		});
-});
+}
 
-router.put('/rate/:userid',
-	function(req, res, next) {
+router.delete('/activity/:userid', deleteActivityUserID);
+
+/**
+	* Middleware function to let a user rate another user for an event.
+	* API to access this function: PUT /api/rate/:userid
+	* @param {Object} req The express routing HTTP client request object.
+	* @param {Object} res The express routing HTTP client response object.
+	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
+	* @return {Void}
+*/
+var putRateUserID = function(req, res, next) {
 	var db = req.app.locals.db;
 	var userId = parseInt(req.params.userid);
 	db.collection('Users')
@@ -369,6 +512,8 @@ router.put('/rate/:userid',
 				});
 			}
 		});
-});
+}
+
+router.put('/rate/:userid', putRateUserID);
 
 module.exports = router;
