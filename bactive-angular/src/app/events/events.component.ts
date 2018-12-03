@@ -20,6 +20,7 @@ export class EventsComponent implements OnInit {
     confirmedEvents: Event[];
     imageMap: IHash = {};
     ratingScale: number[] = [1, 2, 3, 4, 5];
+    ratedEvents: number[] = [];
     ratings: JHash = {}; // First argument is eventId + " " + rateeId. Value stored in that entry is score.
 
 	constructor(private userService: UserService) {
@@ -73,9 +74,37 @@ export class EventsComponent implements OnInit {
         return user.name;
     }
 
+    otherParticipant(invitedIds: number[]): number {
+        if (invitedIds[0] == this.userId) {
+            return invitedIds[1];
+        }
+
+        return invitedIds[0];
+    }
+
+    notRated(eventId: number): boolean {
+        if(this.ratedEvents.indexOf(eventId) > -1) return false;
+
+        for(let i = 0; i < this.user.events.length; i++) {
+
+            if (this.user.events[i].eventId == eventId) {
+                console.log(this.user.events[i].rated.length);
+                if (this.user.events[i].rated.length > 0) {
+                    console.log(this.user.events[i].rated.length);
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+
+        return true;
+    }
+
 
     rateUser(otherId: number, eventId: number, rating: number): void {
 		this.userService.rateUser(this.userId, otherId, eventId, rating);
+        this.ratedEvents.push(eventId);
 	}
 }
 
