@@ -5,10 +5,10 @@
 
 <div class="container-fluid well">
     <h1>Events</h1>
-    <div *ngIf="confimredEvents">
+    <div *ngIf="events">
         <ul>
-            <li *ngFor="let confirmedEvent of confirmedEvents">
-                {{ confirmedEvent.activity }}
+            <li *ngFor="let event of events">
+                {{ event.activity }}
             </li>
         </ul>
     </div>
