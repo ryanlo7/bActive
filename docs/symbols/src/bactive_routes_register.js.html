@@ -13,98 +13,102 @@
 <span class='line'>  6</span> </span><span class="COMM">// const collectionName = 'Users';</span><span class="WHIT">
 <span class='line'>  7</span> 
 <span class='line'>  8</span> </span><span class="COMM">/* GET new user registration. */</span><span class="WHIT">
-<span class='line'>  9</span> </span><span class="NAME">router.get</span><span class="PUNC">(</span><span class="STRN">'/'</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'> 10</span> </span><span class="WHIT">    </span><span class="COMM">/**
-<span class='line'> 11</span>         * Function to handle GET requests for user registration.
-<span class='line'> 12</span>         * Render the registration page, and return it through res.
-<span class='line'> 13</span>         * @param {Object} req The express routing HTTP client request object,
-<span class='line'> 14</span>         * whose body contains the JSON object for user registration.
-<span class='line'> 15</span>         * @param {Object} res The express routing HTTP client response object.
-<span class='line'> 16</span>         * @param {callback} next The express routing callback function to invoke next middleware in the stack.
-<span class='line'> 17</span>         * @return {Object} A JSON object that holds req, res, and next.
-<span class='line'> 18</span>     */</span><span class="WHIT">
-<span class='line'> 19</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">req</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">res</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">next</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>  9</span> 
+<span class='line'> 10</span> </span><span class="COMM">/**
+<span class='line'> 11</span>     * Function to handle GET requests for user registration.
+<span class='line'> 12</span>     * Render the registration page, and return it through res.
+<span class='line'> 13</span>     * @param {Object} req The express routing HTTP client request object,
+<span class='line'> 14</span>     * whose body contains the JSON object for user registration.
+<span class='line'> 15</span>     * @param {Object} res The express routing HTTP client response object.
+<span class='line'> 16</span>     * @param {callback} next The express routing callback function to invoke next middleware in the stack.
+<span class='line'> 17</span>     * @return {Object} A JSON object that holds req, res, and next.
+<span class='line'> 18</span> */</span><span class="WHIT">
+<span class='line'> 19</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">registerGet</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">req</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">res</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">next</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 20</span> </span><span class="WHIT">  	</span><span class="NAME">res.render</span><span class="PUNC">(</span><span class="STRN">'register'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="NAME">err</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 21</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 21</span> </span><span class="PUNC">}</span><span class="WHIT">
 <span class='line'> 22</span> 
-<span class='line'> 23</span> </span><span class="COMM">/* POST new user registration */</span><span class="WHIT">
-<span class='line'> 24</span> </span><span class="NAME">router.post</span><span class="PUNC">(</span><span class="STRN">'/'</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'> 25</span> </span><span class="WHIT">    </span><span class="COMM">/**
-<span class='line'> 26</span>         * Function to handle POST requests for user registration.
-<span class='line'> 27</span>         * Reject the registration iff the email, password, and confirmations fields are blank,
-<span class='line'> 28</span>         * or confirmation does not match. Otherwise add user to database.
-<span class='line'> 29</span>         * @param {Object} req The express routing HTTP client request object,
-<span class='line'> 30</span>         * whose body contains the JSON object for user registration.
-<span class='line'> 31</span>     	* @param {Object} res The express routing HTTP client response object.
-<span class='line'> 32</span>     	* @param {callback} next The express routing callback function to invoke next middleware in the stack.
-<span class='line'> 33</span>     	* @return {Object} A JSON object that holds req, res, and next.
-<span class='line'> 34</span>     */</span><span class="WHIT">
-<span class='line'> 35</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">req</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">res</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">next</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 36</span> </span><span class="WHIT">    	</span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">email</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">req.body.email</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 37</span> </span><span class="WHIT">    	</span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">password</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">req.body.password</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 38</span> </span><span class="WHIT">    	</span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">pass_confirm</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">req.body.password_confirmation</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 39</span> </span><span class="WHIT">    	</span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">email</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="STRN">""</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">password</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="STRN">""</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">pass_confirm</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="STRN">""</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 40</span> </span><span class="WHIT">    		</span><span class="NAME">res.status</span><span class="PUNC">(</span><span class="NUMB">401</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">render</span><span class="PUNC">(</span><span class="STRN">'register'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="NAME">err</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">'Error: the email and passwords fields must not be blank'</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 41</span> </span><span class="WHIT">    		</span><span class="KEYW">return</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 42</span> </span><span class="WHIT">    	</span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'> 43</span> </span><span class="WHIT">    	</span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">password</span><span class="WHIT"> </span><span class="PUNC">!==</span><span class="WHIT"> </span><span class="NAME">pass_confirm</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 44</span> </span><span class="WHIT">    		</span><span class="NAME">res.status</span><span class="PUNC">(</span><span class="NUMB">401</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">render</span><span class="PUNC">(</span><span class="STRN">'register'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="NAME">err</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">'Error: the passwords do not match'</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 45</span> </span><span class="WHIT">    		</span><span class="KEYW">return</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 46</span> </span><span class="WHIT">    	</span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'> 47</span> </span><span class="WHIT">    	</span><span class="NAME">bcrypt.hash</span><span class="PUNC">(</span><span class="NAME">password</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">10</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">err</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">hash</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 48</span> </span><span class="WHIT">    		</span><span class="NAME">database.insertUser</span><span class="PUNC">(</span><span class="NAME">database.routerProperties</span><span class="PUNC">(</span><span class="NAME">req</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">res</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">next</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">email</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">hash</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 49</span> </span><span class="WHIT">    	</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 50</span> 
+<span class='line'> 23</span> </span><span class="NAME">router.get</span><span class="PUNC">(</span><span class="STRN">'/'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">registerGet</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 24</span> 
+<span class='line'> 25</span> </span><span class="COMM">/**
+<span class='line'> 26</span>     * Function to handle POST requests for user registration.
+<span class='line'> 27</span>     * Reject the registration iff the email, password, and confirmations fields are blank,
+<span class='line'> 28</span>     * or confirmation does not match. Otherwise add user to database.
+<span class='line'> 29</span>     * @param {Object} req The express routing HTTP client request object,
+<span class='line'> 30</span>     * whose body contains the JSON object for user registration.
+<span class='line'> 31</span>     * @param {Object} res The express routing HTTP client response object.
+<span class='line'> 32</span>     * @param {callback} next The express routing callback function to invoke next middleware in the stack.
+<span class='line'> 33</span>     * @return {Object} A JSON object that holds req, res, and next.
+<span class='line'> 34</span> */</span><span class="WHIT">
+<span class='line'> 35</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">registerPost</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">req</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">res</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">next</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="WHIT">    </span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">name</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">req.body.name</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 37</span> </span><span class="WHIT">    </span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">email</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">req.body.email</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 38</span> </span><span class="WHIT">    </span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">password</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">req.body.password</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 39</span> </span><span class="WHIT">    </span><span class="NAME">let</span><span class="WHIT"> </span><span class="NAME">pass_confirm</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">req.body.password_confirmation</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 40</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">name</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="STRN">""</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">email</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="STRN">""</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">password</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="STRN">""</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">pass_confirm</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="STRN">""</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 41</span> </span><span class="WHIT">        </span><span class="NAME">res.status</span><span class="PUNC">(</span><span class="NUMB">401</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">render</span><span class="PUNC">(</span><span class="STRN">'register'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="NAME">err</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">'Error: the name, email, and passwords fields must not be blank'</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 43</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 44</span> </span><span class="WHIT">    </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">password</span><span class="WHIT"> </span><span class="PUNC">!==</span><span class="WHIT"> </span><span class="NAME">pass_confirm</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 45</span> </span><span class="WHIT">        </span><span class="NAME">res.status</span><span class="PUNC">(</span><span class="NUMB">401</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">render</span><span class="PUNC">(</span><span class="STRN">'register'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="NAME">err</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="STRN">'Error: the passwords do not match'</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 46</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 47</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 48</span> </span><span class="WHIT">    </span><span class="NAME">bcrypt.hash</span><span class="PUNC">(</span><span class="NAME">password</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">10</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">err</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">hash</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 49</span> </span><span class="WHIT">        </span><span class="NAME">database.insertUser</span><span class="PUNC">(</span><span class="NAME">database.routerProperties</span><span class="PUNC">(</span><span class="NAME">req</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">res</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">next</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">name</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">email</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">hash</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 50</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 51</span> 
-<span class='line'> 52</span> </span><span class="WHIT">	</span><span class="COMM">// let db = req.app.locals.db;</span><span class="WHIT">
-<span class='line'> 53</span> </span><span class="WHIT">	</span><span class="COMM">// const collection = db.collection(collectionName);</span><span class="WHIT">
-<span class='line'> 54</span> </span><span class="WHIT">	</span><span class="COMM">// var query = {"email": email};</span><span class="WHIT">
-<span class='line'> 55</span> 
-<span class='line'> 56</span> </span><span class="WHIT">	</span><span class="COMM">// collection.find(query).toArray(</span><span class="WHIT">
-<span class='line'> 57</span> </span><span class="WHIT">	</span><span class="COMM">// 	function(err, result) {</span><span class="WHIT">
-<span class='line'> 58</span> </span><span class="WHIT">	</span><span class="COMM">// 		if (err) {</span><span class="WHIT">
-<span class='line'> 59</span> </span><span class="WHIT">	</span><span class="COMM">// 			next(err);</span><span class="WHIT">
-<span class='line'> 60</span> </span><span class="WHIT">	</span><span class="COMM">// 			return;</span><span class="WHIT">
-<span class='line'> 61</span> </span><span class="WHIT">	</span><span class="COMM">// 		}</span><span class="WHIT">
-<span class='line'> 62</span> </span><span class="WHIT">	</span><span class="COMM">// 		if (result.length !== 0) {</span><span class="WHIT">
-<span class='line'> 63</span> </span><span class="WHIT">	</span><span class="COMM">// 			res.status(404).send(`User with given email already exists`);</span><span class="WHIT">
-<span class='line'> 64</span> </span><span class="WHIT">	</span><span class="COMM">// 			return;</span><span class="WHIT">
-<span class='line'> 65</span> </span><span class="WHIT">	</span><span class="COMM">// 		}</span><span class="WHIT">
-<span class='line'> 66</span> 
-<span class='line'> 67</span> </span><span class="WHIT">	</span><span class="COMM">// 		db.collection("Values").find({"name": collectionName}).toArray(function(err, resId) {</span><span class="WHIT">
-<span class='line'> 68</span> </span><span class="WHIT">	</span><span class="COMM">// 			if (err) {</span><span class="WHIT">
-<span class='line'> 69</span> </span><span class="WHIT">	</span><span class="COMM">// 				next(err);</span><span class="WHIT">
-<span class='line'> 70</span> </span><span class="WHIT">	</span><span class="COMM">// 				return;</span><span class="WHIT">
-<span class='line'> 71</span> </span><span class="WHIT">	</span><span class="COMM">// 			}</span><span class="WHIT">
-<span class='line'> 72</span> </span><span class="WHIT">	</span><span class="COMM">// 			let maxUserId = resId[0].maxUserId;</span><span class="WHIT">
-<span class='line'> 73</span> </span><span class="WHIT">	</span><span class="COMM">// 			let newUser = {</span><span class="WHIT">
-<span class='line'> 74</span> </span><span class="WHIT">	</span><span class="COMM">// 				userId: maxUserId,</span><span class="WHIT">
-<span class='line'> 75</span> </span><span class="WHIT">	</span><span class="COMM">// 				email: email,</span><span class="WHIT">
-<span class='line'> 76</span> </span><span class="WHIT">	</span><span class="COMM">// 				password: password,</span><span class="WHIT">
-<span class='line'> 77</span> </span><span class="WHIT">	</span><span class="COMM">// 				availability: [],</span><span class="WHIT">
-<span class='line'> 78</span> </span><span class="WHIT">	</span><span class="COMM">// 				events: []</span><span class="WHIT">
-<span class='line'> 79</span> </span><span class="WHIT">	</span><span class="COMM">// 			};</span><span class="WHIT">
-<span class='line'> 80</span> </span><span class="WHIT">	</span><span class="COMM">// 			collection.insertOne(newUser, function (err, insertResult) {</span><span class="WHIT">
-<span class='line'> 81</span> </span><span class="WHIT">	</span><span class="COMM">// 				if (err) {</span><span class="WHIT">
-<span class='line'> 82</span> </span><span class="WHIT">	</span><span class="COMM">// 					next(err);</span><span class="WHIT">
-<span class='line'> 83</span> </span><span class="WHIT">	</span><span class="COMM">// 					return;</span><span class="WHIT">
-<span class='line'> 84</span> </span><span class="WHIT">	</span><span class="COMM">// 				}</span><span class="WHIT">
-<span class='line'> 85</span> </span><span class="WHIT">	</span><span class="COMM">// 				let newValue = {$set: {"maxUserId": maxUserId + 1}}; // this is buggy</span><span class="WHIT">
-<span class='line'> 86</span> </span><span class="WHIT">	</span><span class="COMM">// 				db.collection("Values").updateOne({"name": "Users"}, newValue, function(err, updateResult) {</span><span class="WHIT">
-<span class='line'> 87</span> </span><span class="WHIT">	</span><span class="COMM">// 					if (err) {</span><span class="WHIT">
-<span class='line'> 88</span> </span><span class="WHIT">	</span><span class="COMM">// 						next(err);</span><span class="WHIT">
-<span class='line'> 89</span> </span><span class="WHIT">	</span><span class="COMM">// 						return;</span><span class="WHIT">
-<span class='line'> 90</span> </span><span class="WHIT">	</span><span class="COMM">// 					}</span><span class="WHIT">
-<span class='line'> 91</span> </span><span class="WHIT">	</span><span class="COMM">// 					res.status(201).send('Successfully inserted new user into db.');</span><span class="WHIT">
-<span class='line'> 92</span> </span><span class="WHIT">	</span><span class="COMM">// 					// res.render('profile', {});</span><span class="WHIT">
-<span class='line'> 93</span> </span><span class="WHIT">	</span><span class="COMM">// 					return;</span><span class="WHIT">
-<span class='line'> 94</span> </span><span class="WHIT">	</span><span class="COMM">// 				});</span><span class="WHIT">
-<span class='line'> 95</span> </span><span class="WHIT">	</span><span class="COMM">// 			});</span><span class="WHIT">
-<span class='line'> 96</span> </span><span class="WHIT">	</span><span class="COMM">// 		});</span><span class="WHIT">
-<span class='line'> 97</span> </span><span class="WHIT">	</span><span class="COMM">// 		return;</span><span class="WHIT">
-<span class='line'> 98</span> </span><span class="WHIT">	</span><span class="COMM">// 	}</span><span class="WHIT">
-<span class='line'> 99</span> </span><span class="WHIT">	</span><span class="COMM">// );</span><span class="WHIT">
-<span class='line'>100</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>101</span> 
-<span class='line'>102</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">router</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>103</span> </span></pre></body></html>
+<span class='line'> 52</span> 
+<span class='line'> 53</span> </span><span class="COMM">// let db = req.app.locals.db;</span><span class="WHIT">
+<span class='line'> 54</span> </span><span class="COMM">// const collection = db.collection(collectionName);</span><span class="WHIT">
+<span class='line'> 55</span> </span><span class="COMM">// var query = {"email": email};</span><span class="WHIT">
+<span class='line'> 56</span> 
+<span class='line'> 57</span> </span><span class="COMM">// collection.find(query).toArray(</span><span class="WHIT">
+<span class='line'> 58</span> </span><span class="COMM">// 	function(err, result) {</span><span class="WHIT">
+<span class='line'> 59</span> </span><span class="COMM">// 		if (err) {</span><span class="WHIT">
+<span class='line'> 60</span> </span><span class="COMM">// 			next(err);</span><span class="WHIT">
+<span class='line'> 61</span> </span><span class="COMM">// 			return;</span><span class="WHIT">
+<span class='line'> 62</span> </span><span class="COMM">// 		}</span><span class="WHIT">
+<span class='line'> 63</span> </span><span class="COMM">// 		if (result.length !== 0) {</span><span class="WHIT">
+<span class='line'> 64</span> </span><span class="COMM">// 			res.status(404).send(`User with given email already exists`);</span><span class="WHIT">
+<span class='line'> 65</span> </span><span class="COMM">// 			return;</span><span class="WHIT">
+<span class='line'> 66</span> </span><span class="COMM">// 		}</span><span class="WHIT">
+<span class='line'> 67</span> 
+<span class='line'> 68</span> </span><span class="COMM">// 		db.collection("Values").find({"name": collectionName}).toArray(function(err, resId) {</span><span class="WHIT">
+<span class='line'> 69</span> </span><span class="COMM">// 			if (err) {</span><span class="WHIT">
+<span class='line'> 70</span> </span><span class="COMM">// 				next(err);</span><span class="WHIT">
+<span class='line'> 71</span> </span><span class="COMM">// 				return;</span><span class="WHIT">
+<span class='line'> 72</span> </span><span class="COMM">// 			}</span><span class="WHIT">
+<span class='line'> 73</span> </span><span class="COMM">// 			let maxUserId = resId[0].maxUserId;</span><span class="WHIT">
+<span class='line'> 74</span> </span><span class="COMM">// 			let newUser = {</span><span class="WHIT">
+<span class='line'> 75</span> </span><span class="COMM">// 				userId: maxUserId,</span><span class="WHIT">
+<span class='line'> 76</span> </span><span class="COMM">// 				email: email,</span><span class="WHIT">
+<span class='line'> 77</span> </span><span class="COMM">// 				password: password,</span><span class="WHIT">
+<span class='line'> 78</span> </span><span class="COMM">// 				availability: [],</span><span class="WHIT">
+<span class='line'> 79</span> </span><span class="COMM">// 				events: []</span><span class="WHIT">
+<span class='line'> 80</span> </span><span class="COMM">// 			};</span><span class="WHIT">
+<span class='line'> 81</span> </span><span class="COMM">// 			collection.insertOne(newUser, function (err, insertResult) {</span><span class="WHIT">
+<span class='line'> 82</span> </span><span class="COMM">// 				if (err) {</span><span class="WHIT">
+<span class='line'> 83</span> </span><span class="COMM">// 					next(err);</span><span class="WHIT">
+<span class='line'> 84</span> </span><span class="COMM">// 					return;</span><span class="WHIT">
+<span class='line'> 85</span> </span><span class="COMM">// 				}</span><span class="WHIT">
+<span class='line'> 86</span> </span><span class="COMM">// 				let newValue = {$set: {"maxUserId": maxUserId + 1}}; // this is buggy</span><span class="WHIT">
+<span class='line'> 87</span> </span><span class="COMM">// 				db.collection("Values").updateOne({"name": "Users"}, newValue, function(err, updateResult) {</span><span class="WHIT">
+<span class='line'> 88</span> </span><span class="COMM">// 					if (err) {</span><span class="WHIT">
+<span class='line'> 89</span> </span><span class="COMM">// 						next(err);</span><span class="WHIT">
+<span class='line'> 90</span> </span><span class="COMM">// 						return;</span><span class="WHIT">
+<span class='line'> 91</span> </span><span class="COMM">// 					}</span><span class="WHIT">
+<span class='line'> 92</span> </span><span class="COMM">// 					res.status(201).send('Successfully inserted new user into db.');</span><span class="WHIT">
+<span class='line'> 93</span> </span><span class="COMM">// 					// res.render('profile', {});</span><span class="WHIT">
+<span class='line'> 94</span> </span><span class="COMM">// 					return;</span><span class="WHIT">
+<span class='line'> 95</span> </span><span class="COMM">// 				});</span><span class="WHIT">
+<span class='line'> 96</span> </span><span class="COMM">// 			});</span><span class="WHIT">
+<span class='line'> 97</span> </span><span class="COMM">// 		});</span><span class="WHIT">
+<span class='line'> 98</span> </span><span class="COMM">// 		return;</span><span class="WHIT">
+<span class='line'> 99</span> </span><span class="COMM">// 	}</span><span class="WHIT">
+<span class='line'>100</span> </span><span class="COMM">// );</span><span class="WHIT">
+<span class='line'>101</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>102</span> 
+<span class='line'>103</span> </span><span class="COMM">/* POST new user registration */</span><span class="WHIT">
+<span class='line'>104</span> </span><span class="NAME">router.post</span><span class="PUNC">(</span><span class="STRN">'/'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">registerPost</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>105</span> 
+<span class='line'>106</span> </span><span class="NAME">module.exports</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">router</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>107</span> </span></pre></body></html>

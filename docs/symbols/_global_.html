@@ -236,6 +236,24 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#calculateRating">calculateRating</a></b>(userRatingContainer)
+								</div>
+								<div class="description">Calculates a rating for a user.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#checkLogin">checkLogin</a></b>(cookie, email)
+								</div>
+								<div class="description">Checks a login, using the provided cookie and email.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/_global_.html#computeInterestMatch">computeInterestMatch</a></b>(curr_user_interest, potential_match_interest)
 								</div>
 								<div class="description">Returns a score for interest match.</div>
@@ -264,9 +282,63 @@ have the same maximum and minimum values.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#deleteActivityUserID">deleteActivityUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to delete an activity for user with id userid.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#deleteEventEventID">deleteEventEventID</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to delete event in database with id eventId.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#editGetUserID">editGetUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Function to handle GET requests for user information.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#editPostUserID">editPostUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Function to handle POST requests for user information.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#eventsGetUserID">eventsGetUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Function to handle GET requests for user events page.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/_global_.html#generateActivityMatches">generateActivityMatches</a></b>(curr_user_activities, potential_match_activities)
 								</div>
 								<div class="description">Generates a list of activity matches with an interest match and a skill match for each activity.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#getActivityLocations">getActivityLocations</a></b>()
+								</div>
+								<div class="description">Return the locations of activities.</div>
 							</td>
 						</tr>
 					
@@ -311,9 +383,135 @@ interest and skill level scores for that activity, given a list of activities an
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/_global_.html#insertUser">insertUser</a></b>(properties, email, password)
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#getConfirmedEventsUserID">getConfirmedEventsUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to get confirmed events from database that user with id userid has been matched to.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#getEvent">getEvent</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to get event from database.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#getEventDate">getEventDate</a></b>(day, time_slot)
+								</div>
+								<div class="description">Return the time of the event in Unix Epoch time format.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#getEventStartTime">getEventStartTime</a></b>(curr_user_availability, potential_match_availability)
+								</div>
+								<div class="description">Returns the best time to meet up for two users.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#getEventsUserID">getEventsUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to get events from database that user with id userid is invited to.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#getMatchedEventsUserID">getMatchedEventsUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to get events from database that user with id userid has been matched to.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#getPendingEventsUserID">getPendingEventsUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to get pending events from database that user with id userid has been matched to.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#getUserID">getUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to get user with id userid.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#getUsers">getUsers</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to get array of JSON objects representing all users.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#indexGet">indexGet</a></b>(req, res, next)
+								</div>
+								<div class="description">Function to handle GET requests for index page.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#insertEvent">insertEvent</a></b>(properties, email, password, activity, startTime, endTime, location)
+								</div>
+								<div class="description">Function to insert a new event into the Events collection in MongoDB.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#insertUser">insertUser</a></b>(properties, name, email, password)
 								</div>
 								<div class="description">Function to insert a new user into the Users collection in MongoDB.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#loginGet">loginGet</a></b>(req, res)
+								</div>
+								<div class="description">Function to handle GET requests for login page.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#loginPost">loginPost</a></b>(req, res)
+								</div>
+								<div class="description">Function to handle POST requests for login page.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#matchGet">matchGet</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to get matches for a user.</div>
 							</td>
 						</tr>
 					
@@ -329,9 +527,99 @@ interest and skill level scores for that activity, given a list of activities an
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/_global_.html#matchUsers">matchUsers</a></b>(req, res, next, userId)
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#matchUsers">matchUsers</a></b>(req, res, next, userId, matches)
 								</div>
 								<div class="description">Key function to generate matches for a single user, given the user id.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#postActivityUserID">postActivityUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to update an activity for user with id userid.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#postEvent">postEvent</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to post an event to the database.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#profileGet">profileGet</a></b>(req, res, next)
+								</div>
+								<div class="description">Function to handle GET requests for user profile page.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#putAvailabilityUserID">putAvailabilityUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to update an availability cell for user with id userid.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#putEventEventID">putEventEventID</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to update event in database with id eventId.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#putNameUserID">putNameUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to put a name into the user with id userid.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#putPasswordUserID">putPasswordUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to update the password for user with id userid.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#putRateUserID">putRateUserID</a></b>(req, res, next)
+								</div>
+								<div class="description">Middleware function to let a user rate another user for an event.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#registerGet">registerGet</a></b>(req, res, next)
+								</div>
+								<div class="description">Function to handle GET requests for user registration.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#registerPost">registerPost</a></b>(req, res, next)
+								</div>
+								<div class="description">Function to handle POST requests for user registration.</div>
 							</td>
 						</tr>
 					
@@ -347,7 +635,7 @@ interest and skill level scores for that activity, given a list of activities an
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/_global_.html#searchUsers">searchUsers</a></b>(properties, criteria, processUsers)
+								<div class="fixedFont"><b><a href="../symbols/_global_.html#searchUsers">searchUsers</a></b>(properties, criteria, processUsers, processUsers)
 								</div>
 								<div class="description">Function to search for all users meeting a criteria.</div>
 							</td>
@@ -382,6 +670,104 @@ interest and skill level scores for that activity, given a list of activities an
 				<div class="sectionTitle">
 					Method Detail
 				</div>
+				
+					<a name="calculateRating"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>calculateRating</b>(userRatingContainer)
+					
+					</div>
+					<div class="description">
+						Calculates a rating for a user.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_profile.js.html">profile.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>userRatingContainer</b>
+									
+								</dt>
+								<dd>The container that holds the user ratings.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{number}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="checkLogin"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{boolean}</span>
+					<b>checkLogin</b>(cookie, email)
+					
+					</div>
+					<div class="description">
+						Checks a login, using the provided cookie and email.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_verify.js.html">verify.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>cookie</b>
+									
+								</dt>
+								<dd>The cookie provided by the client's browser.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>email</b>
+									
+								</dt>
+								<dd>The user's email.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{boolean}</span> Whether the given cookie and email verify.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
 				
 					<a name="computeInterestMatch"> </a>
 					<div class="fixedFont">
@@ -543,6 +929,301 @@ have the same maximum and minimum values.
 
 					<hr />
 				
+					<a name="deleteActivityUserID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>deleteActivityUserID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to delete an activity for user with id userid.
+API to access this function: DELETE /api/activity/:userid
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="deleteEventEventID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>deleteEventEventID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to delete event in database with id eventId.
+API to access this function: DELETE /api/event/:eventId
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="editGetUserID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Object}</span>
+					<b>editGetUserID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Function to handle GET requests for user information.Render the edit page corresponding to the user, or a 404 if the userID does not exist.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_edit.js.html">edit.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object,whose parameters contain the userID.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Object}</span> A JSON object that holds req, res, and next.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="editPostUserID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Object}</span>
+					<b>editPostUserID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Function to handle POST requests for user information.Updates the user's information in the database.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_edit.js.html">edit.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object,whose parameters contain the userID, email, password, and confirmation.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Object}</span> A JSON object that holds req, res, and next.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="eventsGetUserID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Object}</span>
+					<b>eventsGetUserID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Function to handle GET requests for user events page.
+Render the events page, or return a 404 error if the userID is not in the MongoDB database,
+or redirect to the login page with a 401 status code if the JSON web token does not verify.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_events.js.html">events.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object,
+whose parameters include the userID.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Object}</span> A JSON object that holds req, res, and next.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
 					<a name="generateActivityMatches"> </a>
 					<div class="fixedFont">
 					
@@ -598,10 +1279,45 @@ the name of the potential match activity, a skill score, and an interest score.<
 
 					<hr />
 				
+					<a name="getActivityLocations"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Object}</span>
+					<b>getActivityLocations</b>()
+					
+					</div>
+					<div class="description">
+						Return the locations of activities.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_match.js.html">match.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Object}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
 					<a name="getAvailabilityMatch"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{number}</span>
+					<span class="light">{Object}</span>
 					<b>getAvailabilityMatch</b>(curr_user_availability, potential_match_availability)
 					
 					</div>
@@ -645,7 +1361,8 @@ for the potentialMatch for each thirty-minute time slot on each day of the week.
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{number}</span> The maximum number of overlapping consecutive half-hours between the two users.</dd>
+								<dd><span class="light fixedFont">{Object}</span> The day, start time slot, and maximum number of overlapping consecutive half-hours
+between the two users.</dd>
 							
 							</dl>
 						
@@ -820,18 +1537,593 @@ a field for the skill match score.</dd>
 
 					<hr />
 				
-					<a name="insertUser"> </a>
+					<a name="getConfirmedEventsUserID"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{Void}</span>
-					<b>insertUser</b>(properties, email, password)
+					<b>getConfirmedEventsUserID</b>(req, res, next)
 					
 					</div>
 					<div class="description">
-						Function to insert a new user into the Users collection in MongoDB.
-The server returns a 404 error if the email in the request body is already in use.
-Otherwise it creates a new user with the given userID and hashed password,
-default availabilities, and no activities or events, and adds it to the MongoDB database,
+						Middleware function to get confirmed events from database that user with id userid has been matched to.
+API to access this function: GET /api/confirmedevents/:userid
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getEvent"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>getEvent</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to get event from database.
+API to access this function: GET /api/event
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getEventDate"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>getEventDate</b>(day, time_slot)
+					
+					</div>
+					<div class="description">
+						Return the time of the event in Unix Epoch time format.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_match.js.html">match.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>day</b>
+									
+								</dt>
+								<dd>Day in database for the event, where 0 is
+Monday and 6 is Sunday</dd>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>time_slot</b>
+									
+								</dt>
+								<dd>The timeslot in the database for the
+event, where 0 means midnight, one means 12:30 AM, etc.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="getEventStartTime"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Array<number>}</span>
+					<b>getEventStartTime</b>(curr_user_availability, potential_match_availability)
+					
+					</div>
+					<div class="description">
+						Returns the best time to meet up for two users.
+This is done by computing the largest overlapping block of time between the two users, and
+finding the start time of this largest overlapping block.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_match.js.html">match.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array<Array<<boolean>>}</span> <b>curr_user_availability</b>
+									
+								</dt>
+								<dd>A list of true/false availabilities
+for the current user for each thirty-minute time slot on each day of the week.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array<Array<<boolean>>}</span> <b>potential_match_availability</b>
+									
+								</dt>
+								<dd>A list of true/false availabilities
+for the potentialMatch for each thirty-minute time slot on each day of the week.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array<number>}</span> A day and time slot for the start of the event.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getEventsUserID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>getEventsUserID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to get events from database that user with id userid is invited to.
+API to access this function: GET /api/events/:userid
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getMatchedEventsUserID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>getMatchedEventsUserID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to get events from database that user with id userid has been matched to.
+API to access this function: GET /api/matchedevents/:userid
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getPendingEventsUserID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>getPendingEventsUserID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to get pending events from database that user with id userid has been matched to.
+API to access this function: GET /api/pendingevents/:userid
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getUserID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>getUserID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to get user with id userid.
+API to access this function: GET /api/:userid
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getUsers"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>getUsers</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to get array of JSON objects representing all users.
+API to access this function: GET /api/users
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="indexGet"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Object}</span>
+					<b>indexGet</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Function to handle GET requests for index page.
+Render the index page.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_index.js.html">index.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Object}</span> A JSON object that holds req, res, and next.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="insertEvent"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>insertEvent</b>(properties, email, password, activity, startTime, endTime, location)
+					
+					</div>
+					<div class="description">
+						Function to insert a new event into the Events collection in MongoDB.
+The server returns a 404 error if the event in the request body is already in use.
+Otherwise it creates a new event with the given ,
+and adds it to the MongoDB database,
 returning a 201 status code.
 						
 							<br />
@@ -864,6 +2156,268 @@ returning a 201 status code.
 								</dt>
 								<dd>The password of the new user that is encrypted with bcrypt.</dd>
 							
+								<dt>
+									<b>activity</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>startTime</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>endTime</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>location</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="insertUser"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>insertUser</b>(properties, name, email, password)
+					
+					</div>
+					<div class="description">
+						Function to insert a new user into the Users collection in MongoDB.
+The server returns a 404 error if the email in the request body is already in use.
+Otherwise it creates a new user with the given userID and hashed password,
+default availabilities, and no activities or events, and adds it to the MongoDB database,
+returning a 201 status code.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_database.js.html">database.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>properties</b>
+									
+								</dt>
+								<dd>JSON object containing the express router properties.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>name</b>
+									
+								</dt>
+								<dd>The name of the new user.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>email</b>
+									
+								</dt>
+								<dd>The email of the new user.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>password</b>
+									
+								</dt>
+								<dd>The password of the new user that is encrypted with bcrypt.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="loginGet"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Object}</span>
+					<b>loginGet</b>(req, res)
+					
+					</div>
+					<div class="description">
+						Function to handle GET requests for login page.
+Render the registration page, and return it through res.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_login.js.html">login.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Object}</span> A JSON object that holds req and res.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="loginPost"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Object}</span>
+					<b>loginPost</b>(req, res)
+					
+					</div>
+					<div class="description">
+						Function to handle POST requests for login page.
+Causes the server to return 400 error if malformed request.
+Queries MongoDB for this user. If it doesn't exist, or the password doesn't match
+with cryptographic hash, then causes the server to return a 401 error, and redirects to login.
+If all goes well, then redirects user to her profile page
+with a JSON web token that lasts two hours.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_login.js.html">login.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object,
+whose body contains the user's email and password.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Object}</span> A JSON object that holds req and res.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="matchGet"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>matchGet</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to get matches for a user.
+API to access this function: GET /match/
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_match.js.html">match.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
 							</dl>
 						
 						
@@ -885,7 +2439,7 @@ returning a 201 status code.
 					<a name="matchUser"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{Array}</span>
+					<span class="light">{Object}</span>
 					<b>matchUser</b>(curr_user, potential_match)
 					
 					</div>
@@ -927,7 +2481,7 @@ match candidate for the logged in user.</dd>
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{Array}</span> An array of a matched activity and the match score.
+								<dd><span class="light fixedFont">{Object}</span> An object conaining matched activity, event time, and score.
 A score representing how good the match is between the logged in user and the potential match.
 This match is based on availability, interest level, and skill level.</dd>
 							
@@ -942,7 +2496,7 @@ This match is based on availability, interest level, and skill level.</dd>
 					<div class="fixedFont">
 					
 					<span class="light">{!Array}</span>
-					<b>matchUsers</b>(req, res, next, userId)
+					<b>matchUsers</b>(req, res, next, userId, matches)
 					
 					</div>
 					<div class="description">
@@ -984,6 +2538,12 @@ This match is based on availability, interest level, and skill level.</dd>
 								</dt>
 								<dd>An integer that represents a user id.</dd>
 							
+								<dt>
+									<b>matches</b>
+									
+								</dt>
+								<dd></dd>
+							
 							</dl>
 						
 						
@@ -995,6 +2555,601 @@ This match is based on availability, interest level, and skill level.</dd>
 							
 								<dd><span class="light fixedFont">{!Array}</span> A sorted array of matching users, from highest score match
 to lowest score match.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="postActivityUserID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>postActivityUserID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to update an activity for user with id userid.
+API to access this function: POST /api/activity/:userid
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="postEvent"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>postEvent</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to post an event to the database.
+API to access this function: POST /api/event
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="profileGet"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Object}</span>
+					<b>profileGet</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Function to handle GET requests for user profile page.
+Render the profile page, or return a 404 error if the userID is not in the MongoDB database,
+or redirect to the login page with a 401 status code if the JSON web token does not verify.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_profile.js.html">profile.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object,
+whose parameters include the userID.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Object}</span> A JSON object that holds req, res, and next.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="putAvailabilityUserID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>putAvailabilityUserID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to update an availability cell for user with id userid.
+API to access this function: PUT /api/availability/:userid
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="putEventEventID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>putEventEventID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to update event in database with id eventId.
+API to access this function: PUT /api/event/:eventId
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="putNameUserID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>putNameUserID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to put a name into the user with id userid.
+API to access this function: PUT /api/name/:userid
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="putPasswordUserID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>putPasswordUserID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to update the password for user with id userid.
+API to access this function: PUT /api/password/:userid
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="putRateUserID"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Void}</span>
+					<b>putRateUserID</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Middleware function to let a user rate another user for an event.
+API to access this function: PUT /api/rate/:userid
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_api.js.html">api.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Void}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="registerGet"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Object}</span>
+					<b>registerGet</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Function to handle GET requests for user registration.
+Render the registration page, and return it through res.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_register.js.html">register.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object,
+whose body contains the JSON object for user registration.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Object}</span> A JSON object that holds req, res, and next.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="registerPost"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Object}</span>
+					<b>registerPost</b>(req, res, next)
+					
+					</div>
+					<div class="description">
+						Function to handle POST requests for user registration.
+Reject the registration iff the email, password, and confirmations fields are blank,
+or confirmation does not match. Otherwise add user to database.
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/bactive_routes_register.js.html">register.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>req</b>
+									
+								</dt>
+								<dd>The express routing HTTP client request object,
+whose body contains the JSON object for user registration.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>res</b>
+									
+								</dt>
+								<dd>The express routing HTTP client response object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{callback}</span> <b>next</b>
+									
+								</dt>
+								<dd>The express routing callback function to invoke next middleware in the stack.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Object}</span> A JSON object that holds req, res, and next.</dd>
 							
 							</dl>
 						
@@ -1065,7 +3220,7 @@ to lowest score match.</dd>
 					<div class="fixedFont">
 					
 					<span class="light">{Void}</span>
-					<b>searchUsers</b>(properties, criteria, processUsers)
+					<b>searchUsers</b>(properties, criteria, processUsers, processUsers)
 					
 					</div>
 					<div class="description">
@@ -1101,6 +3256,12 @@ The server returns a 404 error if no users matching criteria are found.
 									
 								</dt>
 								<dd>A callback function to be invoked on the resulting set of users found.</dd>
+							
+								<dt>
+									<b>processUsers</b>
+									
+								</dt>
+								<dd></dd>
 							
 							</dl>
 						
@@ -1192,7 +3353,7 @@ Returns a 201 if it succesfully updates user data.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Nov 16 2018 04:22:44 GMT-0000 (GMT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Dec 03 2018 11:03:13 GMT-0000 (GMT)
 		</div>
 	</body>
 </html>
