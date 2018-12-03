@@ -33,11 +33,12 @@ router.post('/',
     	* @return {Object} A JSON object that holds req, res, and next.
     */
     function(req, res, next) {
+        let name = req.body.name;
     	let email = req.body.email;
     	let password = req.body.password;
     	let pass_confirm = req.body.password_confirmation;
-    	if (email === "" || password === "" || pass_confirm === "") {
-    		res.status(401).render('register', { err: 'Error: the email and passwords fields must not be blank'});
+    	if (name === "" || email === "" || password === "" || pass_confirm === "") {
+    		res.status(401).render('register', { err: 'Error: the name, email, and passwords fields must not be blank'});
     		return;
     	}
     	if (password !== pass_confirm) {
@@ -45,7 +46,7 @@ router.post('/',
     		return;
     	}
     	bcrypt.hash(password, 10, function(err, hash) {
-    		database.insertUser(database.routerProperties(req, res, next), email, hash);
+    		database.insertUser(database.routerProperties(req, res, next), name, email, hash);
     	});
 
 

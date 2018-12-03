@@ -129,11 +129,12 @@ var updateUser = function(properties, email, updateSet) {
 	* default availabilities, and no activities or events, and adds it to the MongoDB database,
 	* returning a 201 status code.
 	* @param {Object} properties JSON object containing the express router properties.
+	* @param {string} name The name of the new user.
 	* @param {string} email The email of the new user.
 	* @param {string} password The password of the new user that is encrypted with bcrypt.
 	* @return {Void}
 */
-var insertUser = function(properties, email, password) {
+var insertUser = function(properties, name, email, password) {
 	let req = properties.req;
 	let res = properties.res;
 	let next = properties.next;
@@ -172,9 +173,8 @@ var insertUser = function(properties, email, password) {
 
 				let newUser = {
 					userId: maxUserId,
-					name: "dummy",
+					name: name,
 					email: email,
-					name: "Active Member",
 					password: password,
 					rating: { "scoreSum": 0, "numRatings": 0},
 					activities: [],
