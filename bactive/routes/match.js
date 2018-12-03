@@ -132,6 +132,7 @@ function matchUser(curr_user, potential_match) {
 	var event_time = getEventStartTime(curr_user["availability"], potential_match["availability"]);
 	var total_score = 0;
 	var match = {};
+	const MILLISECONDS_IN_HOUR = 3600000;
 	if (activity_match["interest_score"] != 0 && availability_match_score != 0) {
 		total_score = activity_match["interest_score"] + activity_match["skill_score"] + availability_match_score;
 	}
@@ -142,6 +143,7 @@ function matchUser(curr_user, potential_match) {
 	match["score"] = total_score;
 	match["time"] = event_time;
 	match["unix_time"] = unix_time; 
+	match["end_time"] = (unix_time + MILLISECONDS_IN_HOUR); 
 	match["match_name"] = potential_match["name"];
 	match["match_id"] = potential_match["userId"];
 	match["match_email"] = potential_match["email"];
