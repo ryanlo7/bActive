@@ -53,6 +53,39 @@ export class MatchesComponent implements OnInit {
 		}
 	}
 
+	// given a pending event, return true if use has not accepted
+	hasNotAccepted(eventId: number): boolean {
+		for(let i = 0; i < this.pendingEvents.length; i++) {
+			if (eventId == this.pendingEvents[i].eventId) {
+				if (this.pendingEvents[i].acceptedIds.indexOf(this.userId) > -1) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	getUserName(userId: number): String {
+        var user: User;
+        user = this.userService.getUser(userId);
+        if (user == null) {
+            return null;
+        }
+
+        return user.name;
+    }
+
+    otherParticipant(invitedIds: number[]): number {
+    	if (invitedIds[0] == this.userId) {
+    		return invitedIds[1];
+    	}
+
+    	return invitedIds[0];
+    }
+
 	// add the userId to the accepted array. If all invited have accepted,
 	// change the status to confirmed. Otherwise, set the status of the event
 	// to pending or invited
@@ -78,7 +111,7 @@ export class MatchesComponent implements OnInit {
 			// serach through pending. if accepted, this means moved to confirmed
 			for(let i = 0; i < this.pendingEvents.length; i++) {
 				if (this.pendingEvents[i].eventId == eventId) {
-					let newEvent: Event = this.matchedEvents[i];
+					let newEvent: Event = this.pendingEvents[i];
 					newEvent.acceptedIds.push(userId);
 					newEvent.status = "confirmed";
 					this.userService.updateEvent(newEvent);
