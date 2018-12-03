@@ -196,21 +196,7 @@ var insertUser = function(properties, email, password) {
 							next(err);
 							return;
 						}
-<<<<<<< HEAD
-						res.redirect('/active/');
-=======
-						res.status(201).render('profile', {
-							userId: newUser.userId,
-							email: newUser.email,
-							name: newUser.name,
-							rating: 0,
-							numRatings: newUser.rating.numRatings,
-							activities: newUser.activities,
-							availability: newUser.availability,
-							//events: newUser.events,
-							isUser: true
-						});
->>>>>>> b19af159ffb1e421476539b94809584bd8a71381
+						res.redirect(`/active/profile/${newUser.userId}`);
 						return;
 					});
 				});
