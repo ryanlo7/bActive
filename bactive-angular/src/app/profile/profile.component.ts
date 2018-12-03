@@ -32,7 +32,6 @@ export class ProfileComponent implements OnInit {
 		// If the link that led to the profile page is from /profile, display the public view
 		if ( this.route.snapshot.url.length > 0) {
 			const id = +this.route.snapshot.paramMap.get('id');
-			console.log('hi');
 			if (id != null && id != this.userId) {
 				this.userId = id;
 				this.publicView = true;

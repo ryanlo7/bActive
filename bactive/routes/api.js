@@ -64,7 +64,7 @@ router.post('/event',
 				}
 				var eventId = Number(result.maxEventId);
 				db.collection('Values').updateOne({'name': 'Events'}, {'maxEventId': eventId + 1}, function(err, result) {
-					var event = JSON.parse(req.body.event)
+					var event = req.body.event;
 					event.eventId = eventId + 1;
 					db.collection('Events').insertOne(event, function(err, result) {
 						res.status(200).send('OK');
@@ -73,17 +73,27 @@ router.post('/event',
 		});
 });
 
-router.delete('/event',
+router.put('/event/:eventId',
 	function(req, res, next) {
-	if(req.body.eventId === undefined) {
-		res.status(400).send('Bad request');
-		return;
-	}
-	var db = req.app.locals.db;
-	db.collection('Events')
-		.deleteOne({'eventId': Number(req.body.eventId)}, function(err, results) {
-			res.status(200).send('OK');
-		});
+		var eventId = parseInt(req.params.eventid);
+		var db = req.app.locals.db;
+		var event = req.body.event;
+		console.log(event);
+		var updateObj = { $set: {acceptedIds: event.acceptedIds,
+										status: event.status} };
+		db.collection('Events').updateOne({'eventId': eventId}, updateObj, function(err, result) {
+						res.status(200).send('OK');
+					});
+});
+
+router.delete('/event/:eventId',
+	function(req, res, next) {
+		var eventId = parseInt(req.params.eventid);
+		var db = req.app.locals.db;
+		db.collection('Events')
+			.deleteOne({'eventId': eventId}, function(err, results) {
+				res.status(200).send('OK');
+			});
 });
 
 router.get('/users',

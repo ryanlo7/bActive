@@ -192,6 +192,7 @@ var insertUser = function(properties, name, email, password) {
 							next(err);
 							return;
 						}
+						
 						res.redirect(`/active/profile/${newUser.userId}`);
 						return;
 					});

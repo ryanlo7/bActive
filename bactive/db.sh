@@ -15,7 +15,7 @@ db.Values.insert(
 
 db.Users.insert({
 					"userId": 0,
-					"name": "Thing One",
+					"name": "Carey Nachenberg",
 					"email": "user1@ucla.edu",
 					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
 					"rating": { "scoreSum": 100, "numRatings": 25},
@@ -40,7 +40,7 @@ db.Users.insert({
 })
 db.Users.insert({
 					"userId": 1,
-					"name": "Thing Two",
+					"name": "David Smallberg",
 					"email": "user2@ucla.edu",
 					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
 					"rating": { "scoreSum": 120, "numRatings": 25},
