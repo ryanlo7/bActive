@@ -6,12 +6,20 @@ import { catchError, map, tap } from 'rxjs/operators';
 const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
 const options = {headers, responseType: 'text' as 'text'};
 
+/**
+    * A class representing an activity.
+    * @class Activity
+*/
 export class Activity {
 	name: string;
 	interest: number;
 	skill: number;
 }
 
+/**
+    * A class representing an event.
+    * @class Event
+*/
 export class Event {
 	eventId: number;
 	acceptedIds: number[];
@@ -23,6 +31,10 @@ export class Event {
 	location: string;
 }
 
+/**
+    * A class representing a user.
+    * @class User
+*/
 export class User {
 	userId: number;
 	email: string;
@@ -36,6 +48,10 @@ export class User {
 	events: {eventId: number, rated: number[]}[];
 }
 
+/**
+    * A class representing a match.
+    * @class Match
+*/
 export class Match {
 	event: string;
 	score: number;
@@ -50,6 +66,10 @@ export class Match {
 @Injectable({
 	providedIn: 'root'
 })
+/**
+    * A class which provides user functionalities, and calls to the API.
+    * @class UserService
+*/
 export class UserService {
 	private users: User[];
 	private events: Event[];
@@ -59,6 +79,10 @@ export class UserService {
 	private apiUrl = 'http://localhost:3000/api';
 	private matchUrl = 'http://localhost:3000/match';
 
+	/**
+        * Creates a UserService object.
+        * @param {HttpClient} http The HTTP client.
+    */
 	constructor(private http: HttpClient) { }
 
 	/**
@@ -75,7 +99,7 @@ export class UserService {
 			})
 		);
 	}
-	
+
 	/**
 		* Returns user with given userId if it exists in users array.
 		* If no user with given userId found, returns null instead.
@@ -88,7 +112,7 @@ export class UserService {
 		}
 		return this.users.find(cur => cur.userId === userId);
 	}
-	
+
 	/**
 		* Initial call to populate events array with events that user with id userId is invited to.
 		* Calls the following server-side API: GET /api/events/:userId.
@@ -216,7 +240,7 @@ export class UserService {
 			})
 		);
 	}
-	
+
 	/**
 		* Updates name of user with user id userId to newName.
 		* Calls the following server-side API: PUT /name/:userId, body: {name: newName}

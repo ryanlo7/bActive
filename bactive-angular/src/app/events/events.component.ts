@@ -14,6 +14,10 @@ function parseJWT(token)
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.css']
 })
+/**
+    * A class representing the component which shows a user's events.
+    * @class EventsComponent
+*/
 export class EventsComponent implements OnInit {
 	user: User;
 	userId: number;
@@ -23,6 +27,10 @@ export class EventsComponent implements OnInit {
     ratedEvents: number[] = [];
     ratings: JHash = {}; // First argument is eventId + " " + rateeId. Value stored in that entry is score.
 
+    /**
+        * Creates a UserService.
+        * @param {UserService} userService The userService.
+    */
 	constructor(private userService: UserService) {
 		this.userId = parseJWT(document.cookie).userId;
 
@@ -38,6 +46,12 @@ export class EventsComponent implements OnInit {
         this.imageMap["Frisbee"] = "https://childlikefaith.com/wp-content/uploads/2015/10/ultimate-frisbee-catch.jpg";
 	}
 
+    /**
+        * Function which runs at MatchesComponent's initialisation.
+        * Get the user from the API if it has not been fetched.
+        * Do the same for confirmed events.
+        * @return {Void}
+    */
 	ngOnInit() {
 		this.user = this.userService.getUser(this.userId);
 		if (this.user == null) {
@@ -56,15 +70,30 @@ export class EventsComponent implements OnInit {
         }
 	}
 
+    /**
+        * Determines if a date is in the past.
+        * @param {number} endDate The date of the end of the event.
+        * @return {boolean} Whether the date is in the past.
+    */
     isPastEvent(endDate: number) {
         let current: number = Date.now();
         return endDate < current;
     }
 
+    /**
+        * Gets the URL for the image of the activity.
+        * @param {String} name The name of the activity.
+        * @return {String} The URL for the image of the activity.
+    */
     getActivityUrl(name: string) {
         return this.imageMap[name];
     }
 
+    /**
+        * Gets the name of the user with id userId.
+        * @param {number} userId The ID of the user.
+        * @return {String} The name of the user.
+    */
     getUserName(userId: number): String {
         var user: User;
         user = this.userService.getUser(userId);
@@ -74,6 +103,11 @@ export class EventsComponent implements OnInit {
         return user.name;
     }
 
+    /**
+        * Gets the other participant in an event.
+        * @param {Array<number>} userId The IDs of the users in the event.
+        * @return {number} The ID of the other participant in an event.
+    */
     otherParticipant(invitedIds: number[]): number {
         if (invitedIds[0] == this.userId) {
             return invitedIds[1];
@@ -82,6 +116,11 @@ export class EventsComponent implements OnInit {
         return invitedIds[0];
     }
 
+    /**
+        * Determines if this event and user have been rated or not.
+        * @param {number} eventId The ID of the event.
+        * @return {Boolean} True if this event has not been rated for this user.
+    */
     notRated(eventId: number): boolean {
         if(this.ratedEvents.indexOf(eventId) > -1) return false;
 
@@ -101,17 +140,30 @@ export class EventsComponent implements OnInit {
         return true;
     }
 
-
+    /**
+        Allows the user to rate the other user for this event.
+        * @param {number} otherId The ID of the user to be rated.
+        * @param {number} eventId The ID of the event.
+        * @param {number} rating The rating, from 1 to 5.
+    */
     rateUser(otherId: number, eventId: number, rating: number): void {
 		this.userService.rateUser(this.userId, otherId, eventId, rating);
         this.ratedEvents.push(eventId);
 	}
 }
 
+/**
+    A hashmap interface, from strings (activity names) to strings (image URLs).
+    * @interface IHash
+*/
 export interface IHash {
     [details: string] : string;
 }
 
+/**
+    A hashmap interface, from strings (eventId + " " + userId) to numbers (ratings).
+    * @interface JHash
+*/
 export interface JHash {
     [details: string] : number;
 }
