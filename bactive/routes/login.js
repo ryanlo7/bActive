@@ -37,9 +37,7 @@ router.post('/',
 	usr = req.body.email;
 	pw = req.body.password;
 	var query = {email: usr};
-	console.log("hello world2");
 	req.app.locals.db.collection('Users').findOne(query, function(err, result) {
-		console.log("hello world3");
 		if(result === null) {
 			res.status(401).render('login', {err: 'Invalid email/password combination'});
 			return;
