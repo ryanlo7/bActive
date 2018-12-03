@@ -29,35 +29,8 @@ router.get('/:userid', function(req, res, next) {
 				}
 			});
 
-	// const collection = db.collection("Events");
-	// // function(err, result) {
-	// let newEvent = {
-	// 	eventId: maxEventId,
-	// 	acceptedIds: email,
-	// 	invitedIds: password,
-	// 	activity: [],
-	// 	startTime: [],
-	// 	endTime: [],
-	// 	status: ,
-	// 	location: 
-	// };
-	// collection.insertOne(newEvent, function (err, insertResult) {
-	// 	if (err) {
-	// 		next(err);
-	// 		return;
-	// 	}
-	// 	console.log("1 event inserted");
-	// 	let newValue = {$set: {"maxEventId": maxEventId + 1}}; // this is buggy
-	// 	db.collection("Values").updateOne({"name": "Users"}, newValue, function(err, updateResult) {
- // 			if (err) {
-	// 			next(err);
-	// 			return;
-	// 		}
-	// 		res.status(201).send('Successfully inserted new user into db.');
-	// 		// res.render('profile', {});
-	// 		return;
-	// 	});
-	// });
+	//db call to insertEvent here:
+	database.insertEvent(database.routerProperties(req, res, next), matchedResults["user_id"], matchedResults["match_id"], matchedResults["event"], matchedResults["unix_time"], matchedResults["end_time"], matchedResults["location"]);
 
 });
 
@@ -142,8 +115,8 @@ function matchUser(curr_user, potential_match) {
 	match["user_id"] = curr_user["userId"];
 	match["score"] = total_score;
 	match["time"] = event_time;
-	match["unix_time"] = unix_time; 
-	match["end_time"] = (unix_time + MILLISECONDS_IN_HOUR); 
+	match["unix_time"] = unix_time; //startTime in db
+	match["end_time"] = (unix_time + MILLISECONDS_IN_HOUR);  //endTime in db
 	match["match_name"] = potential_match["name"];
 	match["match_id"] = potential_match["userId"];
 	match["match_email"] = potential_match["email"];
