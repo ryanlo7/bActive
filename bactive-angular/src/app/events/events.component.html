@@ -5,6 +5,23 @@
 
 <div class="container-fluid well">
     <h1>Events</h1>
+    <div class = "eventBoxes" *ngIf="events">
+        <div class="eventBox" *ngFor="let event of events">
+            <div class="darkBox" width="300" height="200">
+            </div>
+
+            <div class="eventInfo">
+                <div style="font-size: 18pt;">{{ event.activity }}</div><br>
+                Begins: {{ event.startTime }}<br>
+                Ends: {{ event.endTime }}<br>
+                Location: {{ event.location }}<br>
+                Status: {{ event.status }}<br>
+            </div>
+
+            <img src={{getActivityUrl(event.activity)}} width="300" height="200">
+        </div>
+    </div>
+
     <div *ngIf="events">
         <ul>
             <li *ngFor="let event of events">

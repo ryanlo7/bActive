@@ -19,6 +19,7 @@ export class EventsComponent implements OnInit {
 	userId: number;
 	events: Event[];
     confirmedEvents: Event[];
+    imageMap: IHash = {};
 
 	constructor(private userService: UserService) {
 		this.userId = parseJWT(document.cookie).userId;
@@ -48,4 +49,12 @@ export class EventsComponent implements OnInit {
         }
 	}
 
+    getActivityUrl(name: string) {
+        return this.imageMap[name];
+    }
+
+}
+
+export interface IHash {
+    [details: string] : string;
 }
