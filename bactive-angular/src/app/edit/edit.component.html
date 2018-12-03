@@ -9,12 +9,15 @@
     <h1>Edit Profile</h1>
     <button class="btn btn-default" (click)="updateProfile()"> Save </button>
     <button class="btn btn-default" (click)="updateProfileAndReturn()"> Return to Profile </button>
-    <h3>Name:
-    	<span>
-			<input type="text" class="form-control nameBox" [(ngModel)]="user.name" name="name">
-		</span>
-    </h3>
-    <h3>Email: {{ user.email }} </h3>
+</div>
+
+<div *ngIf="user">
+<h3>Name:
+    <span>
+        <input type="text" class="form-control nameBox" [(ngModel)]="user.name" name="name">
+    </span>
+</h3>
+<h3>Email: {{ user.email }} </h3>
 </div>
 
 <div class="user-rating" *ngIf="user">
@@ -24,6 +27,9 @@
     </div>
     <h6> ({{user.rating.numRatings}})</h6>
 </div>
+
+</div>
+<div class="container-fluid well">
 
 <h2>Activities</h2>
 <div *ngIf="user">
@@ -54,6 +60,9 @@
 
     <button (click)="addActivity()"> Add Activity </button>
 </div>
+
+</div>
+<div class="container-fluid well">
 
 <h2>Availability</h2>
 <div class="schedule" *ngIf="user">

@@ -6,8 +6,14 @@
 <div class="container-fluid well">
 
 <div *ngIf="user">
-    <h1>{{ user.name }}</h1>
+    <h1>{{ user.name }}'s Profile</h1>
     <p><button *ngIf="!publicView" id="edit_button" class="btn btn-default" (click)="handleEdit()">Edit Profile</button></p>
+</div>
+
+</div>
+<div class="container-fluid well">
+
+<div *ngIf="user">
     <h4>Email: {{ user.email }} </h4>
 </div>
 
@@ -18,6 +24,9 @@
     </div>
     <h6> ({{user.rating.numRatings}})</h6>
 </div>
+
+</div>
+<div class="container-fluid well">
 
 <h2>Activities</h2>
 <div class = "activityBoxes" *ngIf="user">
@@ -34,6 +43,10 @@
         <img src={{getActivityUrl(activity.name)}} width="300" height="200">
     </div>
 </div>
+
+</div>
+<div class="container-fluid well">
+
 <h2>Availability</h2>
 <div class="schedule" *ngIf="user">
 

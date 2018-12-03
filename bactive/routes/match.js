@@ -29,36 +29,35 @@ router.get('/:userid', function(req, res, next) {
 				}
 			});
 
-	const collection = db.collection("Events");
-	// function(err, result) {
-	// 	let newEvent = {
-	// 		eventId: maxUserId,
-	// 		acceptedIds: email,
-	// 		invitedIds: password,
-	// 		activity: [],
-	// 		startTime: []
-	// 		endTime: []
-	// 		status: ,
-	// 		location: 
-	// 	};
-	// 	collection.insertOne(newEvent, function (err, insertResult) {
-	// 		if (err) {
+	// const collection = db.collection("Events");
+	// // function(err, result) {
+	// let newEvent = {
+	// 	eventId: maxEventId,
+	// 	acceptedIds: email,
+	// 	invitedIds: password,
+	// 	activity: [],
+	// 	startTime: [],
+	// 	endTime: [],
+	// 	status: ,
+	// 	location: 
+	// };
+	// collection.insertOne(newEvent, function (err, insertResult) {
+	// 	if (err) {
+	// 		next(err);
+	// 		return;
+	// 	}
+	// 	console.log("1 event inserted");
+	// 	let newValue = {$set: {"maxEventId": maxEventId + 1}}; // this is buggy
+	// 	db.collection("Values").updateOne({"name": "Users"}, newValue, function(err, updateResult) {
+ // 			if (err) {
 	// 			next(err);
 	// 			return;
 	// 		}
-	// 		let newValue = {$set: {"maxUserId": maxUserId + 1}}; // this is buggy
-	// 		db.collection("Values").updateOne({"name": "Users"}, newValue, function(err, updateResult) {
-	// 			if (err) {
-	// 				next(err);
-	// 				return;
-	// 			}
-	// 			res.status(201).send('Successfully inserted new user into db.');
-	// 			// res.render('profile', {});
-	// 			return;
-	// 		});
+	// 		res.status(201).send('Successfully inserted new user into db.');
+	// 		// res.render('profile', {});
+	// 		return;
 	// 	});
-	// return;
-	// }
+	// });
 
 });
 

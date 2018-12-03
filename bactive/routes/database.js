@@ -172,12 +172,17 @@ var insertUser = function(properties, email, password) {
 
 				let newUser = {
 					userId: maxUserId,
+					name: "dummy",
 					email: email,
 					name: "Active Member",
 					password: password,
 					rating: { "scoreSum": 0, "numRatings": 0},
+<<<<<<< HEAD
 					availability: defaultAvailability,
+=======
+>>>>>>> b19af159ffb1e421476539b94809584bd8a71381
 					activities: [],
+					availability: defaultAvailability,
 					events: []
 				};
 				userCollection.insertOne(newUser, function (err, insertResult) {
@@ -191,7 +196,21 @@ var insertUser = function(properties, email, password) {
 							next(err);
 							return;
 						}
+<<<<<<< HEAD
 						res.redirect('/active/');
+=======
+						res.status(201).render('profile', {
+							userId: newUser.userId,
+							email: newUser.email,
+							name: newUser.name,
+							rating: 0,
+							numRatings: newUser.rating.numRatings,
+							activities: newUser.activities,
+							availability: newUser.availability,
+							//events: newUser.events,
+							isUser: true
+						});
+>>>>>>> b19af159ffb1e421476539b94809584bd8a71381
 						return;
 					});
 				});
