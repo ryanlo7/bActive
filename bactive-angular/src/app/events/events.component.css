@@ -2,8 +2,24 @@ h1, h2 {
     font-family: 'Special Elite';
 }
 
+.col-sm-6 {
+    text-align: center;
+}
+
 .well {
     background: rgba(225, 243, 250);
+}
+
+.table {
+    background: white;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: rgba(195, 230, 243);
+}
+
+td {
+    height: 67px;
+    text-align: middle;
 }
 
 .darkBox {
