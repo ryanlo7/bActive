@@ -37,7 +37,9 @@ router.post('/',
 	usr = req.body.email;
 	pw = req.body.password;
 	var query = {email: usr};
+	console.log("hello world2");
 	req.app.locals.db.collection('Users').findOne(query, function(err, result) {
+		console.log("hello world3");
 		if(result === null) {
 			res.status(401).render('login', {err: 'Invalid email/password combination'});
 			return;
@@ -49,7 +51,7 @@ router.post('/',
 				var cert = "C-UFRaksvPKhx1txJYFcut3QGxsafPmwCY6SCly3G6c";
 				jwt.sign(payload, cert, { algorithm: 'HS256',  header: header}, function(err, token) {
 					res.cookie("jwt", token, {});
-					res.redirect(`/active/profile/${newUser.userId}`);
+					res.redirect(`/active/profile/${result.userId}`);
 				});
 			}
 			else {
