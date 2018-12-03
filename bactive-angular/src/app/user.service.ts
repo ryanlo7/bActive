@@ -73,7 +73,7 @@ export class UserService {
 	}
 
 	getUser(userId: number): User {
-		return this.users.find(cur => cur.userId === number);
+		return this.users.find(cur => cur.userId === number)[0];
 	}
 
 	fetchEvents(userId: number): Observable<Event[]> {
