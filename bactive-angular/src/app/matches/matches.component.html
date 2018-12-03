@@ -5,8 +5,30 @@
 </head>
 
 <div class="container-fluid well">
-    <h1>Matches</h1>
-	<div>
-		<p>{{matches}}</p>
+	<h2>Matched Events</h2>
+	<div class="matched" *ngIf="user">
+	    <table>
+	        <thead>
+	            <tr>
+	                <th>Activity</th>
+	                <th>Start Time</th>
+	                <th>End Time</th>
+	                <th>Invited</th>
+	                <th>Accepted</th>
+	                <th>Location</th>
+	                <th>Accept?</th>
+	            </tr>
+	        </thead>
+	            <tr *ngFor="let event of matchedEvents; let i = index">
+	                <td>{{event.activity}}</td>
+	                <td>{{event.startTime}}</td>
+	                <td>{{event.endTime}}</td>
+	                <td>{{event.invitedIds}}</td>
+	                <td>{{event.acceptedIds}}</td>
+	                <td>{{event.location}}</td>
+	                <td><button (click)="acceptEvent(event.eventId, userId)"> Accept! </button></td>
+	                <td><button (click)="declineEvent(event.eventId, userId)"> Decline </button></td>
+	            </tr>
+	    </table>
 	</div>
 </div>
