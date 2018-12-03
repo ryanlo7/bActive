@@ -62,7 +62,7 @@ export class UserService {
 	constructor(private http: HttpClient) { }
 
 	// Get the user from the API
-	fetchUser(): Observable<User> {
+	fetchUser(): Observable<User[]> {
 		const url = `${this.apiUrl}/users`;
 
 		return this.http.get<User[]>(url).pipe(
