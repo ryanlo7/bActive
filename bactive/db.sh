@@ -11,7 +11,7 @@ db.createCollection("Values")
 db.createCollection("Events")
 
 db.Values.insert(
-	{"name": "Users", "maxUserId": 2},
+	{"name": "Users", "maxUserId": 3},
 	{"name": "Events", "maxEventId": 1}
 )
 
@@ -68,7 +68,7 @@ db.Users.insert({
 					"name": "Thing Three",
 					"email": "user3@ucla.edu",
 					"password": "$2a$10$2DGJ96C77f/WwIwClPwSNuQRqjoSnDFj9GDKjg6X/PePgFdXoE4W6",
-					"rating": { "scoreSum": 50, "numRatings": 5},
+					"rating": { "scoreSum": 25, "numRatings": 5},
 					"activities": [
 						{"name": "Lifting", "interest": 5, "skill": 5},
 						{"name": "Basketball", "interest": 4, "skill": 3}

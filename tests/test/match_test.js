@@ -30,6 +30,7 @@ it('Match User Test', () => {
 	var result = matchModule.matchUser(currUser, potentialMatch);
 	assert.equal(result["event"], "Running");
 	assert.equal(result["score"] > 26.6 && result["score"] < 26.7, true);
+	assert.equal(result["user_id"], 0);
 	assert.equal(result["time"][0], 2);
 	assert.equal(result["time"][1], 1);
 	assert.equal(result["match_name"], "Bob");

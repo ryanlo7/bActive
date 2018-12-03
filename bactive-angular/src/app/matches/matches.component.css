@@ -2,6 +2,24 @@ h1, h2 {
     font-family: 'Special Elite';
 }
 
+button {
+    font-family: "Special Elite";
+    margin: 5px;
+}
+
 .well {
     background: rgba(225, 243, 250);
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background: rgba(239, 239, 245);
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}

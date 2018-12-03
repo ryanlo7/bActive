@@ -5,28 +5,72 @@
 
 <div class="container-fluid well">
     <h1>Events</h1>
-    <div class = "eventBoxes" *ngIf="events">
-        <div class="eventBox" *ngFor="let event of events">
-            <div class="darkBox" width="300" height="200">
+    <div *ngIf="events">
+    <h2>Confirmed Events</h2>
+        <div class="row" *ngFor="let event of events">
+            <div class="col-sm-6">
+                <div class="eventBox">
+                <div class="darkBox" width="300" height="200"></div>
+                <div class="eventInfo">
+                    <div style="font-size: 18pt;">{{ event.activity }}</div>
+                </div>
+                <img src={{getActivityUrl(event.activity)}} width="300" height="200">
+                </div>
             </div>
-
-            <div class="eventInfo">
-                <div style="font-size: 18pt;">{{ event.activity }}</div><br>
-                Begins: {{ event.startTime }}<br>
-                Ends: {{ event.endTime }}<br>
-                Location: {{ event.location }}<br>
-                Status: {{ event.status }}<br>
+            <div class="col-sm-6">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Participants</td>
+                        <td><span *ngFor="let id of event.invitedIds">{{ getUserName(id) }}<br /></span></td>
+                    </tr>
+                    <tr>
+                        <td>Start Time</td>
+                        <td>{{ event.startTime | date: 'd MMM yyyy' }}, {{ event.startTime | date: 'hh:mm a' }}</td>
+                    </tr>
+                    <tr>
+                        <td>End Time</td>
+                        <td>{{ event.endTime | date: 'd MMM yyyy' }}, {{ event.endTime | date: 'hh:mm a' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        <td>{{ event.location }}</td>
+                    </tr>
+                </table>
             </div>
-
-            <img src={{getActivityUrl(event.activity)}} width="300" height="200">
         </div>
     </div>
-
-    <div *ngIf="events">
-        <ul>
-            <li *ngFor="let event of events">
-                {{ event.activity }}
-            </li>
-        </ul>
+    <div *ngIf="pendingEvents">
+        <h2>Pending Events</h2>
+        <div class="row" *ngFor="let event of pendingEvents">
+            <div class="col-sm-6">
+                <div class="eventBox">
+                <div class="darkBox" width="300" height="200"></div>
+                <div class="eventInfo">
+                    <div style="font-size: 18pt;">{{ event.activity }}</div>
+                </div>
+                <img src={{getActivityUrl(event.activity)}} width="300" height="200">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Participants</td>
+                        <td><span *ngFor="let id of event.invitedIds">{{ getUserName(id) }}<br /></span></td>
+                    </tr>
+                    <tr>
+                        <td>Start Time</td>
+                        <td>{{ event.startTime | date: 'd MMM yyyy' }}, {{ event.startTime | date: 'hh:mm a' }}</td>
+                    </tr>
+                    <tr>
+                        <td>End Time</td>
+                        <td>{{ event.endTime | date: 'd MMM yyyy' }}, {{ event.endTime | date: 'hh:mm a' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        <td>{{ event.location }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

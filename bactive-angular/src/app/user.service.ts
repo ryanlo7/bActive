@@ -51,7 +51,7 @@ export class Match {
 	providedIn: 'root'
 })
 export class UserService {
-	private user: User;
+	private users: User[];
 	private events: Event[];
 	private matchedEvents: Event[];
 	private confirmedEvents: Event[];
@@ -62,18 +62,22 @@ export class UserService {
 	constructor(private http: HttpClient) { }
 
 	// Get the user from the API
-	fetchUser(userId: number): Observable<User> {
-		const url = `${this.apiUrl}/${userId}`;
+	fetchUser(): Observable<User[]> {
+		const url = `${this.apiUrl}/users`;
 
-		return this.http.get<User>(url).pipe(
+		return this.http.get<User[]>(url).pipe(
 			tap(res => {
-				this.user = res;
+				this.users = res;
 			})
 		);
 	}
 
 	getUser(userId: number): User {
-		return this.user;
+<<<<<<< HEAD
+		return this.users.find(cur => cur.userId === number);
+=======
+		return this.users.find(cur => cur.userId === userId);
+>>>>>>> ffa9775238f8337c270c00290691de13fc7e5afd
 	}
 
 	fetchEvents(userId: number): Observable<Event[]> {
@@ -99,7 +103,7 @@ export class UserService {
 			})
 		);
 	}
-	
+
 	getMatchedEvents(): Event[] {
 		return this.matchedEvents;
 	}
@@ -113,7 +117,7 @@ export class UserService {
 			})
 		);
 	}
-	
+
 	getConfirmedEvents(): Event[] {
 		return this.confirmedEvents;
 	}
@@ -127,7 +131,7 @@ export class UserService {
 			})
 		);
 	}
-	
+
 	getPendingEvents(): Event[] {
 		return this.pendingEvents;
 	}
@@ -137,7 +141,7 @@ export class UserService {
 		const url = `${this.matchUrl}/${userId}`;
 
 		return this.http.get<Match[]>(url).pipe(
-			tap(res => { 
+			tap(res => {
 				for (let match of res) {
 					let event: Event = {
 						eventId: 0,

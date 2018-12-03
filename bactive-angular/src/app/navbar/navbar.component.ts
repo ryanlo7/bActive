@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
       this.user = this.userService.getUser(this.userId);
       if (this.user == null) {
-          this.userService.fetchUser(this.userId)
+          this.userService.fetchUser()
               .subscribe(user => {
                   this.user = this.userService.getUser(this.userId);
               });

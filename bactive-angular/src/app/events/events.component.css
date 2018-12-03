@@ -2,8 +2,27 @@ h1, h2 {
     font-family: 'Special Elite';
 }
 
+.col-sm-6 {
+    text-align: center;
+}
+
 .well {
     background: rgba(225, 243, 250);
+}
+
+.table {
+    background: white;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: rgba(195, 230, 243);
+    font-family: 'Special Elite';
+}
+
+td {
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    border-width: 0px;
 }
 
 .darkBox {
@@ -23,6 +42,7 @@ h1, h2 {
 .eventBox {
 	padding: 10px;
 	display: inline-block;
+    font-family: 'Special Elite';
 }
 
 .eventBoxes {

@@ -24,16 +24,19 @@ export class ProfileComponent implements OnInit {
 	imageMap: IHash = {};
 	publicView: boolean = false;
 
-	constructor(private userService: UserService, 
+	constructor(private userService: UserService,
 		private router: Router,
 		private route : ActivatedRoute) {
 		this.userId = parseJWT(document.cookie).userId;
 
-		// + converts to a number
-		const id = +this.route.snapshot.paramMap.get('id');
-		if (id != null && id != this.userId) {
-			this.userId = id;
-			this.publicView = true;
+		// If the link that led to the profile page is from /profile, display the public view
+		if ( this.route.snapshot.url.length > 0) {
+			const id = +this.route.snapshot.paramMap.get('id');
+			console.log('hi');
+			if (id != null && id != this.userId) {
+				this.userId = id;
+				this.publicView = true;
+			}
 		}
 
 		this.imageMap["Lifting"] = "https://static1.squarespace.com/static/53de6926e4b06edf127b3ecd/t/56c51cb6555986ef347ae6ba/1455758525694/";
@@ -50,10 +53,18 @@ export class ProfileComponent implements OnInit {
 
 	// Get the user from the API if it has not been fetched
 	ngOnInit() {
+		this.userId = parseJWT(document.cookie).userId;
+
+		// + converts to a number
+		const id = +this.route.snapshot.paramMap.get('id');
+		if (id != null && id != this.userId) {
+			this.userId = id;
+			this.publicView = true;
+		}
 		this.fillTableHeadings();
 		this.user = this.userService.getUser(this.userId);
 		if (this.user == null) {
-			this.userService.fetchUser(this.userId)
+			this.userService.fetchUser()
 				.subscribe(user => {
 					this.user = this.userService.getUser(this.userId);
 				});
@@ -76,7 +87,7 @@ export class ProfileComponent implements OnInit {
 		if (ratings.numRatings === 0) {
 			return 0;
 		}
-		let avg = ratings.scoreSum / ratings.numRatings;
+		let avg = Math.ceil(ratings.scoreSum / ratings.numRatings);
 		return Array(avg).fill(5);
 	}
 

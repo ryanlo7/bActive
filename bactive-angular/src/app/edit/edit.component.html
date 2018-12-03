@@ -54,11 +54,11 @@
                 	<option *ngFor="let x of ratingScale" [selected]="activity.interest == x">
                 	{{x}}</option>
                 </select></td>
-                <td class="activityLevel"><button (click)="deleteActivity(activity.name)"> Delete </button></td>
+                <td class="activityLevel"><button class="btn btn-default" (click)="deleteActivity(activity.name)"> Delete </button></td>
             </tr>
     </table>
 
-    <button (click)="addActivity()"> Add Activity </button>
+    <button class="btn btn-default" (click)="addActivity()"> Add Activity </button>
 </div>
 
 </div>
